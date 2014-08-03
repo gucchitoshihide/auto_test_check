@@ -1,0 +1,27 @@
+<h1>Listing week_reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Report</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @week_reports.each do |week_report| %>
+      <tr>
+        <td><%= week_report.user %></td>
+        <td><%= week_report.report %></td>
+        <td><%= link_to 'Show', week_report %></td>
+        <td><%= link_to 'Edit', edit_week_report_path(week_report) %></td>
+        <td><%= link_to 'Destroy', week_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Week report', new_week_report_path %>
