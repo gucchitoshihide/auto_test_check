@@ -1,28 +1,20 @@
 class WeekReportsController < ApplicationController
   before_action :set_week_report, only: [:show, :edit, :update, :destroy]
 
-  # GET /week_reports
-  # GET /week_reports.json
   def index
     @week_reports = WeekReport.all
   end
 
-  # GET /week_reports/1
-  # GET /week_reports/1.json
   def show
   end
 
-  # GET /week_reports/new
   def new
     @week_report = WeekReport.new
   end
 
-  # GET /week_reports/1/edit
   def edit
   end
 
-  # POST /week_reports
-  # POST /week_reports.json
   def create
     @week_report = WeekReport.new(week_report_params)
 
@@ -37,8 +29,6 @@ class WeekReportsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /week_reports/1
-  # PATCH/PUT /week_reports/1.json
   def update
     respond_to do |format|
       if @week_report.update(week_report_params)
@@ -51,8 +41,6 @@ class WeekReportsController < ApplicationController
     end
   end
 
-  # DELETE /week_reports/1
-  # DELETE /week_reports/1.json
   def destroy
     @week_report.destroy
     respond_to do |format|

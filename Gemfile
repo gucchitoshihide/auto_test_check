@@ -15,10 +15,11 @@ gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'rails4_acts_as_paranoid'
 gem 'settingslogic'
-gem 'dalli'
 gem 'simple_form'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'haml'
+gem 'erb2haml'
 
 group :development, :test do
   gem 'pry'
