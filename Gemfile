@@ -14,7 +14,7 @@ gem 'spring',        group: :development
 gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'rails4_acts_as_paranoid'
-gem 'settingslogic'
+gem 'rails_config'
 gem 'simple_form'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
