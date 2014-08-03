@@ -1,5 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe WeekReport, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe 'scope' do
+
+    context '#recent' do
+      subject do
+        @recent_report_num = 5
+        @recent_report     = WeekReport.recent(@recent_report_num)
+      end
+      it { expect(subject).not_to be_nil }
+      it { expect(subject.size).to eq(@recent_report_num) }
+    end
+
+  end
+
 end
