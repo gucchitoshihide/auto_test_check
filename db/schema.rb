@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140803091948) do
 
-  create_table "articles", force: true do |t|
+  create_table "reports", force: true do |t|
     t.string   "title",      null: false
     t.text     "content"
     t.datetime "created_at"
