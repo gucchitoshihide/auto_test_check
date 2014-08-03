@@ -2,30 +2,22 @@ class WeekReportsController < ApplicationController
   before_action :set_week_report, only: [:show, :edit, :update, :destroy]
 
   def index
-    @week_reports = WeekReport.all
   end
 
   def show
   end
 
   def new
-    @week_report = WeekReport.new
   end
 
   def edit
   end
 
   def create
-    @week_report = WeekReport.new(week_report_params)
-
-    respond_to do |format|
-      if @week_report.save
-        format.html { redirect_to @week_report, notice: 'Week report was successfully created.' }
-        format.json { render :show, status: :created, location: @week_report }
-      else
-        format.html { render :new }
-        format.json { render json: @week_report.errors, status: :unprocessable_entity }
-      end
+    begin
+      # must -- implement report creation
+      render 'index'
+    rescue
     end
   end
 
@@ -57,6 +49,6 @@ class WeekReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def week_report_params
-      params.require(:week_report).permit(:user_id, :report_id)
+      params.require(:report).permit(:title, :content)
     end
 end

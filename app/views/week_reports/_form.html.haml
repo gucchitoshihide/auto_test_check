@@ -1,19 +1,13 @@
-= form_for(@week_report) do |f|
-  - if @week_report.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@week_report.errors.count, "error")
-        prohibited this week_report from being saved:
-      %ul
-        - @week_report.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :user_id
-    %br/
-    = f.text_field :user_id
-  .field
-    = f.label :report_id
-    %br/
-    = f.text_field :report_id
-  .actions
-    = f.submit
+- if alert.present?
+  #error_message
+    = alert
+
+= form_for(:report, url: week_reports_path) do |f|
+  %div
+    = f.label :title, t('las.week_reports.title')
+    = f.text_field :title
+
+  %div
+    = f.label :content, t('las.week_reports.content')
+    = f.text_field :content
+  = f.submit t('las.week_reports.submit')

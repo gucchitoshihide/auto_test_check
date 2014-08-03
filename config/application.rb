@@ -19,9 +19,7 @@ module Las
     config.autoload_paths += %W(#{config.root}/app/models/logical)
     config.autoload_paths += %W(#{config.root}/app/models/physical)
 
-
-    # config.time_zone = 'Central Time (US & Canada)'
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.enforce_available_locales = true
+    config.i18n.default_locale            = :ja
   end
 end
