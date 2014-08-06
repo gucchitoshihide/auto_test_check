@@ -3,3 +3,10 @@ front:
     index:
       table:
         list_num: 10
+back:
+  model:
+    report:
+      title:
+        max_length: 255
+    error:
+      seperate: '#'

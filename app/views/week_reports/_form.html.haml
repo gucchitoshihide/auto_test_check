@@ -1,6 +1,9 @@
 - if alert.present?
   #error_message
-    = alert
+    %div
+      - alert.each do |message|
+        %li
+          = message
 
 = form_for(:report, url: week_reports_path) do |f|
   %div

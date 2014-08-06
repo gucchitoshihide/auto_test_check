@@ -1,3 +1,4 @@
 class Report < ActiveRecord::Base
-  belongs_to :week_report
+  include RelationWeekReport
+  include ValidationReport
 end

@@ -15,9 +15,11 @@ class WeekReportsController < ApplicationController
 
   def create
     begin
-      # must -- implement report creation
-      render 'index'
-    rescue
+      WeekReport.submit(week_report_params)
+      redirect_to :index
+    rescue ValidationError => e
+      flash[:alert] = WeekReport.format_error_message(e.message)
+      render :new
     end
   end
 
