@@ -10,7 +10,9 @@ class WeekReport < ActiveRecord::Base
   class << self
     def submit(params)
       report = Report.new(params)
-      unless report.save
+      if report.save
+        WeekReport.new(report_id: report.id).save
+      else
         raise ValidationError, active_model_errors_to_string(report)
       end
     end

@@ -16,9 +16,9 @@ class WeekReportsController < ApplicationController
   def create
     begin
       WeekReport.submit(week_report_params)
-      redirect_to :index
+      redirect_to week_reports_url
     rescue ValidationError => e
-      flash[:alert] = WeekReport.format_error_message(e.message)
+      flash.now[:alert] = WeekReport.format_error_message(e.message)
       render :new
     end
   end
