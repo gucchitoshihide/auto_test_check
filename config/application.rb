@@ -21,5 +21,7 @@ module Las
 
     config.i18n.enforce_available_locales = true
     config.i18n.default_locale            = :ja
+
+    config.active_record.timestamped_migrations = false
   end
 end

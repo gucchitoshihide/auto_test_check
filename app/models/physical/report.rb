@@ -1,4 +1,4 @@
 class Report < ActiveRecord::Base
-  include RelationWeekReport
+  include RelationReport
   include ValidationReport
 end
