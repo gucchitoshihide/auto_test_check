@@ -4,7 +4,7 @@ class WeekReport < ActiveRecord::Base
   include RelationWeekReport
 
   scope :latest, ->(list_num = Settings[:front][:week_reports][:index][:table][:list_num]) {
-    order('created_at DESC').limit(list_num).map { |recent| Report.find_by(id: recent.report_id) }
+    Report.order('created_at DESC').limit(list_num)
   }
 
   class << self

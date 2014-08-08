@@ -29,4 +29,5 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'turnip'
+  gem 'faker'
 end

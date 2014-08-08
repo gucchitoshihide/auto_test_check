@@ -1,10 +1,13 @@
-%p#notice= notice
-%p
-  %strong User:
-  = @week_report.user
-%p
-  %strong Report:
-  = @week_report.report
-= link_to 'Edit', edit_week_report_path(@week_report)
-|
-\#{link_to 'Back', week_reports_path}
+
+%div
+  #notice= notice
+
+%div
+  title:
+  = @report.title
+%div
+  content:
+  = @report.content
+
+%div
+  = link_to 'Back', week_reports_path

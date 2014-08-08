@@ -1,4 +1,4 @@
-module RelationWeekReport
+module RelationReport
   extend ActiveSupport::Concern
 
   included do

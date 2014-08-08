@@ -44,9 +44,8 @@ class WeekReportsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_week_report
-      @week_report = WeekReport.find(params[:id])
+      @report = Report.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

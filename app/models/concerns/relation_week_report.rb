@@ -3,6 +3,6 @@ module RelationWeekReport
 
   included do
     belongs_to :user
-    has_many :reports, dependent: :destroy
+    has_many   :reports, dependent: :destroy
   end
 end
