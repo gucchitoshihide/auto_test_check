@@ -26,6 +26,10 @@ class SkillProfile < ActiveRecord::Base
       end
     end
 
+    def throw_away(profile)
+      profile.destroy
+    end
+
     def format_error_message(error_message)
       error_message.split(Settings[:back][:model][:error][:seperate])
     end

@@ -35,14 +35,9 @@ class SkillProfilesController < ApplicationController
     end
   end
 
-  # DELETE /skill_profiles/1
-  # DELETE /skill_profiles/1.json
   def destroy
-    @skill_profile.destroy
-    respond_to do |format|
-      format.html { redirect_to skill_profiles_url, notice: 'Skill profile was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    SkillProfile.throw_away(@profile)
+    redirect_to skill_profiles_url, notice: 'skill_profile was successfully destroyed'
   end
 
   private
