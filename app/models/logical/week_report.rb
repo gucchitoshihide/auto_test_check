@@ -17,6 +17,14 @@ class WeekReport < ActiveRecord::Base
       end
     end
 
+    def rewrite(report, params)
+      begin
+        report.update_attributes!(params)
+      rescue ActiveRecord::RecordInvalid => e
+        raise ValidationError, active_model_errors_to_string(report)
+      end
+    end
+
     def format_error_message(error_message)
       error_message.split(Settings[:back][:model][:error][:seperate])
     end
