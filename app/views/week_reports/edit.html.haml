@@ -7,7 +7,7 @@
         %li
           = message
 
-= form_for(:report, {url: week_report_url, method: :put, id: @report.id}) do |f|
+= form_for(:article, {url: week_report_url, method: :put, id: @report.id}) do |f|
   %div
     = f.label :title, t('las.week_reports.title')
     = f.text_field :title

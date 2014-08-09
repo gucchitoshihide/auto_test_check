@@ -1,0 +1,27 @@
+<h1>Listing skill_profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Profile</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @skill_profiles.each do |skill_profile| %>
+      <tr>
+        <td><%= skill_profile.profile %></td>
+        <td><%= skill_profile.user %></td>
+        <td><%= link_to 'Show', skill_profile %></td>
+        <td><%= link_to 'Edit', edit_skill_profile_path(skill_profile) %></td>
+        <td><%= link_to 'Destroy', skill_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Skill profile', new_skill_profile_path %>
