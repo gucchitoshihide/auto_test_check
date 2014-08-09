@@ -3,6 +3,10 @@ front:
     index:
       table:
         list_num: 10
+  skill_profile:
+    index:
+      table:
+        list_num: 10
 back:
   model:
     report:

@@ -1,10 +1,7 @@
 class SkillProfilesController < ApplicationController
   before_action :set_skill_profile, only: [:show, :edit, :update, :destroy]
 
-  # GET /skill_profiles
-  # GET /skill_profiles.json
   def index
-    @skill_profiles = SkillProfile.all
   end
 
   # GET /skill_profiles/1
