@@ -11,7 +11,7 @@ class SkillProfile < ActiveRecord::Base
     def submit(params)
       profile = Article.new(params)
       if profile.save
-        SkillProfile.new(article_id: profile.id).save
+        SkillProfile.new(skill_profile_id: profile.id).save
       else
         raise ValidationError, active_model_errors_to_string(profile)
       end

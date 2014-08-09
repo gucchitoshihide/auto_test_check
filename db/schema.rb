@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 3) do
 
   create_table "articles", force: true do |t|
     t.integer  "week_report_id"
-    t.integer  "skiil_profile_id"
+    t.integer  "skill_profile_id"
     t.string   "title",            null: false
     t.text     "content"
     t.datetime "created_at"

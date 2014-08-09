@@ -17,6 +17,9 @@ class WeekReportsController < ApplicationController
     begin
       WeekReport.submit(week_report_params)
       redirect_to week_reports_url
+    rescue SystemError
+      flash.now[:alert] = 'System Error happened. Try again'
+      render :new
     rescue ValidationError => e
       flash.now[:alert] = WeekReport.format_error_message(e.message)
       render :new
