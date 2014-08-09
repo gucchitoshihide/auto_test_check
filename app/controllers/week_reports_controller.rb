@@ -34,11 +34,8 @@ class WeekReportsController < ApplicationController
   end
 
   def destroy
-    @week_report.destroy
-    respond_to do |format|
-      format.html { redirect_to week_reports_url, notice: 'Week report was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    WeekReport.throw_away(@report)
+    redirect_to week_reports_url, notice: 'Week report was successfully destroyed.'
   end
 
   private
