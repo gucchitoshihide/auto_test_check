@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Profile:
+  = @skill_profile.profile
+%p
+  %strong User:
+  = @skill_profile.user
+= link_to 'Edit', edit_skill_profile_path(@skill_profile)
+|
+\#{link_to 'Back', skill_profiles_path}
