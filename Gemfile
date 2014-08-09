@@ -30,4 +30,5 @@ group :development, :test do
   gem 'factory_girl'
   gem 'turnip'
   gem 'faker'
+  gem 'rails-erd'
 end

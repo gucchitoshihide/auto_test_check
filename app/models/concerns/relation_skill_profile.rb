@@ -1,4 +1,4 @@
-module RelationWeekReport
+module RelationSkillProfile
   extend ActiveSupport::Concern
 
   included do

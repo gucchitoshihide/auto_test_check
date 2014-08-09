@@ -3,5 +3,6 @@ module RelationArticle
 
   included do
     belongs_to :week_report
+    belongs_to :skill_profile
   end
 end

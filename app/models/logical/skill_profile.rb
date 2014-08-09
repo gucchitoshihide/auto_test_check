@@ -1,8 +1,7 @@
 require 'las_errors'
 
 class SkillProfile < ActiveRecord::Base
-  belongs_to :profile
-  belongs_to :user
+  include RelationSkillProfile
 
   scope :latest, ->(list_num = Settings[:front][:skill_profile][:index][:table][:list_num]) {
     Article.order('created_at DESC').limit(list_num)
