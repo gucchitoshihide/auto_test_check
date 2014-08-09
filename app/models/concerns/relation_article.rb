@@ -1,4 +1,4 @@
-module RelationReport
+module RelationArticle
   extend ActiveSupport::Concern
 
   included do

@@ -11,24 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2) do
+ActiveRecord::Schema.define(version: 3) do
 
-  create_table "reports", force: true do |t|
+  create_table "articles", force: true do |t|
     t.integer  "week_report_id"
-    t.string   "title",          null: false
+    t.integer  "skiil_profile_id"
+    t.string   "title",            null: false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "week_reports", force: true do |t|
+  create_table "skill_profiles", force: true do |t|
+    t.integer  "article_id"
     t.integer  "user_id"
-    t.integer  "report_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "week_reports", ["report_id"], name: "index_week_reports_on_report_id"
+  add_index "skill_profiles", ["article_id"], name: "index_skill_profiles_on_article_id"
+  add_index "skill_profiles", ["user_id"], name: "index_skill_profiles_on_user_id"
+
+  create_table "week_reports", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "week_reports", ["article_id"], name: "index_week_reports_on_article_id"
   add_index "week_reports", ["user_id"], name: "index_week_reports_on_user_id"
 
 end

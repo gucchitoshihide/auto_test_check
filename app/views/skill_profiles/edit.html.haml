@@ -1,4 +1,4 @@
-%h1 Editing week_report
+%h1 Editing skill_profile
 
 - if alert.present?
   #error_message
@@ -7,7 +7,7 @@
         %li
           = message
 
-= form_for(:article, {url: week_report_url, method: :put, id: @report.id}) do |f|
+= form_for(:article, {url: skill_profile_url, method: :put, id: @profile.id}) do |f|
   %div
     = f.label :title, t('las.week_reports.title')
     = f.text_field :title
@@ -16,4 +16,4 @@
     = f.text_field :content
   = submit_tag t('las.week_reports.submit')
 
-= link_to 'Back', week_reports_path
+= link_to 'Back', skill_profiles_path

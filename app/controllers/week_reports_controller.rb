@@ -1,5 +1,5 @@
 class WeekReportsController < ApplicationController
-  before_action :set_week_report, only: [:show, :edit, :update, :destroy]
+  before_action :prepare_week_report, only: [:show, :edit, :update, :destroy]
 
   def index
   end
@@ -39,11 +39,13 @@ class WeekReportsController < ApplicationController
   end
 
   private
-    def set_week_report
-      @report = Report.find_by(id: params[:id])
-    end
 
-    def week_report_params
-      params.require(:report).permit(:title, :content)
-    end
+  def prepare_week_report
+    @report = Article.find_by(id: params[:id])
+  end
+
+  def week_report_params
+    params.require(:article).permit(:title, :content)
+  end
+
 end

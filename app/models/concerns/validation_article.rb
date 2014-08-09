@@ -1,4 +1,4 @@
-module ValidationReport
+module ValidationArticle
   extend ActiveSupport::Concern
 
   included do
