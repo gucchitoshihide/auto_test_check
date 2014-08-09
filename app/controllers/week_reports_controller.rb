@@ -24,14 +24,12 @@ class WeekReportsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @week_report.update(week_report_params)
-        format.html { redirect_to @week_report, notice: 'Week report was successfully updated.' }
-        format.json { render :show, status: :ok, location: @week_report }
-      else
-        format.html { render :edit }
-        format.json { render json: @week_report.errors, status: :unprocessable_entity }
-      end
+    begin
+      WeekReport.rewrite(@report, week_report_params)
+      redirect_to week_reports_url
+    rescue ValidationError => e
+      flash.now[:alert] = WeekReport.format_error_message(e.message)
+      render :edit
     end
   end
 
@@ -48,7 +46,6 @@ class WeekReportsController < ApplicationController
       @report = Report.find_by(id: params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def week_report_params
       params.require(:report).permit(:title, :content)
     end

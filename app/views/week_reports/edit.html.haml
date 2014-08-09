@@ -1,5 +1,19 @@
 %h1 Editing week_report
-= render 'form'
-= link_to 'Show', @week_report
-|
-\#{link_to 'Back', week_reports_path}
+
+- if alert.present?
+  #error_message
+    %div
+      - alert.each do |message|
+        %li
+          = message
+
+= form_for(:report, {url: week_report_url, method: :put, id: @report.id}) do |f|
+  %div
+    = f.label :title, t('las.week_reports.title')
+    = f.text_field :title
+  %div
+    = label_tag :content, t('las.week_reports.content')
+    = f.text_field :content
+  = submit_tag t('las.week_reports.submit')
+
+= link_to 'Back', week_reports_path
