@@ -1,3 +1,5 @@
+require 'las_errors'
+
 class SkillProfile < ActiveRecord::Base
   belongs_to :profile
   belongs_to :user
@@ -12,6 +14,14 @@ class SkillProfile < ActiveRecord::Base
       if profile.save
         SkillProfile.new(article_id: profile.id).save
       else
+        raise ValidationError, active_model_errors_to_string(profile)
+      end
+    end
+
+    def rewrite(profile, params)
+      begin
+        profile.update_attributes!(params)
+      rescue ActiveRecord::RecordInvalid => e
         raise ValidationError, active_model_errors_to_string(profile)
       end
     end

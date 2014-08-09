@@ -1,5 +1,19 @@
 %h1 Editing skill_profile
-= render 'form'
-= link_to 'Show', @skill_profile
-|
-\#{link_to 'Back', skill_profiles_path}
+
+- if alert.present?
+  #error_message
+    %div
+      - alert.each do |message|
+        %li
+          = message
+
+= form_for(:article, {url: skill_profile_url, method: :put, id: @profile.id}) do |f|
+  %div
+    = f.label :title, t('las.week_reports.title')
+    = f.text_field :title
+  %div
+    = label_tag :content, t('las.week_reports.content')
+    = f.text_field :content
+  = submit_tag t('las.week_reports.submit')
+
+= link_to 'Back', skill_profiles_path
