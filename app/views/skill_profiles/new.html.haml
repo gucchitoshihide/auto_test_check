@@ -1,3 +1,20 @@
 %h1 New skill_profile
-= render 'form'
+
+- if alert.present?
+  #error_message
+    %div
+      - alert.each do |message|
+        %li
+          = message
+
+= form_for(:article, url: skill_profiles_path) do |f|
+  %div
+    = f.label :title, t('las.week_reports.title')
+    = f.text_field :title
+
+  %div
+    = f.label :content, t('las.week_reports.content')
+    = f.text_field :content
+  = f.submit t('las.week_reports.submit')
+
 = link_to 'Back', skill_profiles_path

@@ -9,28 +9,20 @@ class SkillProfilesController < ApplicationController
   def show
   end
 
-  # GET /skill_profiles/new
   def new
-    @skill_profile = SkillProfile.new
   end
 
   # GET /skill_profiles/1/edit
   def edit
   end
 
-  # POST /skill_profiles
-  # POST /skill_profiles.json
   def create
-    @skill_profile = SkillProfile.new(skill_profile_params)
-
-    respond_to do |format|
-      if @skill_profile.save
-        format.html { redirect_to @skill_profile, notice: 'Skill profile was successfully created.' }
-        format.json { render :show, status: :created, location: @skill_profile }
-      else
-        format.html { render :new }
-        format.json { render json: @skill_profile.errors, status: :unprocessable_entity }
-      end
+    begin
+      SkillProfile.submit(skill_profile_params)
+      redirect_to skill_profiles_url
+    rescue ValidationError => e
+      flash.now[:alert] = SkillProfile.format_error_message(e.message)
+      render :new
     end
   end
 
@@ -59,13 +51,13 @@ class SkillProfilesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_skill_profile
-      @skill_profile = SkillProfile.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def skill_profile_params
-      params.require(:skill_profile).permit(:profile_id, :user_id)
-    end
+  def set_skill_profile
+    @skill_profile = SkillProfile.find(params[:id])
+  end
+
+  def skill_profile_params
+    params.require(:article).permit(:title, :content)
+  end
+
 end
