@@ -1,0 +1,19 @@
+= form_for(@skill_profile) do |f|
+  - if @skill_profile.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@skill_profile.errors.count, "error")
+        prohibited this skill_profile from being saved:
+      %ul
+        - @skill_profile.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :profile_id
+    %br/
+    = f.text_field :profile_id
+  .field
+    = f.label :user_id
+    %br/
+    = f.text_field :user_id
+  .actions
+    = f.submit
