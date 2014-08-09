@@ -6,6 +6,7 @@
       %th content
       %th{:colspan => "3"}
       %th{:colspan => "3"}
+      %th{:colspan => "3"}
   %tbody
     - WeekReport.latest.each do |report|
       %tr
@@ -15,5 +16,7 @@
           = link_to 'Show', week_report_path(id: report.id)
         %td
           = link_to 'Edit', edit_week_report_path(id: report.id)
+        %td
+          = link_to 'Delete', week_report_path(id: report.id), method: :delete, data: { confirm: 'Are you sure?' }
 %br
 = link_to 'New Week report', new_week_report_path
