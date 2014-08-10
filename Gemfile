@@ -8,8 +8,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'spring',        group: :development
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'spring', group: :development
 
 gem 'therubyracer', platforms: :ruby
 gem 'devise'
@@ -20,6 +20,8 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'erb2haml'
+
+gem 'cert', path: 'lib/cert'
 
 group :development, :test do
   gem 'pry'

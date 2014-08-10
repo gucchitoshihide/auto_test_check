@@ -8,6 +8,11 @@ front:
       table:
         list_num: 10
 back:
+  controller:
+    comment:
+      cert_redirection:
+        - 'week_reports'
+        - 'skill_profiles'
   model:
     report:
       title:
