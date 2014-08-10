@@ -2,7 +2,8 @@ module RelationArticle
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :week_report
+    has_many   :article_week_reports
+    has_many   :week_reports, dependent: :destroy, through: :article_week_reports
     belongs_to :skill_profile
     has_many   :article_comments
     has_many   :comments, through: :article_comments

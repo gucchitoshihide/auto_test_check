@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 5) do
+ActiveRecord::Schema.define(version: 6) do
 
   create_table "article_comments", force: true do |t|
     t.integer  "article_id"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 5) do
   end
 
   add_index "article_comments", ["comment_id"], name: "index_article_comments_on_comment_id"
+
+  create_table "article_week_reports", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "week_report_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "article_week_reports", ["article_id"], name: "index_article_week_reports_on_article_id"
+  add_index "article_week_reports", ["week_report_id"], name: "index_article_week_reports_on_week_report_id"
 
   create_table "articles", force: true do |t|
     t.integer  "week_report_id"

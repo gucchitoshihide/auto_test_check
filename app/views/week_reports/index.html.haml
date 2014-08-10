@@ -1,4 +1,8 @@
-%h1 Listing week_reports
+- if alert.present?
+  #error_message
+    %div
+      %li
+        = alert
 
 %table
   %thead
@@ -17,13 +21,14 @@
           = report.content
         %td
           = link_to 'Show', week_report_path(id: report.id)
+        %td
+          = link_to 'Delete', week_report_path(id: report.id), method: :delete, data: { confirm: 'Are you sure?' }
         - if ArticleComment.find_by_article_id(report.id).present?
           %td
             = link_to Comment.find_by(id: 1).content, '#'
 - #       %td
 - #         = link_to 'Edit', edit_week_report_path(id: report.id)
-- #       %td
-- #         = link_to 'Delete', week_report_path(id: report.id), method: :delete, data: { confirm: 'Are you sure?' }
+
 %br
 = link_to 'New Week report', new_week_report_path
 
