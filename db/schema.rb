@@ -11,16 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 4) do
 
   create_table "articles", force: true do |t|
     t.integer  "week_report_id"
     t.integer  "skill_profile_id"
+    t.integer  "comment_id"
     t.string   "title",            null: false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comments", force: true do |t|
+    t.text     "content",    null: false
+    t.integer  "article_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "skill_profiles", force: true do |t|
     t.integer  "article_id"
