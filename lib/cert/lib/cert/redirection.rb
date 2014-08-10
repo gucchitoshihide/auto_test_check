@@ -4,7 +4,7 @@ module Cert
 
     class << self
       def from?(from, referer)
-        referer_url = referer.gsub(/(http|https):\/\/(.+?)\//, '')
+        referer_url = referer.gsub(/http:\/\/(.+?)\//, '')
         case from
         when Array
           return true if from.map { |from_url| referer_url.include?(from_url) }.include?(true)
