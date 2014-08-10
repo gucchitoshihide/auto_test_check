@@ -17,9 +17,9 @@
           = report.content
         %td
           = link_to 'Show', week_report_path(id: report.id)
-        - if report.comment_id.present? # ToDo - revise when build on #show
+        - if ArticleComment.find_by_article_id(report.id).present?
           %td
-            = link_to Comment.find(report.comment_id).content, '#'
+            = link_to Comment.find_by(id: 1).content, '#'
 - #       %td
 - #         = link_to 'Edit', edit_week_report_path(id: report.id)
 - #       %td

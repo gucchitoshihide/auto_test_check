@@ -1,3 +1,5 @@
+require 'las_errors'
+
 class WeekReportsController < ApplicationController
   before_action :prepare_week_report, only: [:show, :edit, :update, :destroy]
   before_action :check_redirection, only: [:comment]
@@ -44,8 +46,7 @@ class WeekReportsController < ApplicationController
 
   def comment
     begin
-      binding.pry
-      Comment.submit(comment_params, params[:article_id])
+      Comment.submit_on_week_report(comment_params, params[:article_id])
       redirect_to week_report_path(id: params[:article_id])
     rescue SystemError => e
       flash.now[:alert] = e.message

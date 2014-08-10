@@ -3,6 +3,7 @@ module RelationComment
 
   included do
     belongs_to :user
-    belongs_to :article, dependent: :destroy
+    has_many   :article_comments
+    has_many   :articles, through: :article_comments
   end
 end
