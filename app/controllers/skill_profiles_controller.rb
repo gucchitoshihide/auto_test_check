@@ -4,8 +4,6 @@ class SkillProfilesController < ApplicationController
   def index
   end
 
-  # GET /skill_profiles/1
-  # GET /skill_profiles/1.json
   def show
   end
 

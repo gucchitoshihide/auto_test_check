@@ -4,28 +4,34 @@ class WeekReport < ActiveRecord::Base
   include RelationWeekReport
 
   scope :latest, ->(list_num = Settings[:front][:week_reports][:index][:table][:list_num]) {
-    Article.order('created_at DESC').limit(list_num)
+    latest_article_ids = WeekReport.limit(list_num).map { |record| record.article_id }
+    latest_article_ids.map { |article_id| Article.find_by(id: article_id) }
   }
 
   class << self
+    # issue - No relation Article is produced when SystemError happened
     def submit(params)
-      report = Article.new(params)
-      if report.save
-        WeekReport.new(article_id: report.id).save
+      article = Article.new(params)
+      if article.save
+        unless (article.week_reports << WeekReport.new(article_id: article.id))
+          raise SystemError, 'System Error happened, Try again'
+        end
       else
-        raise ValidationError, active_model_errors_to_string(report)
+        raise ValidationError, active_model_errors_to_string(article)
       end
     end
 
-    def rewrite(report, params)
+    def rewrite(article, params)
       begin
-        report.update_attributes!(params)
+        article.update_attributes!(params)
       rescue ActiveRecord::RecordInvalid => e
-        raise ValidationError, active_model_errors_to_string(report)
+        raise ValidationError, active_model_errors_to_string(article)
       end
     end
 
     def throw_away(report)
+      report.week_reports.each { |week_report| week_report.destroy }
+      report.comments.each     { |comment| comment.destroy }
       report.destroy
     end
 

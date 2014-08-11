@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   root to: 'home#index'
-  resources :week_reports
-  resources :skill_profiles
+
+  concern :article do
+    post :comment, on: :collection
+  end
+
+  resources :week_reports,   concerns: :article
+  resources :skill_profiles, concerns: :article
 end

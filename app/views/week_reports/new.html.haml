@@ -3,9 +3,14 @@
 - if alert.present?
   #error_message
     %div
-      - alert.each do |message|
+      - if alert.instance_of?(Array) 
+        - alert.each do |alert_message|
+          %li
+            = alert_message
+      - else
         %li
-          = message
+          = alert
+
 
 = form_for(:article, url: week_reports_path) do |f|
   %div

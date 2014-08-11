@@ -1,8 +1,7 @@
 require 'las_errors'
 
 class SkillProfile < ActiveRecord::Base
-  belongs_to :profile
-  belongs_to :user
+  include RelationSkillProfile
 
   scope :latest, ->(list_num = Settings[:front][:skill_profile][:index][:table][:list_num]) {
     Article.order('created_at DESC').limit(list_num)
@@ -12,7 +11,7 @@ class SkillProfile < ActiveRecord::Base
     def submit(params)
       profile = Article.new(params)
       if profile.save
-        SkillProfile.new(article_id: profile.id).save
+        SkillProfile.new(skill_profile_id: profile.id).save
       else
         raise ValidationError, active_model_errors_to_string(profile)
       end
