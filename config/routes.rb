@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   resources :week_reports,   concerns: :article
   resources :skill_profiles, concerns: :article
+  resources :logins, only: [:index, :create]
 end

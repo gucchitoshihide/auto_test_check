@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 7) do
 
   create_table "article_comments", force: true do |t|
     t.integer  "article_id"
@@ -59,6 +59,14 @@ ActiveRecord::Schema.define(version: 6) do
 
   add_index "skill_profiles", ["article_id"], name: "index_skill_profiles_on_article_id"
   add_index "skill_profiles", ["user_id"], name: "index_skill_profiles_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "week_reports", force: true do |t|
     t.integer  "user_id"
