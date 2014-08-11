@@ -6,9 +6,10 @@ class User < ActiveRecord::Base
   class << self
     attr_accessor :errors
 
-    def authorize(params)
+    def authenticate(params)
       validate_params(params)
       raise ValidationError, join_errors(@errors) if @errors.present?
+      authentication(params)
     end
 
     def format_error_message(error_message)
@@ -16,6 +17,14 @@ class User < ActiveRecord::Base
     end
 
     private
+
+    def authentication(params)
+      user = find_by_name(params[:name])
+      unless (user and user.authenticate(params[:password]))
+        raise AuthorizationError, 'username or password is invalid'
+      end
+      user
+    end
 
     def validate_params(params)
       @errors = []

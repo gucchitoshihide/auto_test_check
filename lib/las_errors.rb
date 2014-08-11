@@ -1,2 +1,3 @@
-class ValidationError < StandardError ; end
-class SystemError < StandardError ; end
+class SystemError        < StandardError ; end
+class AuthorizationError < StandardError ; end
+class ValidationError    < StandardError ; end
