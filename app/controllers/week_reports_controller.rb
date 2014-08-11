@@ -48,7 +48,7 @@ class WeekReportsController < ApplicationController
 
   def comment
     begin
-      Comment.submit_on_week_report(comment_params, params[:article_id], session[:id])
+      Comment.submit(comment_params, params[:article_id], session[:id])
       redirect_to week_report_path(id: params[:article_id])
     rescue SystemError => e
       flash.now[:alert] = e.message

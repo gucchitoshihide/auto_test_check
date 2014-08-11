@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
 
   class << self
 
-    def submit_on_week_report(params, article_id, user_id)
+    def submit(params, article_id, user_id)
       article = Article.find_by(id: article_id)
       unless (article.comments << Comment.new(content: params[:content], user_id: user_id))
         raise SystemError, 'Sytem Error happened Try again'

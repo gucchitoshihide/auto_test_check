@@ -4,14 +4,17 @@ class SkillProfile < ActiveRecord::Base
   include RelationSkillProfile
 
   scope :latest, ->(list_num = Settings[:front][:skill_profile][:index][:table][:list_num]) {
-    Article.order('created_at DESC').limit(list_num)
+    latest_article_ids = SkillProfile.limit(list_num).map { |record| record.article_id }
+    latest_article_ids.map { |article_id| Article.find_by(id: article_id) }
   }
 
   class << self
-    def submit(params)
-      profile = Article.new(params)
-      if profile.save
-        SkillProfile.new(skill_profile_id: profile.id).save
+    def submit(params, user_id)
+      article = Article.new(params)
+      if article.save
+        unless (article.skill_profiles << SkillProfile.new(article_id: article.id, user_id: user_id))
+          raise SystemError, 'System Error happened, Try again'
+        end
       else
         raise ValidationError, active_model_errors_to_string(profile)
       end
@@ -26,6 +29,8 @@ class SkillProfile < ActiveRecord::Base
     end
 
     def throw_away(profile)
+      profile.skill_profiles.each { |skill_profile| skill_profile.destroy }
+      profile.comments.each       { |comment| comment.destroy }
       profile.destroy
     end
 
