@@ -23,9 +23,9 @@
           = link_to 'Show', week_report_path(id: report.id)
         %td
           = link_to 'Delete', week_report_path(id: report.id), method: :delete, data: { confirm: 'Are you sure?' }
-        - if ArticleComment.find_by_article_id(report.id).present?
+        - if Comment.followed?(report.id)
           %td
-            = link_to Comment.find_by(id: 1).content, '#'
+            = link_to "(#{Comment.num_followed(report.id)})", '#'
 - #       %td
 - #         = link_to 'Edit', edit_week_report_path(id: report.id)
 

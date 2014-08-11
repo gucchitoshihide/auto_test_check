@@ -9,6 +9,14 @@
   content:
   = @report.content
 
+%div
+  - if Comment.followed?(@report.id)
+    - Comment.show_all(@report.id).each do |comment|
+      %hr
+        %li
+          = comment.content
+%hr
+
 = form_for(:comment, url: comment_week_reports_path(article_id: @report.id)) do |f|
   %div
     = f.label :content, 'Comment'
