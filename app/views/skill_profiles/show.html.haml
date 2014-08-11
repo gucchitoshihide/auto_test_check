@@ -9,5 +9,20 @@
   content:
   = @profile.content
 
+
+%div
+  - if Comment.followed?(@profile.id)
+    - Comment.show_all(@profile.id).each do |comment|
+      %hr
+        %li
+          = comment.content
+%hr
+
+= form_for(:comment, url: comment_skill_profiles_path(article_id: @profile.id)) do |f|
+  %div
+    = f.label :content, 'Comment'
+    = f.text_field :content
+  = f.submit 'submit'
+
 %div
   = link_to 'Back', skill_profiles_path

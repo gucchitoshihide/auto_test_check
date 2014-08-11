@@ -5,14 +5,18 @@
       %th title
       %th content
       %th{:colspan => "3"}
+      %th{:colspan => "3"}
+      %th{:colspan => "3"}
   %tbody
-    - SkillProfile.latest.each do |skill_profile|
+    - SkillProfile.latest.each do |profile|
       %tr
-        %td= skill_profile.title
-        %td= skill_profile.content
-        %td= link_to 'Show', skill_profile_path(id: skill_profile.id)
-        %td= link_to 'Edit', edit_skill_profile_path(skill_profile)
-        %td= link_to 'Destroy', skill_profile_path(id: skill_profile.id), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= profile.title
+        %td= profile.content
+        %td= link_to 'Show', skill_profile_path(id: profile.id)
+        %td= link_to 'Destroy', skill_profile_path(id: profile.id), method: :delete, data: { confirm: 'Are you sure?' }
+        - if Comment.followed?(profile.id)
+          %td
+            = link_to "(#{Comment.num_followed(profile.id)})", '#'
 %br/
 = link_to 'New Skill profile', new_skill_profile_path
 = link_to 'Home', root_path

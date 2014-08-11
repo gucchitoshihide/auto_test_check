@@ -10,10 +10,10 @@ class WeekReport < ActiveRecord::Base
 
   class << self
     # issue - No relation Article is produced when SystemError happened
-    def submit(params)
+    def submit(params, user_id)
       article = Article.new(params)
       if article.save
-        unless (article.week_reports << WeekReport.new(article_id: article.id))
+        unless (article.week_reports << WeekReport.new(article_id: article.id, user_id: user_id))
           raise SystemError, 'System Error happened, Try again'
         end
       else
