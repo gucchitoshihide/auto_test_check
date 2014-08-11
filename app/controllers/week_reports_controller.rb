@@ -1,6 +1,8 @@
 require 'las_errors'
 
 class WeekReportsController < ApplicationController
+  include SessionAction
+  before_action :session_required
   before_action :prepare_week_report, only: [:show, :edit, :update, :destroy]
   before_action :check_redirection, only: [:comment]
 
@@ -18,7 +20,7 @@ class WeekReportsController < ApplicationController
 
   def create
     begin
-      WeekReport.submit(week_report_params)
+      WeekReport.submit(week_report_params, session[:id])
       redirect_to week_reports_url
     rescue SystemError
       flash.now[:alert] = 'System Error happened. Try again'
@@ -46,7 +48,7 @@ class WeekReportsController < ApplicationController
 
   def comment
     begin
-      Comment.submit_on_week_report(comment_params, params[:article_id])
+      Comment.submit_on_week_report(comment_params, params[:article_id], session[:id])
       redirect_to week_report_path(id: params[:article_id])
     rescue SystemError => e
       flash.now[:alert] = e.message

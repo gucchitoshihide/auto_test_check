@@ -1,4 +1,6 @@
 class SkillProfilesController < ApplicationController
+  include SesssionAction
+  before_action :session_required
   before_action :set_skill_profile, only: [:show, :edit, :update, :destroy]
 
   def index
