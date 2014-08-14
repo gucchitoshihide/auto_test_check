@@ -4,21 +4,21 @@
 
 %div
   title:
-  = @profile.title
+  = @article.title
 %div
   content:
-  = @profile.content
+  = @article.content
 
 
 %div
-  - if Comment.followed?(@profile.id)
-    - Comment.show_all(@profile.id).each do |comment|
+  - if Comment.followed?(@article.id)
+    - Comment.show_all(@article.id).each do |comment|
       %hr
         %li
           = comment.content
 %hr
 
-= form_for(:comment, url: comment_skill_profiles_path(article_id: @profile.id)) do |f|
+= form_for(:comment, url: comment_skill_profiles_path(article_id: @article.id)) do |f|
   %div
     = f.label :content, 'Comment'
     = f.text_field :content
