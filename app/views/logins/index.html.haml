@@ -1,3 +1,5 @@
+= javascript_include_tag 'login'
+
 %h1 Login#index
 
 #alert
@@ -10,12 +12,12 @@
       = alert
 
 = form_for(:user, url: logins_path) do |f|
-  %div
-    = f.label :name, 'name'
-    = f.text_field :name
-  
-  %div
-    = f.label :password, 'password'
-    = f.password_field :password
-
-  = f.submit 'login'
+  %div#user_form
+    %div.name_field
+      = f.label :name, 'name'
+      = f.text_field :name
+    %div.password_field
+      = f.label :password, 'password'
+      = f.password_field :password
+    %div.submit_field
+      = f.submit 'login'
