@@ -10,25 +10,28 @@ class SkillProfile < ActiveRecord::Base
 
   class << self
     def submit(params, user_id)
-      article = Article.new(params)
-      if article.save
-        unless (article.skill_profiles << SkillProfile.new(article_id: article.id, user_id: user_id))
-          raise SystemError, 'System Error happened, Try again'
+      skill_profile = SkillProfile.new(title: params[:title])
+      if skill_profile.save
+        begin
+          skill_profile.create_article(title: params[:title], content: params[:content])
+        rescue ActiveRecord::StatementInvalid
+          skill_profile.delete
+          raise ValidationError, 'Detect All Validation'
         end
       else
         raise ValidationError, active_model_errors_to_string(profile)
       end
     end
 
-    def rewrite(profile, params)
+    def rewrite(article_obj, params)
       begin
-        profile.update_attributes!(params)
+        article_obj.update_attributes!(params)
       rescue ActiveRecord::RecordInvalid => e
         raise ValidationError, active_model_errors_to_string(profile)
       end
     end
 
-    def throw_away(profile)
+    def throw_away(aricle_obj)
       profile.skill_profiles.each { |skill_profile| skill_profile.destroy }
       profile.comments.each       { |comment| comment.destroy }
       profile.destroy
