@@ -1,7 +1,8 @@
 class SkillProfilesController < ApplicationController
   include SessionAction
   before_action :session_required
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article,    only: [:show, :edit, :update]
+  before_action :authorize_edit, only: [:edit, :update]
 
   def index
   end
@@ -35,6 +36,7 @@ class SkillProfilesController < ApplicationController
     end
   end
 
+  # Implemented for future
   def destroy
     SkillProfile.throw_away(@article)
     redirect_to skill_profiles_url, notice: 'skill_profile was successfully destroyed'
@@ -53,7 +55,13 @@ class SkillProfilesController < ApplicationController
   private
 
   def set_article
-    @article = Article.find(params[:id])
+    @article = SkillProfile.find_by(id: params[:id]).article
+  end
+
+  def authorize_edit
+    unless @article.skill_profile.user_id == session[:id]
+      redirect_to root_path
+    end
   end
 
   def article_params 

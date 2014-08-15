@@ -11,7 +11,9 @@
       %tr
         %td= profile.title
         %td= link_to 'Show', skill_profile_path(id: profile.article.id)
-        %td= link_to 'Destroy', skill_profile_path(id: profile.article.id), method: :delete, data: { confirm: 'Are you sure?' }
+        - if user_owned?(profile)
+          %td= link_to 'Edit', edit_skill_profile_path(id: profile.article.id)
+          %td= link_to 'Destroy', skill_profile_path(id: profile.article.id), method: :delete, data: { confirm: 'Are you sure?' }
         - if Comment.followed?(profile.article.id)
           %td
             = link_to "(#{Comment.num_followed(profile.article.id)})", '#'
