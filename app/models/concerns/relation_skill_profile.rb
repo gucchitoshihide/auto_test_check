@@ -3,6 +3,6 @@ module RelationSkillProfile
 
   included do
     has_many :users
-    has_many :articles, dependent: :destroy
+    has_one  :article
   end
 end

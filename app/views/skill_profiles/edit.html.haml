@@ -7,7 +7,7 @@
         %li
           = message
 
-= form_for(:article, {url: skill_profile_url, method: :put, id: @profile.id}) do |f|
+= form_for(:article, {url: skill_profile_url, method: :put, id: @article.id}) do |f|
   %div
     = f.label :title, t('las.week_reports.title')
     = f.text_field :title

@@ -1,7 +1,7 @@
 class SkillProfilesController < ApplicationController
   include SessionAction
   before_action :session_required
-  before_action :set_skill_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   def index
   end
@@ -17,7 +17,7 @@ class SkillProfilesController < ApplicationController
 
   def create
     begin
-      SkillProfile.submit(skill_profile_params, session[:id])
+      SkillProfile.submit(article_params, session[:id])
       redirect_to skill_profiles_url
     rescue ValidationError => e
       flash.now[:alert] = SkillProfile.format_error_message(e.message)
@@ -27,7 +27,7 @@ class SkillProfilesController < ApplicationController
 
   def update
     begin
-      SkillProfile.rewrite(@profile, skill_profile_params)
+      SkillProfile.rewrite(@article, article_params)
       redirect_to skill_profiles_url
     rescue ValidationError => e
       flash.now[:alert] = SkillProfile.format_error_message(e.message)
@@ -36,7 +36,7 @@ class SkillProfilesController < ApplicationController
   end
 
   def destroy
-    SkillProfile.throw_away(@profile)
+    SkillProfile.throw_away(@article)
     redirect_to skill_profiles_url, notice: 'skill_profile was successfully destroyed'
   end
 
@@ -52,11 +52,11 @@ class SkillProfilesController < ApplicationController
 
   private
 
-  def set_skill_profile
-    @profile = Article.find(params[:id])
+  def set_article
+    @article = Article.find(params[:id])
   end
 
-  def skill_profile_params
+  def article_params 
     params.require(:article).permit(:title, :content)
   end
 
