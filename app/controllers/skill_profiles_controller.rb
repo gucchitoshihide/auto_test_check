@@ -46,7 +46,7 @@ class SkillProfilesController < ApplicationController
     begin
       Comment.submit(comment_params, params[:article_id], session[:id])
       redirect_to skill_profile_path(id: params[:article_id])
-    rescue SystemError => e
+    rescue ValidationError => e
       flash.now[:alert] = e.message
       redirect_to root_path
     end

@@ -21,8 +21,10 @@ class Comment < ActiveRecord::Base
 
     def submit(params, article_id, user_id)
       article = Article.find_by(id: article_id)
-      unless (article.comments << Comment.new(content: params[:content], user_id: user_id))
-        raise SystemError, 'Sytem Error happened Try again'
+      begin 
+        article.comments << Comment.new(content: params[:content], user_id: user_id)
+      rescue ActiveRecord::RecordInvalid => e
+        raise ValidationError, e.message
       end
     end
 
