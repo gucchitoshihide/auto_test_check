@@ -1,5 +1,3 @@
-%h1 Editing skill_profile
-
 - if alert.present?
   #error_message
     %div
@@ -7,13 +5,15 @@
         %li
           = message
 
-= form_for(:article, {url: skill_profile_url, method: :put, id: @article.id}) do |f|
-  %div
-    = f.label :title, t('las.week_reports.title')
-    = f.text_field :title
-  %div
-    = label_tag :content, t('las.week_reports.content')
-    = f.text_field :content
-  = submit_tag t('las.week_reports.submit')
+%div.col-lg-6
+  %div.well.bs-component
+    = form_for(:article, {url: skill_profile_url, method: :put, id: @article.id, html: {class: 'form-horizontal'}}) do |f|
+      %div.form-group
+        = label_tag :content, t('las.week_reports.content'), class: 'col-lg-2 control-label'
+        %div.col-lg-10
+          = f.text_area :content, size: '20x20', class: 'form-control'
+      %div.form-group
+        %div.col-lg-10.col-lg-offset-2
+          = submit_tag t('las.week_reports.submit'), class: 'btn btn-primary'
 
 = link_to 'Back', skill_profiles_path
