@@ -1,5 +1,8 @@
 = javascript_include_tag 'skill_profiles'
 
+- if @article.skill_profile.user.id == session[:id]
+  = link_to 'Edit', edit_skill_profile_path(id: @article.id)
+
 %div
   #notice= notice
 
