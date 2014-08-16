@@ -1,3 +1,29 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+validation =
+  'comment': false
+
+respond_reload = (value_comment) ->
+  if value_comment != ""
+    validation['content'] = true
+
+initialize_state = ->
+  value_comment = $(':text[name="comment[content]"]').val()
+  respond_reload(value_comment)
+  if value_comment == ""
+    $('#comment_form .submit_field input').attr('disabled', 'disabled')
+
+toggle_submit_by_validation = ->
+  submit_field = $('#comment_form .submit_field input')
+  if validation['comment'] == true
+    submit_field.attr('disabled', false)
+    submit_field.removeAttr('disabled')
+  else
+    submit_field.attr('disabled', 'disabled')
+
+$ ->
+  initialize_state()
+  $('#comment_content').keyup ->
+    if $(':text[name="comment[content]"]').val() == ""
+      validation['comment'] = false
+    else
+      validation['comment'] = true
+    toggle_submit_by_validation()

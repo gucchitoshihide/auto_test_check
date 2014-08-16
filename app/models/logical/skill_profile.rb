@@ -1,33 +1,38 @@
 require 'las_errors'
 
 class SkillProfile < ActiveRecord::Base
-  belongs_to :profile
-  belongs_to :user
+  include RelationSkillProfile
 
   scope :latest, ->(list_num = Settings[:front][:skill_profile][:index][:table][:list_num]) {
-    Article.order('created_at DESC').limit(list_num)
+    order('created_at DESC').limit(list_num)
   }
 
   class << self
-    def submit(params)
-      profile = Article.new(params)
-      if profile.save
-        SkillProfile.new(article_id: profile.id).save
+    def submit(params, user_id)
+      skill_profile = SkillProfile.new(title: params[:title], user_id: user_id)
+      if skill_profile.save
+        begin
+          skill_profile.create_article(title: params[:title], content: params[:content])
+        rescue ActiveRecord::StatementInvalid
+          skill_profile.delete
+          raise ValidationError, 'Detect All Validation'
+        end
       else
         raise ValidationError, active_model_errors_to_string(profile)
       end
     end
 
-    def rewrite(profile, params)
+    def rewrite(article_obj, params)
       begin
-        profile.update_attributes!(params)
+        article_obj.update_attributes!(params)
       rescue ActiveRecord::RecordInvalid => e
         raise ValidationError, active_model_errors_to_string(profile)
       end
     end
 
-    def throw_away(profile)
-      profile.destroy
+    # Implemented for future spec
+    def throw_away(article_obj)
+      SkillProfile.find_by_article_id(article_id: article_obj.id).article.destroy
     end
 
     def format_error_message(error_message)

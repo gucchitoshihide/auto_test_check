@@ -1,11 +1,12 @@
 class SkillProfilesController < ApplicationController
-  before_action :set_skill_profile, only: [:show, :edit, :update, :destroy]
+  include SessionAction
+  before_action :session_required
+  before_action :set_article,    only: [:show, :edit, :update]
+  before_action :authorize_edit, only: [:edit, :update]
 
   def index
   end
 
-  # GET /skill_profiles/1
-  # GET /skill_profiles/1.json
   def show
   end
 
@@ -17,7 +18,7 @@ class SkillProfilesController < ApplicationController
 
   def create
     begin
-      SkillProfile.submit(skill_profile_params)
+      SkillProfile.submit(article_params, session[:id])
       redirect_to skill_profiles_url
     rescue ValidationError => e
       flash.now[:alert] = SkillProfile.format_error_message(e.message)
@@ -27,7 +28,7 @@ class SkillProfilesController < ApplicationController
 
   def update
     begin
-      SkillProfile.rewrite(@profile, skill_profile_params)
+      SkillProfile.rewrite(@article, article_params)
       redirect_to skill_profiles_url
     rescue ValidationError => e
       flash.now[:alert] = SkillProfile.format_error_message(e.message)
@@ -35,19 +36,40 @@ class SkillProfilesController < ApplicationController
     end
   end
 
+  # Implemented for future
   def destroy
-    SkillProfile.throw_away(@profile)
+    SkillProfile.throw_away(@article)
     redirect_to skill_profiles_url, notice: 'skill_profile was successfully destroyed'
+  end
+
+  def comment
+    begin
+      Comment.submit(comment_params, params[:article_id], session[:id])
+      redirect_to skill_profile_path(id: params[:article_id])
+    rescue ValidationError => e
+      flash.now[:alert] = e.message
+      redirect_to root_path
+    end
   end
 
   private
 
-  def set_skill_profile
-    @profile = Article.find(params[:id])
+  def set_article
+    @article = SkillProfile.find_by(id: params[:id]).article
   end
 
-  def skill_profile_params
+  def authorize_edit
+    unless @article.skill_profile.user_id == session[:id]
+      redirect_to root_path
+    end
+  end
+
+  def article_params 
     params.require(:article).permit(:title, :content)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content)
   end
 
 end

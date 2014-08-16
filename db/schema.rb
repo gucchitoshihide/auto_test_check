@@ -11,35 +11,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3) do
+ActiveRecord::Schema.define(version: 6) do
+
+  create_table "article_comments", force: true do |t|
+    t.integer  "article_id"
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "article_comments", ["comment_id"], name: "index_article_comments_on_comment_id"
 
   create_table "articles", force: true do |t|
-    t.integer  "week_report_id"
-    t.integer  "skiil_profile_id"
+    t.integer  "skill_profile_id"
     t.string   "title",            null: false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "skill_profiles", force: true do |t|
-    t.integer  "article_id"
+  add_index "articles", ["skill_profile_id"], name: "index_articles_on_skill_profile_id"
+
+  create_table "comment_users", force: true do |t|
+    t.integer  "comment_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "skill_profiles", ["article_id"], name: "index_skill_profiles_on_article_id"
+  add_index "comment_users", ["comment_id"], name: "index_comment_users_on_comment_id"
+  add_index "comment_users", ["user_id"], name: "index_comment_users_on_user_id"
+
+  create_table "comments", force: true do |t|
+    t.text     "content",    null: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "skill_profiles", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   add_index "skill_profiles", ["user_id"], name: "index_skill_profiles_on_user_id"
 
-  create_table "week_reports", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "article_id"
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "week_reports", ["article_id"], name: "index_week_reports_on_article_id"
-  add_index "week_reports", ["user_id"], name: "index_week_reports_on_user_id"
 
 end

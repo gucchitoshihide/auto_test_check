@@ -1,13 +1,31 @@
+= javascript_include_tag 'skill_profiles'
 
 %div
   #notice= notice
 
 %div
   title:
-  = @profile.title
+  = @article.title
 %div
   content:
-  = @profile.content
+  = @article.content
+
+
+%div
+  - if Comment.followed?(@article.id)
+    - Comment.show_all(@article.id).each do |comment|
+      %hr
+        %li
+          = comment.content
+%hr
+
+= form_for(:comment, url: comment_skill_profiles_path(article_id: @article.id)) do |f|
+  %div#comment_form
+    %div.content_field
+      = f.label :content, 'Comment'
+      = f.text_field :content
+    %div.submit_field
+      = f.submit 'submit'
 
 %div
   = link_to 'Back', skill_profiles_path
