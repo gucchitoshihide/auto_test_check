@@ -1,8 +1,8 @@
-module RelationSkillProfile
+module RelationCommentUser
   extend ActiveSupport::Concern
 
   included do
+    belongs_to :comment
     belongs_to :user
-    has_one    :article
   end
 end

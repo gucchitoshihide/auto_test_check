@@ -1,6 +1,7 @@
 require 'las_errors'
 
 class User < ActiveRecord::Base
+  include RelationUser
   has_secure_password
 
   class << self
