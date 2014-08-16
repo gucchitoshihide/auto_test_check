@@ -21,8 +21,10 @@ class Comment < ActiveRecord::Base
 
     def submit(params, article_id, user_id)
       article = Article.find_by(id: article_id)
+      user    = User.find_by(id: user_id)
       begin 
-        article.comments << Comment.new(content: params[:content], user_id: user_id)
+        comment = Comment.new(content: params[:content], user_id: user_id)
+        [article, user].each { |associated_record| associated_record.comments << comment }
       rescue ActiveRecord::RecordInvalid => e
         raise ValidationError, e.message
       end
