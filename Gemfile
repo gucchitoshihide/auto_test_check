@@ -15,9 +15,10 @@ gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'rails4_acts_as_paranoid'
 gem 'rails_config'
+gem 'twitter-bootswatch-rails', '~> 3.2.0'
+gem 'twitter-bootswatch-rails-helpers'
 gem 'simple_form'
 gem 'less-rails'
-gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'erb2haml'
 
