@@ -1,8 +1,4 @@
 front:
-  week_reports:
-    index:
-      table:
-        list_num: 10
   skill_profile:
     index:
       table:
@@ -14,7 +10,7 @@ back:
         - 'week_reports'
         - 'skill_profiles'
   model:
-    report:
+    article:
       title:
         max_length: 255
     error:
