@@ -8,9 +8,10 @@ RESET_TOKEN = Settings[:back][:model][:user][:password_reset_token]
 UNMATCH_RESET_TOKEN = 'unmatch_token'
 NOT_EXISTS_EMAIL    = 'dummy@no.exists.dummy'
 
-A_DAY = 24 * 60 * 60
-THREE_DAYS = Time.now + (3 * A_DAY)
-FOUR_DAYS  = Time.now + (4 * A_DAY)
+A_DATE = 24 * 60 * 60
+SEND_DATE         = Time.now
+THREE_DATES_SPENT = SEND_DATES + (3 * A_DATE)
+FOUR_DATES_SPENT  = SEND_DATES + (4 * A_DATE)
 
 POST_LOGIN_PARAMS = {
   user: {

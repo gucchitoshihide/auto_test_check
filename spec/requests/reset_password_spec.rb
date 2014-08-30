@@ -76,20 +76,35 @@ RSpec.describe 'ResetPasswords', :type => :request do
     end
     context 'user send request' do
       context 'with valid token and not expired' do
+        before do
+          allow_any_instance(User).to receive_message_chain(:reset_password, :rensend_at).and_return(SEND_DATE)
+        end
+        subject do
+          get(edit_reset_password, RESET_TOKEN)
+          response
+        end
+        it_behaves_like 'a successfully response', 'resend_password'
       end
 
-      context 'with invalid token or has expired' do
-        where(:reset_token, :resend_at) do
+      context 'with invalid token or expired' do
+        with(:token, :spent_date_from_send_mail) do
           [
-            [RESET_TOKEN, FOUR_DAYS]
-            [UNMATCH_RESET_TOKEN, THREE_DAYS],
-            [UNMATCH_RESET_TOKEN, FOUR_DAYS]
+            [RESET_TOKEN,   FOUR_DATES_SPENT],
+            [UNMATCH_TOKEN, THREE_DATES_SPENT],
+            [UNMATCH_TOKEN, FOUR_DATES_SPENT]
           ]
         end
-        
-        with_them do
-        end
 
+        with_them do
+          before do
+            allow_any_instance(User).to receive_message_chain(:reset_password, :rensend_at).and_return(spent_date_from_send_mail)
+          end
+          subject do
+            get(edit_reset_password, RESET_TOKEN)
+            response
+          end
+          it_behaves_like 'a successfully rendered', 'announce'
+        end
       end
     end
   end

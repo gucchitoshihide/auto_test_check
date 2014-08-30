@@ -21,3 +21,13 @@ shared_examples_for 'a successfully redirection response(302)' do |page_name|
   its(:content_type)  { should eq Mime::HTML }
   its(:status)        { should eq 302}
 end
+
+shared_examples_for 'a successfully rendered' do |action|
+  its(:content_type)  { should eq Mime::HTML }
+  its(:status)        { should eq 200 }
+  let(:body)          { Nokogiri::HTML(subject.body) }
+  it "rendered the #{page_name} template" do
+    expect.to render_template(action)
+  end
+end
+
