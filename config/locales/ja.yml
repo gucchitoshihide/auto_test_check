@@ -1,5 +1,21 @@
 ja:
   las:
+    logins:
+      title: Las - Launch a service -
+      message:
+        label:
+          name: 名前
+          password: パスワード
+        alert:
+          not_loggedin: ログインしてください
+          blank:
+            name: 名前を入力してください
+            password: パスワードを入力してください
+          invalid_authorization: 名前もしくはパスワードが不正です
+      button:
+        submit: ログイン
+    home:
+      title: Las - ホーム -
     week_reports:
       title: 'タイトル'
       content: '記事内容'

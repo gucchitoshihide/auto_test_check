@@ -20,6 +20,7 @@ gem 'less-rails'
 gem 'haml'
 
 gem 'cert', path: 'lib/cert'
+gem 'search', path: 'lib/search'
 
 group :development, :test do
   gem 'pry'
@@ -27,8 +28,13 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'factory_girl'
-  gem 'turnip'
+  gem 'rspec-its'
+  gem 'rspec-parameterized'
   gem 'faker'
   gem 'erb2haml'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'turnip'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'phantomjs'
 end

@@ -30,6 +30,12 @@ class SkillProfile < ActiveRecord::Base
       end
     end
 
+    def search(params)
+      found_records = Search::Word.reg_exp(Article.where.not(skill_profile_id: nil), :content, params[:search])
+      return [] if found_records.blank?
+      found_records.map { |record| record.skill_profile }
+    end
+
     # Implemented for future spec
     def throw_away(article_obj)
       SkillProfile.find_by_article_id(article_id: article_obj.id).article.destroy

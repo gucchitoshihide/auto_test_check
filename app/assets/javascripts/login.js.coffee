@@ -1,41 +1,53 @@
-validation = 
-  'name':     false
-  'password': false
+# http://dev.classmethod.jp/client-side/javascript/class-in-coffeescript/
+
+class FormValidationState
+  _state = []
+
+  reset_state = ->
+    _state = []
+
+  constructor: () ->
+    reset_state()
+
+  validate_length = (property_name, property_length) ->
+    if property_length == 0
+      _state.push ('blank_' + property_name)
+
+  validation: (name, password) ->
+    reset_state()
+    validate_length('name',     name.length)
+    validate_length('password', password.length)
+
+  state: ->
+    return _state
+
+class Message
+  @t = (message_property) ->
+    $('#message .' + message_property).val()
+
+
+class Flash
+  reset_message = ->
+    $('#alert > ul').remove()
+
+  show_message = (active_state) ->
+    reset_message()
+    $('#alert').append('<ul></ul>')
+    $('#alert > ul').append('<li>' + Message.t(message_property) + '</li>') for message_property in active_state
+
+  @alert_if_active_state: (state) ->
+    show_message(state)
+
+on_blur_validation = (form_validation_state) ->
+  form_validation_state.validation($('#user_name').val(), $('#user_password').val())
+  form_validation_state.state()
 
 $ ->
-  initialize()
-  $('#user_name').keyup ->
-    if $(':text[name="user[name]"]').val() == ""
-      validation['name'] = false
-    else
-      validation['name'] = true
-    toggle_submit_by_validation()
+  form_validation_state = new FormValidationState()
+  $('#user_name').blur ->
+    on_blur_validation(form_validation_state)
+    Flash.alert_if_active_state(form_validation_state.state())
 
-  $('#user_password').keyup ->
-    if $(':password[name="user[password]"]').val() == ""
-      validation['password'] = false
-    else
-      validation['password'] = true
-    toggle_submit_by_validation()
-
-initialize = ->
-  value_name     = $(':text[name="user[name]"]').val()
-  value_password = $(':password[name="user[password]"]').val()
-  respond_reload(value_name, value_password)
-  if value_name == "" || value_password == ""
-    $('#user_form .submit_field input').attr('disabled', 'disabled')
-
-respond_reload = (value_name, value_password) ->
-  if value_name != ""
-    validation['name'] = true
-  if value_password  != ""
-    validation['password'] = true
-
-toggle_submit_by_validation = ->
-  submit_field = $('#user_form .submit_field input')
-  if validation['name'] and validation['password']
-    submit_field.attr('disabled', false)
-    submit_field.removeAttr('disabled')
-  else
-    submit_field.attr('disabled', 'disabled')
-
+  $('#user_password').blur ->
+    on_blur_validation(form_validation_state)
+    Flash.alert_if_active_state(form_validation_state.state())

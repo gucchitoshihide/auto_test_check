@@ -1,12 +1,21 @@
 front:
-  week_reports:
+  skill_profile:
     index:
       table:
         list_num: 10
 back:
+  controller:
+    comment:
+      cert_redirection:
+        - 'week_reports'
+        - 'skill_profiles'
   model:
-    report:
+    article:
       title:
         max_length: 255
     error:
       seperate: '#'
+    user:
+      name: dummy
+      email: dummy@dummy.jp
+      password: password_dummy
