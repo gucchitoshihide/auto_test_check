@@ -5,9 +5,12 @@ class ResetPasswordsController < ApplicationController
   def create
     begin
       User.request_reset_password(params)
-      redirect_to root_url, notice: 'Email sent with inst. If do not come, please do it again'
+      redirect_to announce_reset_password_path, notice: 'Email sent with inst. If do not come, please do it again'
     rescue
     end
+  end
+
+  def announce
   end
 
   def edit

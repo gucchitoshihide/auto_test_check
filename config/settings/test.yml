@@ -7,7 +7,6 @@ back:
   controller:
     comment:
       cert_redirection:
-        - 'week_reports'
         - 'skill_profiles'
   model:
     article:
@@ -19,3 +18,4 @@ back:
       name: dummy
       email: dummy@dummy.jp
       password: password_dummy
+      password_reset_token: dummy_token
