@@ -9,17 +9,13 @@
     - else
       = alert
 
-%div.col-lg-6
-  %div.well.bs-component
-    = form_for(:user, url: logins_path, html: {class: 'form-horizontal'}) do |f|
-      %div.form-group
-        = f.label :name, 'name', class: 'col-lg-2 control-label'
-        %div.col-lg-10
-          = f.text_field :name,  class: 'form-control'
-      %div.form-group
-        = f.label :password, 'password', class: 'col-lg-2 control-label'
-        %div.col-lg-10
-          = f.password_field :password,  class: 'form-control'
-      %div.form-group
-        %div.col-lg-10.col-lg-offset-2
-          = f.submit 'login', class: 'btn btn-primary'
+= form_for(:user, url: logins_path) do |f|
+  %div#user_form
+    %div.name_field
+      = f.label :name, 'name'
+      = f.text_field :name
+    %div.password_field
+      = f.label :password, 'password'
+      = f.password_field :password
+    %div.submit_field
+      = f.submit 'login'

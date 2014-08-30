@@ -10,17 +10,14 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
+gem 'bcrypt'
 
 gem 'therubyracer', platforms: :ruby
-gem 'devise'
 gem 'rails4_acts_as_paranoid'
 gem 'rails_config'
-gem 'twitter-bootswatch-rails', '~> 3.2.0'
-gem 'twitter-bootswatch-rails-helpers'
 gem 'simple_form'
 gem 'less-rails'
 gem 'haml'
-gem 'erb2haml'
 
 gem 'cert', path: 'lib/cert'
 
@@ -33,4 +30,5 @@ group :development, :test do
   gem 'factory_girl'
   gem 'turnip'
   gem 'faker'
+  gem 'erb2haml'
 end
