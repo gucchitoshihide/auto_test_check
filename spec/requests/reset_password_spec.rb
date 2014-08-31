@@ -87,11 +87,11 @@ RSpec.describe 'ResetPasswords', :type => :request do
       end
 
       context 'with invalid token or expired' do
-        with(:token, :spent_date_from_send_mail) do
+        where(:token, :spent_date_from_send_mail) do
           [
-            [RESET_TOKEN,   FOUR_DATES_SPENT],
-            [UNMATCH_TOKEN, THREE_DATES_SPENT],
-            [UNMATCH_TOKEN, FOUR_DATES_SPENT]
+            [RESET_TOKEN,         FOUR_DATES_SPENT],
+            [UNMATCH_RESET_TOKEN, THREE_DATES_SPENT],
+            [UNMATCH_RESET_TOKEN, FOUR_DATES_SPENT]
           ]
         end
         with_them do
@@ -121,8 +121,8 @@ RSpec.describe 'ResetPasswords', :type => :request do
       context 'when params are invalid' do
         where(:password, :password_confirmation) do
           [
-            [CHANGE_PASSWORD,         UNMATCH_CHANGE_PASSWORD_CONFIRMATION]
-            [UNMATCH_CHANGE_PASSWORD, CHANGE_PASSWORD_CONFIRMATION]
+            [CHANGE_PASSWORD,         UNMATCH_CHANGE_PASSWORD_CONFIRMATION],
+            [UNMATCH_CHANGE_PASSWORD, CHANGE_PASSWORD_CONFIRMATION],
             [UNMATCH_CHANGE_PASSWORD, UNMATCH_CHANGE_PASSWORD_CONFIRMATION]
           ]
         end
@@ -147,8 +147,11 @@ RSpec.describe 'ResetPasswords', :type => :request do
         ]
       end
       with_them do
-        request.referer = UNEXPECTED_REFERER
-        get(path)
+        subject do
+          get(LOCAL_HOST_ROUTE)
+          get(path)
+          response
+        end
       end
       it_behaves_like 'a prohibited request and return 403'
     end

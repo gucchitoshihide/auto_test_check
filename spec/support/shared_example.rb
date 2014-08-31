@@ -26,7 +26,7 @@ shared_examples_for 'a successfully rendered' do |action|
   its(:content_type)  { should eq Mime::HTML }
   its(:status)        { should eq 200 }
   let(:body)          { Nokogiri::HTML(subject.body) }
-  it "rendered the #{page_name} template" do
+  it "rendered the #{action} template" do
     expect.to render_template(action)
   end
 end

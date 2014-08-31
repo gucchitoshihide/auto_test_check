@@ -13,10 +13,10 @@ UNMATCH_CHANGE_PASSWORD_CONFIRMATION = 'unmatch_change_password_confirmation'
 UNMATCH_RESET_TOKEN = 'unmatch_token'
 NOT_EXISTS_EMAIL    = 'dummy@no.exists.dummy'
 
-UNEXPECTED_REFERER = 'http://dummyreferer.dummy.com.escape_forsafe'
+LOCAL_HOST_ROUTE = 'http://localhost:3000/'
 
 A_DATE = 24 * 60 * 60
-SEND_DATE         = Time.now
+SEND_DATES        = Time.now
 THREE_DATES_SPENT = SEND_DATES + (3 * A_DATE)
 FOUR_DATES_SPENT  = SEND_DATES + (4 * A_DATE)
 
@@ -37,7 +37,7 @@ USER_MOCK = {
 PASSWORD_RESEND_USER = {
   id:       USER_ID,
   password_reset: {
-    token: RESET_TOKEN
+    token: RESET_TOKEN,
     resend_at: Time.now
   }
 }
