@@ -3,14 +3,18 @@ require 'rails_helper'
 # http://blog.lucascaton.com.br/index.php/2010/10/25/how-to-test-mailers-in-rails-3-with-rspec/
 
 RSpec.describe 'ResetPasswords', :type => :request do
+  before do
+    FactoryGirl.create(:user)
+  end
+
   describe 'GET /reset_password/new' do
     let(:mock_session) { double('session') }
     before do
-      allow(mock_session).to receive(:[]).and_return(SESSION_ID)
+      allow(mock_session).to receive(:[]).with(:id).and_return(SESSION_ID)
     end
 
     context 'user send request' do
-      context 'when with no session' do
+      context 'when without session' do
         where(:session, :cookie) do
           [
             [nil, nil]
@@ -29,11 +33,14 @@ RSpec.describe 'ResetPasswords', :type => :request do
       context 'when with session' do
         where(:session, :cookie) do
           [
-            [nil, nil]
+            [mock_session, nil]
             # append cookie object when put the function
           ]
         end
         with_them do
+          before do
+            login
+          end
           subject do
             get(new_reset_password_path)
             response
@@ -46,34 +53,28 @@ RSpec.describe 'ResetPasswords', :type => :request do
 
   # Given no sessions
   describe 'POST /reset_password' do
-    before do
-      FactoryGirl.create(:user)
-    end
     context 'user input his email-address' do
       context 'when the input email-address is correct' do
         subject do
-          post(reset_password_path, EMAIL)
+          post(reset_password_path, email: EMAIL)
           response
         end
-        it { expect.to change { ActionMailer::Base.delivers.count }.by(1) } 
-        it_behaves_like 'a successfully response', 'resend_password'
+        it { expect(ActionMailer::Base.deliveries.last).not_to be_nil}
+        it_behaves_like 'a successfully rendered', 'announce'
       end
 
       context 'when the email-address is not correct' do
         subject do
-          poset(reset_password_path , NO_EXISTS_EMAIL)
+          post(reset_password_path, email: NOT_EXISTS_EMAIL)
           response
         end
+        it { expect(ActionMailer::Base.deliveries.last).to be_nil}
+        it_behaves_like 'a successfully rendered', 'announce'
       end
-      it { expect.to change { ActionMailer::Base.delivers.count }.by(0) } 
-      it_behaves_like 'a successfully response', 'resend_password'
     end
   end
 
   describe 'GET /reset_password/edit' do
-    before do
-      FactoryGirl.create(:user)
-    end
     context 'user send request' do
       context 'with valid token and not expired' do
         before do
@@ -155,5 +156,13 @@ RSpec.describe 'ResetPasswords', :type => :request do
       end
       it_behaves_like 'a prohibited request and return 403'
     end
+  end
+
+  describe 'POST request' do
+    # pending -- respond to cracking
+  end
+
+  describe 'PUT request' do
+    # pending -- respond to cracking
   end
 end

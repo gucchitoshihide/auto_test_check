@@ -27,7 +27,7 @@ shared_examples_for 'a successfully rendered' do |action|
   its(:status)        { should eq 200 }
   let(:body)          { Nokogiri::HTML(subject.body) }
   it "rendered the #{action} template" do
-    expect.to render_template(action)
+    expect(subject).to render_template(action)
   end
 end
 

@@ -1,3 +1,6 @@
+require 'yaml'
+mail_settings = YAML.load_file('/home/matsu/Develop/mail_settings.yml')
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -31,6 +34,20 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+    enable_starttls_auto: true,
+    address: 'smtp.gmail.com',
+    port: '587',
+    domain: 'smtp.gmail.com',
+    authentication: 'plain',
+    user_name: mail_settings['email']['address'],
+    password: mail_settings['email']['password']
+  }
+  config.action_mailer.default_url_options = {
+    host: 'localhost:3000'
+  }
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

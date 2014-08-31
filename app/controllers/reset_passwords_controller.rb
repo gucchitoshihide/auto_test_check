@@ -1,13 +1,12 @@
 class ResetPasswordsController < ApplicationController
+  before_action :back_to_root, only: [:new]
+
   def new
   end
 
   def create
-    begin
-      User.request_reset_password(params)
-      redirect_to announce_reset_password_path, notice: 'Email sent with inst. If do not come, please do it again'
-    rescue
-    end
+    User.request_reset_password(params)
+    render 'announce'
   end
 
   def announce
@@ -38,5 +37,9 @@ class ResetPasswordsController < ApplicationController
 
   def reset_password_params
     params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def back_to_root
+    redirect_to root_path if session[:id]
   end
 end

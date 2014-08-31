@@ -1,7 +1,7 @@
 ja:
   las:
     logins:
-      title: Las - Launch a service -
+      title: ログイン - Las -
       message:
         label:
           name: 名前
@@ -20,3 +20,5 @@ ja:
       title: 'タイトル'
       content: '記事内容'
       submit: '投稿'
+    reset_password:
+      title: パスワード復旧
