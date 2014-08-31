@@ -31,6 +31,9 @@ class ResetPasswordsController < ApplicationController
     end
   end
 
+  def finish
+  end
+
   private
 
   def reset_password_params

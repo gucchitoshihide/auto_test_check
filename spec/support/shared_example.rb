@@ -31,3 +31,5 @@ shared_examples_for 'a successfully rendered' do |action|
   end
 end
 
+shared_examples_for 'a prohibited request and return 403' do
+end

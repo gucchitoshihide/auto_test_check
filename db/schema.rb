@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 7) do
 
   create_table "article_comments", force: true do |t|
     t.integer  "article_id"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 6) do
   end
 
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "reset_passwords", force: true do |t|
+    t.string   "token"
+    t.date     "resend_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "skill_profiles", force: true do |t|
     t.integer  "user_id"

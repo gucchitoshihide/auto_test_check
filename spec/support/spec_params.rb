@@ -5,8 +5,15 @@ EMAIL       = Settings[:back][:model][:user][:email]
 PASSWORD    = Settings[:back][:model][:user][:password]
 RESET_TOKEN = Settings[:back][:model][:user][:password_reset_token]
 
+CHANGE_PASSWORD                      = 'change_password'
+UNMATCH_CHANGE_PASSWORD              = 'unmatch_change_password'
+CHANGE_PASSWORD_CONFIRMATION         = CHANGE_PASSWORD
+UNMATCH_CHANGE_PASSWORD_CONFIRMATION = 'unmatch_change_password_confirmation'
+
 UNMATCH_RESET_TOKEN = 'unmatch_token'
 NOT_EXISTS_EMAIL    = 'dummy@no.exists.dummy'
+
+UNEXPECTED_REFERER = 'http://dummyreferer.dummy.com.escape_forsafe'
 
 A_DATE = 24 * 60 * 60
 SEND_DATE         = Time.now

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   concern :mail do
     get :announce , on: :collection
+    get :finish, on: :collection
   end
 
   resources :skill_profiles, concerns: :article
