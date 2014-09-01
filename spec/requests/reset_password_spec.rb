@@ -54,37 +54,36 @@ RSpec.describe 'ResetPasswords', :type => :request do
   # Given no sessions
   describe 'POST /reset_password' do
     context 'user input his email-address' do
-      context 'when the input email-address is correct' do
-        subject do
-          post(reset_password_path, email: EMAIL)
-          response
-        end
-        it { expect(ActionMailer::Base.deliveries.last).not_to be_nil}
-        it_behaves_like 'a successfully rendered', 'announce'
+      where(:email) do
+        [
+          [EMAIL],
+          [NOT_EXISTS_EMAIL]
+        ]
       end
-
-      context 'when the email-address is not correct' do
+      with_them do
         subject do
-          post(reset_password_path, email: NOT_EXISTS_EMAIL)
+          post(reset_password_path, email: email)
           response
         end
-        it { expect(ActionMailer::Base.deliveries.last).to be_nil}
         it_behaves_like 'a successfully rendered', 'announce'
       end
     end
   end
 
   describe 'GET /reset_password/edit' do
+    before do
+      @mock_user = FactoryGirl.create(:reset_password)
+    end
     context 'user send request' do
       context 'with valid token and not expired' do
         before do
-          allow_any_instance(User).to receive_message_chain(:reset_password, :rensend_at).and_return(SEND_DATE)
+          allow_any_instance_of(ResetPassword).to receive_message_chain(:user).and_return(@mock_user)
         end
         subject do
-          get(edit_reset_password_path, RESET_TOKEN)
+          get(edit_reset_password_path, format: RESET_TOKEN)
           response
         end
-        it_behaves_like 'a successfully response', 'resend_password'
+        it_behaves_like 'a successfully response', 'reset_password'
       end
 
       context 'with invalid token or expired' do
@@ -97,10 +96,10 @@ RSpec.describe 'ResetPasswords', :type => :request do
         end
         with_them do
           before do
-            allow_any_instance(User).to receive_message_chain(:reset_password, :rensend_at).and_return(spent_date_from_send_mail)
+            allow_any_instance_of(User).to receive_message_chain(:resend_at).and_return(spent_date_from_send_mail)
           end
           subject do
-            get(edit_reset_password_path, RESET_TOKEN)
+            get(edit_reset_password_path, format: RESET_TOKEN)
             response
           end
           it_behaves_like 'a successfully rendered', 'announce'

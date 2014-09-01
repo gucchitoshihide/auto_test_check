@@ -4,6 +4,8 @@ front:
       table:
         list_num: 10
 back:
+  reset_passwords:
+    expirenation: <%= 3.days.ago %>
   controller:
     comment:
       cert_redirection:
@@ -16,6 +18,6 @@ back:
       seperate: '#'
     user:
       name: dummy
-      email: dummy@dummy.jp
+      email: dummy@example.com
       password: password_dummy
       password_reset_token: dummy_token

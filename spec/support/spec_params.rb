@@ -3,7 +3,7 @@ USER_ID     = 1
 USER_NAME   = Settings[:back][:model][:user][:name]
 EMAIL       = Settings[:back][:model][:user][:email]
 PASSWORD    = Settings[:back][:model][:user][:password]
-RESET_TOKEN = Settings[:back][:model][:user][:password_reset_token]
+RESET_TOKEN = Settings[:back][:reset_passwords][:token]
 
 CHANGE_PASSWORD                      = 'change_password'
 UNMATCH_CHANGE_PASSWORD              = 'unmatch_change_password'

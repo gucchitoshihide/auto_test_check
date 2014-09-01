@@ -14,16 +14,17 @@ class ResetPasswordsController < ApplicationController
 
   def edit
     begin
-      @user = User.find_by_password_reset_token!(params[:format])
-    rescue ActiveRecord::NotFound => e
-      # * old token or invalid access
-      # * should judge expire?
+      # use at form
+      @user  = User.certificate(params[:format])
+      @token = params[:format]
+    rescue ActiveRecord::RecordNotFound, CertificationError => e
+      render 'announce'
     end
   end
 
   def update
     begin
-      user = User.find_by_password_reset_token!(params[:format])
+      user = User.find_by_password_token!(params[:format])
       user.update(reset_password_params)
       # should respond delete password_reset_token
     rescue ActiveRecord::NotFound => e

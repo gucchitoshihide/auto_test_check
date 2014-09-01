@@ -17,6 +17,13 @@ class User < ActiveRecord::Base
       user
     end
 
+    def certificate(email_token)
+      password_reset = ResetPassword.find_by_token!(email_token)
+      raise CertificationError if password_reset.resend_at < Settings[:back][:reset_passwords][:expirenation]
+      reset_token(password_reset)
+      password_reset.user
+    end
+
     def request_reset_password(params)
       user = find_by_email(params[:email])
       user.send_reset_password_email if user.present?
@@ -27,6 +34,11 @@ class User < ActiveRecord::Base
     end
 
     private
+
+    def reset_token(password_reset)
+      password_reset.token = nil
+      password_reset.save
+    end
 
     def validate_params(params)
       @errors = []
@@ -46,14 +58,14 @@ class User < ActiveRecord::Base
   end
 
   def send_reset_password_email
-    generate_token(:password_reset_token)
+    generate_token(:token)
     self.password_reset_sent_at = Time.zone.now
     save!
     Announce.resend_password(self).deliver
   end
 
   def generate_token(column)
-    self[column] = SecureRandom.urlsafe_base64
+    self.password_reset[column] = SecureRandom.urlsafe_base64
   end
 
 end
