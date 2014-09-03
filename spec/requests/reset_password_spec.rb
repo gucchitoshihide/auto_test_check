@@ -96,10 +96,10 @@ RSpec.describe 'ResetPasswords', :type => :request do
         end
         with_them do
           before do
-            allow_any_instance_of(User).to receive_message_chain(:resend_at).and_return(spent_date_from_send_mail)
+            allow_any_instance_of(ResetPassword).to receive_message_chain(:resend_at).and_return(spent_date_from_send_mail)
           end
           subject do
-            get(edit_reset_password_path, format: RESET_TOKEN)
+            get(edit_reset_password_path, format: token)
             response
           end
           it_behaves_like 'a successfully rendered', 'announce'

@@ -14,6 +14,7 @@ class ResetPasswordsController < ApplicationController
 
   def edit
     begin
+      binding.pry
       # use at form
       @user  = User.certificate(params[:format])
       @token = params[:format]
