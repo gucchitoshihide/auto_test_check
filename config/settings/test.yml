@@ -4,10 +4,15 @@ front:
       table:
         list_num: 10
 back:
+  reset_passwords:
+    token: dummy_token
+    resend_at: <%= 2.days.ago %>
+    expirenation: <%= 3 %>
+    email:
+      format: '[^@]+@([^@\.]+\.)+[^@\.]+'
   controller:
     comment:
       cert_redirection:
-        - 'week_reports'
         - 'skill_profiles'
   model:
     article:
@@ -19,3 +24,4 @@ back:
       name: dummy
       email: dummy@dummy.jp
       password: password_dummy
+      password_reset_token: dummy_token

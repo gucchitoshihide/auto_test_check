@@ -1,14 +1,17 @@
-%div.col-lg-6
-  %div.well.bs-component
-    = form_for(@user, url: reset_password_url(@user.password_reset_token), html: {class: 'form-horizontal'}) do |f|
-      %div.form-group
-        = f.label :password, 'password', class: 'col-lg-2 control-label'
-        %div.col-lg-10
-          = f.password_field :password, class: 'form-control'
-      %div.form-group
-        = f.label :password_confirmation, 'password_confirmation', class: 'col-lg-2 control-label'
-        %div.col-lg-10
-          = f.password_field :password_confirmation, class: 'form-control'
-      %div.form-group
-        %div.col-lg-10.col-lg-offset-2
-          = f.submit 'submit', class: 'btn btn-primary'
+= content_for :title, t('las.reset_password.title')
+
+%div#alert
+  - if alert
+    - alert.each do |message|
+      = message
+
+%div
+  = form_for(ResetPassword.find_by_token(params[:format]).user, url: reset_password_url(params[:format])) do |f|
+    %div
+      = f.label :password, 'password'
+      = f.password_field :password, class: 'form-control'
+    %div
+      = f.label :password_confirmation, 'password_confirmation'
+      = f.password_field :password_confirmation
+    %div
+      = f.submit 'submit'

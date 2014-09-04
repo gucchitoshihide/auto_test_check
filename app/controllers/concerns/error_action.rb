@@ -1,5 +1,7 @@
 module ErrorAction
   extend ActiveSupport::Concern
+
+  class Forbidden < ActionController::ActionControllerError; end
   
   def routing_error
     raise ActionController::RoutingError.new(params[:path])
@@ -21,6 +23,10 @@ module ErrorAction
     else
       render template: 'errors/error_500', status: 500
     end
+  end
+
+  def render_403(e = nil)
+    render 'errors/error_403', status: 403
   end
 
 end

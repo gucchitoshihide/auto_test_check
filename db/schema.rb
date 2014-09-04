@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 7) do
 
   create_table "article_comments", force: true do |t|
     t.integer  "article_id"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 6) do
 
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
+  create_table "reset_passwords", force: true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.date     "resend_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reset_passwords", ["user_id"], name: "index_reset_passwords_on_user_id"
+
   create_table "skill_profiles", force: true do |t|
     t.integer  "user_id"
     t.string   "title",      null: false
@@ -64,8 +74,6 @@ ActiveRecord::Schema.define(version: 6) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.string   "password_reset_token"
-    t.string   "password_reset_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
