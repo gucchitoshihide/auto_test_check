@@ -15,7 +15,7 @@ ja:
       button:
         submit: ログイン
     home:
-      title: Las - ホーム -
+      title: ホーム
     week_reports:
       title: 'タイトル'
       content: '記事内容'
@@ -33,3 +33,5 @@ ja:
             not_match: パスワードと確認用パスワードの入力が一致していません
           email:
             invalid_format: メールアドレスの形式が不正です
+    settings:
+      title: アカウント設定

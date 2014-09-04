@@ -17,9 +17,9 @@ shared_examples_for 'a no redirection response' do |original_page, suspect_page|
   end
 end
 
-shared_examples_for 'a successfully redirection response(302)' do |page_name|
+shared_examples_for 'a successfully response redirection (302)' do |page_name|
   its(:content_type)  { should eq Mime::HTML }
-  its(:status)        { should eq 302}
+  its(:status)        { should eq 302 }
 end
 
 shared_examples_for 'a successfully rendered' do |action|

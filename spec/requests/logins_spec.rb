@@ -41,7 +41,7 @@ RSpec.describe 'Logins', :type => :request do
         post(logins_path, POST_LOGIN_PARAMS)
         response
       end
-      it_behaves_like 'a successfully redirection response(302)', 'home'
+      it_behaves_like 'a successfully response redirection (302)', 'home'
     end
 
     context 'when the params is invalid' do
@@ -74,7 +74,7 @@ RSpec.describe 'Logins', :type => :request do
         post(logins_path, POST_LOGIN_PARAMS)
         response
       end
-      it_behaves_like 'a successfully redirection response(302)', 'home'
+      it_behaves_like 'a successfully response redirection (302)', 'home'
     end
 
     context 'when the params is invalid' do
