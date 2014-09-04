@@ -19,6 +19,8 @@ gem 'simple_form'
 gem 'less-rails'
 gem 'haml'
 
+gem 'spinjs-rails'
+
 gem 'cert', path: 'lib/cert'
 gem 'search', path: 'lib/search'
 

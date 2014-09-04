@@ -16,9 +16,9 @@ NOT_EXISTS_EMAIL    = 'dummy@no.exists.dummy'
 LOCAL_HOST_ROUTE = 'http://localhost:3000/'
 
 A_DATE = 24 * 60 * 60
-SEND_DATES        = Time.now
-THREE_DATES_SPENT = SEND_DATES + (3 * A_DATE)
-FOUR_DATES_SPENT  = SEND_DATES + (4 * A_DATE)
+NOW_A_DATE      = Date.today
+THREE_DATES_AGO = NOW_A_DATE - 3
+FOUR_DATES_AGO  = NOW_A_DATE - 4
 
 POST_LOGIN_PARAMS = {
   user: {

@@ -1,1 +1,11 @@
-Resend. check it.
+%div#notice
+  - if notice
+    = notice
+
+%div#alert
+  - if alert
+    - alert.each do |message|
+      = message
+
+= link_to 'reset_password', new_reset_password_path
+= link_to 'login', logins_path

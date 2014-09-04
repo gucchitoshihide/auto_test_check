@@ -1,35 +1,45 @@
 class ResetPasswordsController < ApplicationController
-  before_action :back_to_root, only: [:new]
+  before_action :back_to_root,    only: [:new]
+  before_action :edit_forbidden,  only: [:edit]
+  before_action :render_fobidden, only: [:announce, :finish]
 
   def new
   end
 
   def create
-    User.request_reset_password(params)
-    render 'announce'
-  end
-
-  def announce
+    begin
+      User.request_reset_password(params)
+      flash.now[:notice] = I18n.t('las.reset_password.message.notice.send_email')
+      render 'announce'
+    rescue ValidationError => e
+      flash.now[:alert] = User.format_error_message(e.message)
+      render 'new'
+    end
   end
 
   def edit
     begin
-      binding.pry
       # use at form
-      @user  = User.certificate(params[:format])
-      @token = params[:format]
+      User.certificate(params[:format])
     rescue ActiveRecord::RecordNotFound, CertificationError => e
+      flash.now[:alert] = [I18n.t('las.reset_password.message.alert.certification')]
       render 'announce'
     end
   end
 
   def update
     begin
-      user = User.find_by_password_token!(params[:format])
-      user.update(reset_password_params)
-      # should respond delete password_reset_token
-    rescue ActiveRecord::NotFound => e
+      User.update_password(params[:format], reset_password_params)
+      ResetPassword.reset_token(params[:format])
+      flash.now[:notice] = I18n.t('las.reset_password.message.notice.success_update')
+      render 'finish'
+    rescue ValidationError => e
+      flash.now[:alert] = User.format_error_message(e.message)
+      render 'edit'
     end
+  end
+
+  def announce
   end
 
   def finish
@@ -44,4 +54,13 @@ class ResetPasswordsController < ApplicationController
   def back_to_root
     redirect_to root_path if session[:id]
   end
+
+  def edit_forbidden
+    raise Forbidden if params[:format].blank?
+  end
+
+  def render_fobidden
+    raise Forbidden if request
+  end
+
 end

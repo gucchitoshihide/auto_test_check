@@ -22,3 +22,14 @@ ja:
       submit: '投稿'
     reset_password:
       title: パスワード復旧
+      message:
+        notice:
+          send_email: 入力頂いたメールアドレスへ案内メールを送信致しました。時間が経ってもメールが届かない場合、もう一度メールアドレスを入力してください
+          success_update: パスワードを更新しました
+        alert:
+          certification: リンクが有効期限切れか、復旧処理済みにより無効になっています。再復旧の際はもう一度パスワード復旧の手続きを行ってください
+          password:
+            blank: パスワードもしく確認用パスワードの入力が空です
+            not_match: パスワードと確認用パスワードの入力が一致していません
+          email:
+            invalid_format: メールアドレスの形式が不正です

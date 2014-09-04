@@ -1,13 +1,17 @@
 = content_for :title, t('las.reset_password.title')
 
+%div#alert
+  - if alert
+    - alert.each do |message|
+      = message
+
 %div
-  %div
-    = form_for(@user, url: reset_password_url(@token)) do |f|
-      %div
-        = f.label :password, 'password'
-        = f.password_field :password, class: 'form-control'
-      %div
-        = f.label :password_confirmation, 'password_confirmation'
-        = f.password_field :password_confirmation
-      %div
-        = f.submit 'submit'
+  = form_for(ResetPassword.find_by_token(params[:format]).user, url: reset_password_url(params[:format])) do |f|
+    %div
+      = f.label :password, 'password'
+      = f.password_field :password, class: 'form-control'
+    %div
+      = f.label :password_confirmation, 'password_confirmation'
+      = f.password_field :password_confirmation
+    %div
+      = f.submit 'submit'

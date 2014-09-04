@@ -77,7 +77,7 @@ RSpec.describe 'ResetPasswords', :type => :request do
     context 'user send request' do
       context 'with valid token and not expired' do
         before do
-          allow_any_instance_of(ResetPassword).to receive_message_chain(:user).and_return(@mock_user)
+          allow_any_instance_of(ResetPassword).to receive(:user).and_return(@mock_user)
         end
         subject do
           get(edit_reset_password_path, format: RESET_TOKEN)
@@ -89,14 +89,14 @@ RSpec.describe 'ResetPasswords', :type => :request do
       context 'with invalid token or expired' do
         where(:token, :spent_date_from_send_mail) do
           [
-            [RESET_TOKEN,         FOUR_DATES_SPENT],
-            [UNMATCH_RESET_TOKEN, THREE_DATES_SPENT],
-            [UNMATCH_RESET_TOKEN, FOUR_DATES_SPENT]
+            [RESET_TOKEN,         FOUR_DATES_AGO],
+            [UNMATCH_RESET_TOKEN, THREE_DATES_AGO],
+            [UNMATCH_RESET_TOKEN, FOUR_DATES_AGO]
           ]
         end
         with_them do
           before do
-            allow_any_instance_of(ResetPassword).to receive_message_chain(:resend_at).and_return(spent_date_from_send_mail)
+            allow_any_instance_of(ResetPassword).to receive(:resend_at).and_return(spent_date_from_send_mail)
           end
           subject do
             get(edit_reset_password_path, format: token)
@@ -109,10 +109,13 @@ RSpec.describe 'ResetPasswords', :type => :request do
   end
 
   describe 'PUT /edit_reset_password' do
+    before do
+      FactoryGirl.create(:reset_password)
+    end
     context 'user send request' do
       context 'when params are valid' do
         subject do
-          put(edit_reset_password_path, user: {password: CHANGE_PASSWORD, password_confirmation: CHANGE_PASSWORD_CONFIRMATION})
+          put(reset_password_path, format: RESET_TOKEN, user: {password: CHANGE_PASSWORD, password_confirmation: CHANGE_PASSWORD_CONFIRMATION})
           response
         end
         it_behaves_like 'a successfully rendered', 'finish'
@@ -128,10 +131,10 @@ RSpec.describe 'ResetPasswords', :type => :request do
         end
         with_them do
           subject do
-            put(edit_reset_password_path, user: {password: password, password_confirmation: password_confirmation})
+            put(reset_password_path, format: RESET_TOKEN, user: {password: password, password_confirmation: password_confirmation})
             response
           end
-          it_behaves_like 'a successfully rendered', 'announce'
+          it_behaves_like 'a successfully rendered', 'edit'
         end
       end
     end

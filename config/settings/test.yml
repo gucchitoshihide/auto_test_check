@@ -7,7 +7,9 @@ back:
   reset_passwords:
     token: dummy_token
     resend_at: <%= 2.days.ago %>
-    expirenation: <%= 3.days.ago %>
+    expirenation: <%= 3 %>
+    email:
+      format: '[^@]+@([^@\.]+\.)+[^@\.]+'
   controller:
     comment:
       cert_redirection:

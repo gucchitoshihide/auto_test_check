@@ -19,12 +19,18 @@ class User < ActiveRecord::Base
 
     def certificate(email_token)
       reset_password = ResetPassword.find_by_token!(email_token)
-      raise CertificationError if reset_password.resend_at < Settings[:back][:reset_passwords][:expirenation]
-      reset_token(reset_password)
+      raise CertificationError if (Date.today - reset_password.resend_at) >= Settings[:back][:reset_passwords][:expirenation]
       reset_password.user
     end
 
+    def update_password(token, params)
+      validate_password(params[:password], params[:password_confirmation])
+      user = ResetPassword.find_by_token!(token).user
+      user.update_attributes(params)
+    end
+
     def request_reset_password(params)
+      validate_email(params[:email])
       user = find_by_email(params[:email])
       user.send_reset_password_email if user.present?
     end
@@ -33,11 +39,38 @@ class User < ActiveRecord::Base
       error_message.split(Settings[:back][:model][:error][:seperate])
     end
 
-    private
-
     def reset_token(reset_password)
       reset_password.token = nil
       reset_password.save
+    end
+
+    private
+
+    def validate_email(email)
+      @errors = []
+      validate_email_format(email)
+      raise ValidationError, join_errors(@errors) if @errors.present?
+    end
+
+    def validate_email_format(email)
+      unless email =~ /\A#{Settings[:back][:reset_passwords][:email][:format]}\z/
+        @errors << I18n.t('las.reset_password.message.alert.email.invalid_format')
+      end
+    end
+
+    def validate_password(password, password_confirmation)
+      @errors = []
+      validate_blank(password, password_confirmation)
+      validate_not_match(password, password_confirmation)
+      raise ValidationError, join_errors(@errors) if @errors.present?
+    end
+
+    def validate_blank(password, password_confirmation)
+      @errors << I18n.t('las.reset_password.message.alert.password.blank') if password.blank? or password_confirmation.blank?
+    end
+
+    def validate_not_match(password, password_confirmation)
+      @errors << I18n.t('las.reset_password.message.alert.password.not_match') if password != password_confirmation
     end
 
     def validate_params(params)
@@ -58,13 +91,13 @@ class User < ActiveRecord::Base
   end
 
   def send_reset_password_email
-    self.reset_password = ResetPassword.new
+    self.reset_password = ResetPassword.new(user_id: self.id)
     generate_token
     send_mail
   end
 
   def send_mail
-    self.reset_password[:resend_at] = Time.now
+    self.reset_password[:resend_at] = Date.today
     self.reset_password.save!
     Announce.resend_password(self).deliver
   end

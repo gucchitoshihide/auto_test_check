@@ -2,6 +2,6 @@ module RelationResetPassword
   extend ActiveSupport::Concern
 
   included do
-    has_many :users
+    belongs_to :user
   end
 end

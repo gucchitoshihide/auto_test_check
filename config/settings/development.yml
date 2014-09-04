@@ -5,7 +5,11 @@ front:
         list_num: 10
 back:
   reset_passwords:
-    expirenation: <%= 3.days.ago %>
+    token: dummy_token
+    resend_at: <%= 2.days.ago %>
+    expirenation: <%= 3 %>
+    email:
+      format: '[^@]+@([^@\.]+\.)+[^@\.]+'
   controller:
     comment:
       cert_redirection:
