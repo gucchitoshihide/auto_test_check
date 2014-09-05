@@ -7,6 +7,10 @@
     %div{class: tab_name}
       = js_void_link_to(tab_name)
 
+%div#notice
+  - if notice
+    = notice
+
 %div#alert
   - if alert
     - alert.each do |message|
@@ -17,10 +21,13 @@
   %div.password.area{class: activate_if_same(@tab, 'password')}
     = form_tag(setting_path(tab: @tab), method: :put) do
       %div.current_password
+        = label_tag :current_password, 'current_password'
         = password_field_tag :current_password
       %div.password
+        = label_tag :password, 'password'
         = password_field_tag :password
       %div.password_confirmation_
+        = label_tag :password_confirmation, 'password_confirmation'
         = password_field_tag :password_confirmation
       %div.submit
         = submit_tag 'update'

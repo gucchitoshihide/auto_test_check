@@ -14,7 +14,6 @@ back:
     tab:
       group:
         - password
-        - dummy
   controller:
     comment:
       cert_redirection:

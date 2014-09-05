@@ -14,7 +14,9 @@ class SettingsController < ApplicationController
       User.update_settings(settings_params, params[:id], @tab)
     rescue ValidationError => e
       flash.now[:alert] = User.format_error_message(e.message)
+      return render 'edit'
     end
+    flash.now[:notice] = I18n.t('las.settings.message.notice.password.updated')
     render 'edit'
   end
 

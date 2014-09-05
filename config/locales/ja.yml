@@ -35,6 +35,10 @@ ja:
             invalid_format: メールアドレスの形式が不正です
     settings:
       title: アカウント設定
+      message:
+        notice:
+          password:
+            updated: パスワードを更新しました
     error:
       message:
         password:
