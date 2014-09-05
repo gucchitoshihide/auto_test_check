@@ -22,7 +22,7 @@ RSpec.describe 'ResetPasswords', :type => :request do
           ]
         end
         with_them do
-          subjec do
+          subject do
             get(new_reset_password_path)
             response
           end
