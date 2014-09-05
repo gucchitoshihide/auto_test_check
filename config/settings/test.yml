@@ -1,31 +1,23 @@
-front:
-  skill_profile:
-    index:
-      table:
-        list_num: 10
-back:
-  reset_passwords:
-    token: dummy_token
-    resend_at: <%= 2.days.ago %>
-    expirenation: <%= 3 %>
-    email:
-      format: '[^@]+@([^@\.]+\.)+[^@\.]+'
-  settings:
-    tab:
-      group:
-        - password
-  controller:
-    comment:
-      cert_redirection:
-        - 'skill_profiles'
-  model:
-    article:
-      title:
-        max_length: 255
-    error:
-      seperate: '#'
-    user:
-      name: dummy
-      email: dummy@dummy.jp
-      password: password_dummy
-      password_reset_token: dummy_token
+reset_passwords:
+  token: dummy_token
+  resend_at: <%= 2.days.ago %>
+  expirenation: <%= 3 %>
+  email:
+    format: '[^@]+@([^@\.]+\.)+[^@\.]+'
+settings:
+  tab:
+    group:
+      - password
+
+skill_profile:
+  list_num: 10
+article:
+  title:
+    max_length: 255
+user:
+  name: dummy
+  email: dummy@example.com
+  password: password_dummy
+  password_reset_token: dummy_token
+error:
+  seperate: '#'

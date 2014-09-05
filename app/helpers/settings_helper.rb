@@ -1,6 +1,6 @@
 module SettingsHelper
   def tab_group
-    Settings[:back][:settings][:tab][:group]
+    Settings[:settings][:tab][:group]
   end
 
   def activate_if_same(judge_base, obj)

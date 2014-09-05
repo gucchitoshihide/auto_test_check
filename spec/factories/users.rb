@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    name     Settings[:back][:model][:user][:name]
-    email    Settings[:back][:model][:user][:email]
-    password Settings[:back][:model][:user][:password]
+    name     Settings[:user][:name]
+    email    Settings[:user][:email]
+    password Settings[:user][:password]
   end
 
   factory :user_a do

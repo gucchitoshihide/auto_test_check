@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
     def certificate(email_token)
       reset_password = ResetPassword.find_by_token!(email_token)
-      raise CertificationError if (Date.today - reset_password.resend_at) >= Settings[:back][:reset_passwords][:expirenation]
+      raise CertificationError if (Date.today - reset_password.resend_at) >= Settings[:reset_passwords][:expirenation]
       reset_password.user
     end
 
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
     end
 
     def format_error_message(error_message)
-      error_message.split(Settings[:back][:model][:error][:seperate])
+      error_message.split(Settings[:error][:seperate])
     end
 
     def reset_token(reset_password)
@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
     end
 
     def join_errors(errored_message)
-      errored_message.join(Settings[:back][:model][:error][:seperate])
+      errored_message.join(Settings[:error][:seperate])
     end
 
   end

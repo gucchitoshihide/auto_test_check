@@ -3,7 +3,7 @@ require 'las_errors'
 class SkillProfile < ActiveRecord::Base
   include RelationSkillProfile
 
-  scope :latest, ->(list_num = Settings[:front][:skill_profile][:index][:table][:list_num]) {
+  scope :latest, ->(list_num = Settings[:skill_profile][:list_num]) {
     order('created_at DESC').limit(list_num)
   }
 
@@ -42,13 +42,13 @@ class SkillProfile < ActiveRecord::Base
     end
 
     def format_error_message(error_message)
-      error_message.split(Settings[:back][:model][:error][:seperate])
+      error_message.split(Settings[:error][:seperate])
     end
 
     private
 
     def active_model_errors_to_string(errored_model_obj)
-      errored_model_obj.errors.messages.values.flatten.join(Settings[:back][:model][:error][:seperate])
+      errored_model_obj.errors.messages.values.flatten.join(Settings[:error][:seperate])
     end
   end
 

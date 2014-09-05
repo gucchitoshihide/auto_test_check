@@ -1,10 +1,10 @@
 SESSION_ID    = 1
 USER_ID       = 1
 OTHER_USER_ID = 2
-USER_NAME   = Settings[:back][:model][:user][:name]
-EMAIL       = Settings[:back][:model][:user][:email]
-PASSWORD    = Settings[:back][:model][:user][:password]
-RESET_TOKEN = Settings[:back][:reset_passwords][:token]
+USER_NAME   = Settings[:user][:name]
+EMAIL       = Settings[:user][:email]
+PASSWORD    = Settings[:user][:password]
+RESET_TOKEN = Settings[:reset_passwords][:token]
 
 CURRENT_PASSWORD                     = 'current_password'
 MISSED_CURRENT_PASSWORD              = 'missed_current_password'

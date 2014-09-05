@@ -21,7 +21,7 @@ module ValidationResetPassword
   end
 
   def validate_email_format(email)
-    unless email =~ /\A#{Settings[:back][:reset_passwords][:email][:format]}\z/
+    unless email =~ /\A#{Settings[:reset_passwords][:email][:format]}\z/
       @errors << I18n.t('las.reset_password.message.alert.email.invalid_format')
     end
   end
