@@ -1,13 +1,16 @@
-SESSION_ID  = 1
-USER_ID     = 1
+SESSION_ID    = 1
+USER_ID       = 1
+OTHER_USER_ID = 2
 USER_NAME   = Settings[:back][:model][:user][:name]
 EMAIL       = Settings[:back][:model][:user][:email]
 PASSWORD    = Settings[:back][:model][:user][:password]
 RESET_TOKEN = Settings[:back][:reset_passwords][:token]
 
+CURRENT_PASSWORD                     = 'current_password'
+MISSED_CURRENT_PASSWORD              = 'missed_current_password'
 CHANGE_PASSWORD                      = 'change_password'
-UNMATCH_CHANGE_PASSWORD              = 'unmatch_change_password'
 CHANGE_PASSWORD_CONFIRMATION         = CHANGE_PASSWORD
+UNMATCH_CHANGE_PASSWORD              = 'unmatch_change_password'
 UNMATCH_CHANGE_PASSWORD_CONFIRMATION = 'unmatch_change_password_confirmation'
 
 UNMATCH_RESET_TOKEN = 'unmatch_token'

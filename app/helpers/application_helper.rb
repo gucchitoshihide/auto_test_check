@@ -8,4 +8,8 @@ module ApplicationHelper
   def comment_count(article_id)
     Comment.num_followed(article_id)
   end
+
+  def js_void_link_to(property)
+    link_to property, 'javascript:void(0)'
+  end
 end

@@ -5,10 +5,15 @@ class User < ActiveRecord::Base
   has_secure_password
 
   class << self
+    include ValidationSettings
+    include ValidationResetPassword
+    include ValidationLogins
+
     attr_accessor :errors
 
     def authenticate(params)
-      validate_params(params)
+      @errors = []
+      validate_login_params(params)
       raise ValidationError, join_errors(@errors) if @errors.present?
       user = find_by_name(params[:name])
       unless (user and user.authenticate(params[:password]))
@@ -24,13 +29,27 @@ class User < ActiveRecord::Base
     end
 
     def update_password(token, params)
-      validate_password(params[:password], params[:password_confirmation])
+      @errors = []
+      validate_password_reset_password(params[:password], params[:password_confirmation])
+      raise ValidationError, join_errors(@errors) if @errors.present?
       user = ResetPassword.find_by_token!(token).user
       user.update_attributes(params)
     end
 
+    def update_settings(params, user_id, tab_name)
+      @errors = []
+      case tab_name
+      when 'password'
+        validate_setting_password(user_id, params[:current_password], params[:password], params[:password_confirmation])
+        update_settings_password(user_id, {password: params[:password], password_confirmation: params[:password_confirmation]})
+      end
+      raise ValidationError, join_errors(@errors) if @errors.present?
+    end
+
     def request_reset_password(params)
-      validate_email(params[:email])
+      @errors = []
+      validate_email_format(params[:email])
+      raise ValidationError, join_errors(@errors) if @errors.present?
       user = find_by_email(params[:email])
       user.send_reset_password_email if user.present?
     end
@@ -46,42 +65,9 @@ class User < ActiveRecord::Base
 
     private
 
-    def validate_email(email)
-      @errors = []
-      validate_email_format(email)
-      raise ValidationError, join_errors(@errors) if @errors.present?
-    end
-
-    def validate_email_format(email)
-      unless email =~ /\A#{Settings[:back][:reset_passwords][:email][:format]}\z/
-        @errors << I18n.t('las.reset_password.message.alert.email.invalid_format')
-      end
-    end
-
-    def validate_password(password, password_confirmation)
-      @errors = []
-      validate_blank(password, password_confirmation)
-      validate_not_match(password, password_confirmation)
-      raise ValidationError, join_errors(@errors) if @errors.present?
-    end
-
-    def validate_blank(password, password_confirmation)
-      @errors << I18n.t('las.reset_password.message.alert.password.blank') if password.blank? or password_confirmation.blank?
-    end
-
-    def validate_not_match(password, password_confirmation)
-      @errors << I18n.t('las.reset_password.message.alert.password.not_match') if password != password_confirmation
-    end
-
-    def validate_params(params)
-      @errors = []
-      validate_presence(params)
-    end
-
-    def validate_presence(params)
-      params.keys.each do |key|
-        params[key].present? or @errors << I18n.t("las.logins.message.alert.blank.#{key}")
-      end
+    def update_settings_password(user_id, attributes)
+      user = User.find_by_id(user_id)
+      user.update(attributes)
     end
 
     def join_errors(errored_message)
@@ -106,5 +92,4 @@ class User < ActiveRecord::Base
     self.reset_password.token = SecureRandom.urlsafe_base64
     self.reset_password.save!
   end
-
 end

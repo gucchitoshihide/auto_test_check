@@ -45,7 +45,7 @@ RSpec.describe 'ResetPasswords', :type => :request do
             get(new_reset_password_path)
             response
           end
-          it_behaves_like 'a successfully redirection response(302)', 'home'
+          it_behaves_like 'a successfully response redirection (302)', 'home'
         end
       end
     end
