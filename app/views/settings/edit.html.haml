@@ -1,2 +1,28 @@
+= javascript_include_tag 'settings'
 
 = content_for(:title, t('las.settings.title'))
+
+%div#tab
+  - tab_group.each do |tab_name|
+    %div{class: tab_name}
+      = js_void_link_to(tab_name)
+
+%div#alert
+  - if alert
+    - alert.each do |message|
+      %li
+        = message
+
+%div#setting
+  %div.password.area{class: activate_if_same(@tab, 'password')}
+    = form_tag(setting_path(tab: @tab), method: :put) do
+      %div.current_password
+        = password_field_tag :current_password
+      %div.password
+        = password_field_tag :password
+      %div.password_confirmation_
+        = password_field_tag :password_confirmation
+      %div.submit
+        = submit_tag 'update'
+  %div.dummy.area{class: activate_if_same(@tab, 'dummy')}
+    tmp-dummy

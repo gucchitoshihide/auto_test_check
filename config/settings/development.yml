@@ -10,6 +10,11 @@ back:
     expirenation: <%= 3 %>
     email:
       format: '[^@]+@([^@\.]+\.)+[^@\.]+'
+  settings:
+    tab:
+      group:
+        - password
+        - dummy
   controller:
     comment:
       cert_redirection:

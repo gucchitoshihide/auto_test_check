@@ -35,3 +35,13 @@ ja:
             invalid_format: メールアドレスの形式が不正です
     settings:
       title: アカウント設定
+    error:
+      message:
+        password:
+          blank:
+            current_password: 現在のパスワードの入力が空です
+            password: 変更パスワードの入力が空です
+            password_confirmation: 確認用パスワードの入力が空です
+          not_match:
+            current_password: 現在のパスワードが登録パスワードと一致していません
+            password: 変更パスワードと確認用パスワードが一致していません

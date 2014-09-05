@@ -29,6 +29,14 @@ class User < ActiveRecord::Base
       user.update_attributes(params)
     end
 
+    def update_settings(params, user_id, tab_name)
+      case tab_name
+      when 'password'
+        validate_three_passwords(user_id, params[:current_password], params[:password], params[:password_confirmation])
+        update_settings_password(user_id, params[:password], params[:password_confirmation])
+      end
+    end
+
     def request_reset_password(params)
       validate_email(params[:email])
       user = find_by_email(params[:email])
@@ -45,6 +53,21 @@ class User < ActiveRecord::Base
     end
 
     private
+
+    def validate_three_passwords(user_id, current_password, password, password_confirmation)
+      @errors = []
+      @errors << I18n.t('las.error.message.password.not_match.current_password') if find_by_id(user_id).authenticate(password)
+      @errors << I18n.t("las.error.message.password.blank.current_password")     if current_password.blank?
+      @errors << I18n.t("las.error.message.password.blank.password")             if password.blank?
+      @errors << I18n.t("las.error.message.password.blank.password_confirmation")if password_confirmation.blank?
+      @errors << I18n.t('las.error.message.password.not_match.password')         if password != password_confirmation
+      raise ValidationError, join_errors(@errors) if @errors.present?
+    end
+
+    def update_settings_password(user_id, password, password_confirmation)
+      user = User.find_by_id(user_id)
+      user.update({password: password, password_confirmation: password_confirmation})
+    end
 
     def validate_email(email)
       @errors = []
