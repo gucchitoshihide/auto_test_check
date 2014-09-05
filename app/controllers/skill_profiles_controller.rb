@@ -3,8 +3,10 @@ class SkillProfilesController < ApplicationController
   before_action :session_required
   before_action :set_article,    only: [:show, :edit, :update]
   before_action :authorize_edit, only: [:edit, :update]
+  before_action :search_cert,    only: [:search]
 
   def index
+    @profiles = SkillProfile.latest
   end
 
   def show
@@ -52,6 +54,12 @@ class SkillProfilesController < ApplicationController
     end
   end
 
+  def search
+    @profiles = SkillProfile.search(params)
+    render :index
+  end
+  
+
   private
 
   def set_article
@@ -70,6 +78,11 @@ class SkillProfilesController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def search_cert
+    # maybe implement secure search word
+    # using Cert gem
   end
 
 end

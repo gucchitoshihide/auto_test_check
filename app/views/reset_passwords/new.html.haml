@@ -1,0 +1,15 @@
+= content_for :title, t('las.reset_password.title')
+
+= javascript_include_tag 'reset_password'
+
+%div#alert
+  - if alert
+    - alert.each do |message|
+      = message
+
+= form_tag(reset_password_url) do
+  %div#email_content
+    = label_tag :email, 'email'
+    = text_field_tag :email
+  %div#submit_content
+    = submit_tag 'submit'

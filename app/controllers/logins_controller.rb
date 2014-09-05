@@ -9,7 +9,7 @@ class LoginsController < ApplicationController
     begin
       user = User.authenticate(user_params)
       session[:id] = user.id
-      redirect_to root_path
+      redirect_to root_url
     rescue AuthorizationError, ValidationError => e
       flash.now[:alert] = User.format_error_message(e.message)
       render :index
@@ -24,6 +24,6 @@ class LoginsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
+    params.require(:user).permit(:name, :password)
   end
 end
