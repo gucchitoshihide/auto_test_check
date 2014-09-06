@@ -8,6 +8,7 @@ settings:
   tab:
     group:
       - password
+      - avatar
 
 skill_profile:
   list_num: 10
