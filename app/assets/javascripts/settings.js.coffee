@@ -1,5 +1,15 @@
+hide_flash = ->
+  $('#notice').hide()
+  $('#alert').hide()
+
+change_tab = (selected_tab) ->
+  for tab in ['password', 'avatar']
+    $('#setting .' + tab).hide()
+  $('#setting .' + selected_tab.parentElement.className).show()
+
 $ ->
   $('#tab a').click ->
-    for tab in ['password', 'avatar']
-      $('#setting .' + tab).hide()
-    $('#setting .' + this.parentElement.className).show()
+    hide_flash()
+    change_tab(this)
+
+  $('#avatar').change ->
