@@ -51,3 +51,11 @@ ja:
           not_match:
             current_password: 現在のパスワードが登録パスワードと一致していません
             password: 変更パスワードと確認用パスワードが一致していません
+        avatar:
+          blank:
+            no_avatar: アップロードする写真を選択してください
+          size:
+            scale_small: 画像の幅と高さどちらかが Xpx 未満です
+            storage_big: 1 MB 以上の容量を持つ写真はアップロードできません
+          format:
+            invalid: jpg, png, gif 以外の写真ファイルをアップロードすることはできません
