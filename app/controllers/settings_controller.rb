@@ -16,14 +16,14 @@ class SettingsController < ApplicationController
       flash.now[:alert] = User.format_error_message(e.message)
       return render 'edit'
     end
-    flash.now[:notice] = I18n.t('las.settings.message.notice.password.updated')
+    flash.now[:notice] = I18n.t("las.settings.message.notice.updated.#{@tab}")
     render 'edit'
   end
 
   private
 
   def settings_params
-    params.permit(:current_password, :password, :password_confirmation)
+    params.permit(:current_password, :password, :password_confirmation, :avatar)
   end
 
   def prohibit_editing_other

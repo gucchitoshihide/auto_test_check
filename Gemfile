@@ -12,6 +12,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 gem 'bcrypt'
 
+gem 'carrierwave'
+gem 'rmagick'
+
 gem 'therubyracer', platforms: :ruby
 gem 'rails4_acts_as_paranoid'
 gem 'rails_config'

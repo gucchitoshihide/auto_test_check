@@ -19,7 +19,7 @@
 
 %div#setting
   %div.password.area{class: activate_if_same(@tab, 'password')}
-    = form_tag(setting_path(tab: @tab), method: :put) do
+    = form_tag(setting_path(tab: 'password'), method: :put) do
       %div.current_password
         = label_tag :current_password, 'current_password'
         = password_field_tag :current_password
@@ -29,5 +29,16 @@
       %div.password_confirmation_
         = label_tag :password_confirmation, 'password_confirmation'
         = password_field_tag :password_confirmation
+      %div.submit
+        = submit_tag 'update'
+  %div.avatar.area{class: activate_if_same(@tab, 'avatar')}
+    - if current_user.avatar?
+      = image_tag current_user.avatar.thumb.url
+    - else
+      %i.icon-user
+    = form_tag(setting_path(tab: 'avatar'), multipart: true, method: :put) do |f|
+      %div.avatar
+        = label_tag :avatar, 'avatar'
+        = file_field_tag :avatar
       %div.submit
         = submit_tag 'update'

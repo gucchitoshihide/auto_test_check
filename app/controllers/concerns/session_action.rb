@@ -6,5 +6,4 @@ module SessionAction
       redirect_to logins_path, alert: 'You should login'
     end
   end
-
 end

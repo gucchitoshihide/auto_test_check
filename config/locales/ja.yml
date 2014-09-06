@@ -37,8 +37,10 @@ ja:
       title: アカウント設定
       message:
         notice:
-          password:
-            updated: パスワードを更新しました
+          updated:
+            password: パスワードを更新しました
+            avatar: 写真を更新しました
+
     error:
       message:
         password:
