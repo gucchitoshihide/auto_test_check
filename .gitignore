@@ -15,6 +15,10 @@
 /log/*.log
 /tmp
 
+# Ignore upload file
+/public/uploads/user/avatar
+/public/uploads/tmp
+
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml

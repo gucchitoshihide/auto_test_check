@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   class << self
+    include ValidationAvatar
     include ValidationSettings
     include ValidationResetPassword
     include ValidationLogins
@@ -42,13 +43,13 @@ class User < ActiveRecord::Base
       case tab_name
       when 'password'
         validate_setting_password(user_id, params[:current_password], params[:password], params[:password_confirmation])
+        raise ValidationError, join_errors(@errors) if @errors.present?
         update_settings_password(user_id, {password: params[:password], password_confirmation: params[:password_confirmation]})
       when 'avatar'
-        user        = find_by_id(user_id)
-        user.avatar = params[:avatar]
-        user.save!
+        validate_avatar(params)
+        raise ValidationError, join_errors(@errors) if @errors.present?
+        Avatar.update(user_id, params[:avatar])
       end
-      raise ValidationError, join_errors(@errors) if @errors.present?
     end
 
     def request_reset_password(params)
