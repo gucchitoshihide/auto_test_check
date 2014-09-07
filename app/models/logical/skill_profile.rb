@@ -23,8 +23,9 @@ class SkillProfile < ActiveRecord::Base
     end
 
     def rewrite(article_obj, params)
+      content = ERB::Util.html_escape(params[:content]) # respond to XSS / http://qiita.com/2or3/items/3f25216663190676a693
       begin
-        article_obj.update_attributes!(params)
+        article_obj.update_attributes!(content: content)
       rescue ActiveRecord::RecordInvalid => e
         raise ValidationError, active_model_errors_to_string(profile)
       end

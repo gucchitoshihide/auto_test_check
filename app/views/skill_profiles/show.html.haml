@@ -11,7 +11,7 @@
   = @article.title
 %div
   content:
-  = @article.content
+  = markdown_to_html(@article.content)
 
 
 %div
