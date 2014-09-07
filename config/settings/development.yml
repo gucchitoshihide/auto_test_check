@@ -9,6 +9,7 @@ settings:
     group:
       - password
       - avatar
+      - write_style
   avatar:
     min_size: 50
     max_storage: <%= 1.megabytes %>
@@ -27,5 +28,9 @@ user:
   email: dummy@example.com
   password: password_dummy
   password_reset_token: dummy_token
+  write_style:
+    plain: text_plain
+    md: markdown
+
 error:
   seperate: '#'

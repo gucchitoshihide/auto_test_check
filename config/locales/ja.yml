@@ -40,7 +40,7 @@ ja:
           updated:
             password: パスワードを更新しました
             avatar: 写真を更新しました
-
+            write_style: 書式を更新しました
     error:
       message:
         password:
