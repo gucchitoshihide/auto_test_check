@@ -33,7 +33,7 @@
         = submit_tag 'update'
   %div.avatar.area{class: activate_if_same(@tab, 'avatar')}
     - if current_user.avatar?
-      = image_tag current_user.avatar.thumb.url
+      = image_tag current_user.avatar.profile.url
     - else
       %i.icon-user
     = form_tag(setting_path(tab: 'avatar'), multipart: true, method: :put) do |f|
