@@ -11,3 +11,10 @@ namespace :test do
     %x(cp config/settings/development.yml config/settings/test.yml)
   end
 end
+
+namespace :clear do
+  desc 'uploaders'
+  task :uploader do
+    %x(rm -rf public/uploads/user/avatar/[0-9]*)
+  end
+end

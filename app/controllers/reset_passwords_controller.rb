@@ -29,7 +29,7 @@ class ResetPasswordsController < ApplicationController
 
   def update
     begin
-      User.update_password(params[:format], reset_password_params)
+      User.reset_password(params[:format], reset_password_params)
       ResetPassword.reset_token(params[:format])
       flash.now[:notice] = I18n.t('las.reset_password.message.notice.success_update')
       render 'finish'

@@ -8,6 +8,14 @@ settings:
   tab:
     group:
       - password
+      - avatar
+  avatar:
+    min_size: 50
+    max_storage: <%= 1.megabytes %>
+    permitted:
+      - jpeg
+      - png
+      - gif
 
 skill_profile:
   list_num: 10
