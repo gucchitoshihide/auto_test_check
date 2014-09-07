@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
       reset_password.user
     end
 
-    def update_password(token, params)
+    def reset_password(token, params)
       @errors = []
       validate_password_reset_password(params[:password], params[:password_confirmation])
       raise ValidationError, join_errors(@errors) if @errors.present?
@@ -44,11 +44,11 @@ class User < ActiveRecord::Base
       when 'password'
         validate_setting_password(user_id, params[:current_password], params[:password], params[:password_confirmation])
         raise ValidationError, join_errors(@errors) if @errors.present?
-        update_settings_password(user_id, {password: params[:password], password_confirmation: params[:password_confirmation]})
+        Setting.password_update(user_id, password, password_confirmation)
       when 'avatar'
         validate_avatar(params)
         raise ValidationError, join_errors(@errors) if @errors.present?
-        Avatar.update(user_id, params[:avatar])
+        Setting.avatar_update(user_id, params[:avatar])
       end
     end
 
@@ -64,17 +64,7 @@ class User < ActiveRecord::Base
       error_message.split(Settings[:error][:seperate])
     end
 
-    def reset_token(reset_password)
-      reset_password.token = nil
-      reset_password.save
-    end
-
     private
-
-    def update_settings_password(user_id, attributes)
-      user = User.find_by_id(user_id)
-      user.update(attributes)
-    end
 
     def join_errors(errored_message)
       errored_message.join(Settings[:error][:seperate])
