@@ -8,12 +8,10 @@
 %div.col-lg-6
   %div.well.bs-component
     = form_for(:article, {url: skill_profile_url, method: :put, id: @article.id, html: {class: 'form-horizontal'}}) do |f|
-      %div.form-group
-        = label_tag :content, t('las.week_reports.content'), class: 'col-lg-2 control-label'
-        %div.col-lg-10
-          = f.text_area :content, size: '20x20', class: 'form-control'
-      %div.form-group
-        %div.col-lg-10.col-lg-offset-2
-          = submit_tag t('las.week_reports.submit'), class: 'btn btn-primary'
+      %div
+        = label_tag :content, t('las.week_reports.content')
+        = f.text_area :content, value: @article.content.html_safe
+      %div
+        = submit_tag t('las.week_reports.submit')
 
 = link_to 'Back', skill_profiles_path

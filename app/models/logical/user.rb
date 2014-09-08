@@ -49,6 +49,9 @@ class User < ActiveRecord::Base
         validate_avatar(params)
         raise ValidationError, join_errors(@errors) if @errors.present?
         Setting.avatar_update(user_id, params[:avatar])
+      when 'write_style'
+        # no validation because of radio button input
+        Setting.write_style_update(user_id, params[:write_style])
       end
     end
 

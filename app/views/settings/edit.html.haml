@@ -42,3 +42,13 @@
         = file_field_tag :avatar
       %div.submit
         = submit_tag 'update'
+  %div.write_style.area{class: activate_if_same(@tab, 'write_style')}
+    = form_tag(setting_path(tab: 'write_style'), method: :put) do
+      %div.text_plain
+        = label_tag :text_plain, 'text_plain'
+        = precheck_radio_tag_if_setting_activate('write_style', Settings[:user][:write_style][:plain])
+      %div.markdown
+        = label_tag :markdown, 'markdown'
+        = precheck_radio_tag_if_setting_activate('write_style', Settings[:user][:write_style][:md])
+      %div.submit
+        = submit_tag 'update'

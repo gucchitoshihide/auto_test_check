@@ -23,7 +23,7 @@ class SettingsController < ApplicationController
   private
 
   def settings_params
-    params.permit(:current_password, :password, :password_confirmation, :avatar)
+    params.permit(:current_password, :password, :password_confirmation, :write_style, :avatar)
   end
 
   def prohibit_editing_other

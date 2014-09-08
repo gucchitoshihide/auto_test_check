@@ -12,4 +12,10 @@ module ApplicationHelper
   def js_void_link_to(property)
     link_to property, 'javascript:void(0)'
   end
+
+  # http://qiita.com/shu_0115/items/476a51cb4751515f3ac2
+  # http://qiita.com/2or3/items/3f25216663190676a693
+  def markdown_to_html(text)
+    sanitize Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(text)
+  end
 end

@@ -16,10 +16,11 @@ gem 'carrierwave'
 gem 'rmagick'
 
 gem 'therubyracer', platforms: :ruby
-gem 'rails4_acts_as_paranoid'
 gem 'rails_config'
 gem 'simple_form'
 gem 'less-rails'
+
+gem 'redcarpet'
 gem 'haml'
 
 gem 'spinjs-rails'

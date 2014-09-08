@@ -11,8 +11,11 @@
   = @article.title
 %div
   content:
-  = @article.content
-
+  - case @article.written_style
+  - when Settings[:user][:write_style][:plain]
+    = @article.content
+  - when Settings[:user][:write_style][:md]
+    = markdown_to_html(@article.content)
 
 %div
   - if Comment.followed?(@article.id)

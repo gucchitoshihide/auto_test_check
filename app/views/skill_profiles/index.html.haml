@@ -19,7 +19,6 @@
         %tr
           %td{colspan: '3'}
           %td= link_to profile.title + announce_comment(profile.article.id), skill_profile_path(id: profile.article.id)
-          %td= truncate(profile.article.content, length: 10)
           %td
             = profile.user.name
             - if profile.user.avatar?
