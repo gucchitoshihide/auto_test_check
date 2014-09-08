@@ -12,7 +12,7 @@ class SkillProfile < ActiveRecord::Base
       skill_profile = SkillProfile.new(title: params[:title], user_id: user_id)
       if skill_profile.save
         begin
-          skill_profile.create_article(title: params[:title], content: params[:content])
+          skill_profile.create_article(title: params[:title], content: params[:content], written_style: skill_profile.user.write_style)
         rescue ActiveRecord::StatementInvalid
           skill_profile.delete
           raise ValidationError, 'Detect All Validation'
@@ -22,10 +22,9 @@ class SkillProfile < ActiveRecord::Base
       end
     end
 
-    def rewrite(article_obj, params)
-      content = ERB::Util.html_escape(params[:content]) # respond to XSS / http://qiita.com/2or3/items/3f25216663190676a693
+    def rewrite(article_obj, params, current_user)
       begin
-        article_obj.update_attributes!(content: content)
+        article_obj.update_attributes!(content: params[:content], written_style: current_user.write_style)
       rescue ActiveRecord::RecordInvalid => e
         raise ValidationError, active_model_errors_to_string(profile)
       end

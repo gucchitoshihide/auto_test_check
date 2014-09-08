@@ -12,9 +12,9 @@ namespace :test do
   end
 end
 
-namespace :clear do
-  desc 'uploaders'
-  task :uploader do
+namespace :uploader do
+  desc 'clean uploader'
+  task :clean do
     %x(rm -rf public/uploads/user/avatar/[0-9]*)
   end
 end

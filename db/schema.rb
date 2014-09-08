@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 7) do
 
   create_table "articles", force: true do |t|
     t.integer  "skill_profile_id"
-    t.string   "title",            null: false
+    t.string   "title",                                   null: false
     t.text     "content"
+    t.string   "written_style",    default: "text_plain"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
