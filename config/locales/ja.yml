@@ -16,10 +16,11 @@ ja:
         submit: ログイン
     home:
       title: ホーム
-    week_reports:
-      title: 'タイトル'
-      content: '記事内容'
-      submit: '投稿'
+    skill_profiles:
+      title: スキル紹介
+      content: 紹介内容
+      submit: 投稿
+      update: 変更
     reset_password:
       title: パスワード復旧
       message:

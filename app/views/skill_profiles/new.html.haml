@@ -7,12 +7,12 @@
 
 = form_for(:article, url: skill_profiles_path) do |f|
   %div
-    = f.label :title, t('las.week_reports.title')
+    = f.label :title, t('las.skill_profiles.title')
     = f.text_field :title
 
   %div
-    = f.label :content, t('las.week_reports.content')
+    = f.label :content, t('las.skill_profiles.content')
     = f.text_area :content
-  = f.submit t('las.week_reports.submit')
+  = f.submit t('las.skill_profiles.submit')
 
 = link_to 'Back', skill_profiles_path
