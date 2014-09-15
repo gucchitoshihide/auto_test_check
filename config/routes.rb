@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :skill_profiles, concerns: :article
   resources :logins,   only: [:index, :create, :destroy]
   resources :settings, only: [:edit, :update]
+  resources :admin, only: [:index, :create] do
+    get :login, on: :collection
+  end
   resource  :reset_password, concerns: :mail
 
   get  '*not_found' => 'application#routing_error'

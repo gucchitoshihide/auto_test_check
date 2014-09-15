@@ -14,3 +14,8 @@ User.create! do |user|
   user.email                 = 'mat27y@gmail.com'
 end
 
+Admin.create! do |admin|
+  admin.name     = 'blah'
+  admin.password = 'blah'
+  admin.email    = 'dummy@example.com'
+end

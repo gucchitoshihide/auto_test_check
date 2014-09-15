@@ -6,3 +6,17 @@ end
 def login
   post(logins_path, user: {name: USER_NAME, password: PASSWORD})
 end
+
+# https://gist.github.com/mattconnolly/4158961
+def basic_login_request
+  @env     ||= {}
+  id       = Settings[:admin][:basic_auth][:id]
+  password = Settings[:admin][:basic_auth][:password]
+  @env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(id, password)
+end
+
+def basic_login_controller
+  id       = Settings[:admin][:basic_auth][:id]
+  password = Settings[:admin][:basic_auth][:password]
+  request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(id, password)
+end

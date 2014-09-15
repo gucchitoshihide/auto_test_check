@@ -17,7 +17,25 @@ settings:
       - jpeg
       - png
       - gif
-
+admin:
+  fixture:
+    name: dummy
+    email: <%= 'a' * 243 + '@example.com' %>
+    password: <%= 'a' * 255 %>
+  basic_auth:
+    id: dev
+    password: dev
+  constraint:
+    email:
+      length: 255
+    password:
+      length: 255
+      regexp: '[ -~]+'
+  redirection:
+    regexp: '(http[s]?):\/\/([^\/\s]*)'
+  allowed_keys:
+    - email
+    - password
 skill_profile:
   list_num: 10
 article:
@@ -31,6 +49,5 @@ user:
   write_style:
     plain: text_plain
     md: markdown
-
 error:
   seperate: '#'

@@ -1,0 +1,19 @@
+= javascript_include_tag 'admin'
+= content_for(:title, t('las.admin.title'))
+
+#alert
+  - if alert
+    %ul
+      - alert.each do |alert_message|
+        %li
+          = alert_message
+
+= form_for(:admin, url: admin_index_path) do |f|
+  %div.email_content
+    = f.label :email, I18n.t('las.admin.label.email')
+    = f.text_field :email
+  %div.password_field
+    = f.label :password, I18n.t('las.admin.label.password')
+    = f.password_field :password
+  %div.submit_field
+    = f.submit I18n.t('las.admin.button.submit')

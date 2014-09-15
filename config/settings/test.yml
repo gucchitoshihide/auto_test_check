@@ -9,7 +9,33 @@ settings:
     group:
       - password
       - avatar
-
+      - write_style
+  avatar:
+    min_size: 50
+    max_storage: <%= 1.megabytes %>
+    permitted:
+      - jpeg
+      - png
+      - gif
+admin:
+  fixture:
+    name: dummy
+    email: <%= 'a' * 243 + '@example.com' %>
+    password: <%= 'a' * 255 %>
+  redirection:
+    regexp: '(http[s]?):\/\/([^\/\s]*)'
+  basic_auth:
+    id: test
+    password: test
+  constraint:
+    email:
+      length: 255
+    password:
+      length: 255
+      regexp: '[ -~]+'
+  allowed_keys:
+    - email
+    - password
 skill_profile:
   list_num: 10
 article:
@@ -20,5 +46,8 @@ user:
   email: dummy@example.com
   password: password_dummy
   password_reset_token: dummy_token
+  write_style:
+    plain: text_plain
+    md: markdown
 error:
   seperate: '#'

@@ -45,6 +45,8 @@ GEM
     arel (5.0.1.20140414130214)
     ast (2.0.0)
     bcrypt (3.1.7)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -76,6 +78,7 @@ GEM
     concord (0.1.5)
       adamantium (~> 0.2.0)
       equalizer (~> 0.0.9)
+    debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     equalizer (0.0.9)
@@ -133,7 +136,7 @@ GEM
       slop (~> 3.4, >= 3.4.5)
     phantomjs (1.9.7.1)
     polyglot (0.3.5)
-    proc_to_ast (0.0.6)
+    proc_to_ast (0.0.7)
       coderay
       parser
       unparser
@@ -187,7 +190,8 @@ GEM
       rspec-expectations (>= 2.99.0.beta1)
     rspec-mocks (3.0.4)
       rspec-support (~> 3.0.0)
-    rspec-parameterized (0.1.1)
+    rspec-parameterized (0.1.2)
+      binding_of_caller
       parser
       proc_to_ast
       rspec (>= 2.13, < 4)
@@ -287,7 +291,7 @@ DEPENDENCIES
   rspec
   rspec-its
   rspec-parameterized
-  rspec-rails
+  rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   search!
