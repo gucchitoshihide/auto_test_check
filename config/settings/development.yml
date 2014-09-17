@@ -34,6 +34,7 @@ admin:
   redirection:
     regexp: '(http[s]?):\/\/([^\/\s]*)'
   allowed_keys:
+    - page
     - email
     - password
 skill_profile:

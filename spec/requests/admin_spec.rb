@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin', :type => :request do
-  describe 'GET /admin/login' do context 'with user request' do context 'with basic authentication' do
-      before { basic_login_request }
+  describe 'GET /admin/login' do
+    context 'with user request' do
+      context 'with basic authentication' do
+        before do
+          basic_login_request
+        end
         subject do
           get(login_admin_index_path, BLANK_PARAMETERS, @env)
           response
@@ -10,6 +14,7 @@ RSpec.describe 'Admin', :type => :request do
 
         it_behaves_like 'a successfully response MOD', 'admin.login'
       end
+
       context 'without basic authentication' do
         subject do
           get(login_admin_index_path)
@@ -38,20 +43,22 @@ RSpec.describe 'Admin', :type => :request do
 
   describe' GET /admin' do
     subject do
-      pending
-      #get(admin_index_path)
-      #response
+      get(admin_index_path)
+      response
     end
+
     context 'with user request' do
       context 'with session' do
-      pending
-      # it_behaves_like 'a successfully response MOD', 'admin.index'
+        before do
+          FactoryGirl.create(:admin)
+          login_as_admin
+        end
+        it_behaves_like 'a successfully response MOD', 'admin.index'
       end
     end
 
     context 'without session' do
-      pending
-      # it_behaves_like 'a successfully response MOD', 'admin.index'
+      it_behaves_like 'a failure response status with', 403
     end
   end
 

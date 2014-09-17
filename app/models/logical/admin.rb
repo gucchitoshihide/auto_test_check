@@ -14,6 +14,7 @@ class Admin < ActiveRecord::Base
       unless admin and admin.authenticate(params[:password])
         raise AuthorizationError, I18n.t('las.errors.admin_authorization.invalid')
       end
+      admin
     end
 
     private

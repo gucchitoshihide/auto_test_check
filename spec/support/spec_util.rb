@@ -4,7 +4,11 @@ end
 
 # http://stackoverflow.com/a/5803121
 def login
-  post(logins_path, user: {name: USER_NAME, password: PASSWORD})
+  post(logins_path, user: { name: USER_NAME, password: PASSWORD })
+end
+
+def login_as_admin
+  post(admin_index_path, USER_POST_ADMIN_PARAMS)
 end
 
 # https://gist.github.com/mattconnolly/4158961

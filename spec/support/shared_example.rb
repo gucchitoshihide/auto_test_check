@@ -57,7 +57,9 @@ shared_examples_for 'a successfully rendered' do |action|
   end
 end
 
-shared_examples_for 'a prohibited request and return 403' do
+shared_examples_for 'a failure response status with' do |status|
+  its(:content_type)  { should eq Mime::HTML }
+  its(:status)        { should eq status }
 end
 
 shared_examples_for 'a prohibited request and return 401' do

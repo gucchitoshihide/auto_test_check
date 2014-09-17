@@ -4,8 +4,9 @@ describe 'Routing of Las', :type => :routing do
   describe 'Route to valid paths' do
     where(:method, :path, :expected_controller, :expected_action) do
       [
+        [:get,  '/admin', 'admin', 'index'],
+        [:post, '/admin', 'admin', 'create'],
         [:get,  '/admin/login', 'admin', 'login'],
-        [:post, '/admin', 'admin', 'create']
       ]
     end
     with_them do

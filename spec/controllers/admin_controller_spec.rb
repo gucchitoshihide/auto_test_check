@@ -1,6 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe AdminController, :type => :controller do
+  describe '#index' do
+    subject do
+      get(:index)
+      response
+    end
+
+    context 'with session' do
+      before do
+        FactoryGirl.create(:admin)
+        login_as_admin
+      end
+    end
+
+    context 'without session' do
+      it_behaves_like 'a failure response status with', 403
+    end
+  end
+
   describe '#login' do
     subject do
       get(:login)
@@ -18,10 +36,6 @@ RSpec.describe AdminController, :type => :controller do
         it { expect(response).to be_success }
       end
     end
-  end
-
-  describe '#index' do
-    pending
   end
 
   describe '#create' do

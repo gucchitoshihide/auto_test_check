@@ -21,6 +21,7 @@ gem 'simple_form'
 gem 'less-rails'
 
 gem 'redcarpet'
+gem 'kaminari'
 gem 'haml'
 
 gem 'spinjs-rails'

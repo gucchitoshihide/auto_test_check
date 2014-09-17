@@ -34,6 +34,7 @@ admin:
       length: 255
       regexp: '[ -~]+'
   allowed_keys:
+    - page
     - email
     - password
 skill_profile:

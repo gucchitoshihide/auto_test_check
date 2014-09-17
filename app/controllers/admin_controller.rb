@@ -9,11 +9,12 @@ class AdminController < ApplicationController
 
   def create
     begin
-      Admin.authenticate(admin_params)
+      res_admin = Admin.authenticate(admin_params)
     rescue ValidationError, AuthorizationError => e
       flash.now[:alert] = Flash.format_error_message(e.message)
       return(render 'login')
     end
+    session[:admin_id] = res_admin.id
     redirect_to admin_index_path
   end
 
