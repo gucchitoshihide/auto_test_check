@@ -4,7 +4,8 @@ end
 
 # http://stackoverflow.com/a/5803121
 def login
-  post(logins_path, user: { name: USER_NAME, password: PASSWORD })
+  get(new_login_path)
+  post(login_path, USER_POST_LOGIN_PARAMS)
 end
 
 def login_as_admin

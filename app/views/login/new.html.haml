@@ -1,11 +1,6 @@
 = javascript_include_tag 'login'
 
-= content_for(:title, t('las.logins.title'))
-
-#message
-  %input.blank_name{type: 'hidden', value: t('las.logins.message.alert.blank.name')}
-  %input.blank_password{type: 'hidden', value: t('las.logins.message.alert.blank.password')}
-  %input.invalid_authorization{type: 'hidden', value: t('las.logins.message.alert.invalid_authorization')}
+= content_for(:title, I18n.t('las.login.new.title'))
 
 #alert
   - if alert
@@ -18,7 +13,7 @@
         %li
           = alert
 
-= form_for(:user, url: logins_path) do |f|
+= form_for(:user, url: login_path) do |f|
   %div#user_form
     %div.name_field
       = f.label :name, 'name'

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  resource :login,   controller: :login,   only: [:new, :create, :destroy]
+  resource :welcome, controller: :welcome, only: [:show]
 
   concern :article do
     post :comment, on: :collection
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   end
 
   resources :skill_profiles, concerns: :article
-  resources :logins,   only: [:index, :create, :destroy]
   resources :settings, only: [:edit, :update]
   resources :admin, only: [:index, :create] do
     get :login, on: :collection

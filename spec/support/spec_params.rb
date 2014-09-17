@@ -1,13 +1,14 @@
-SESSION_ID    = 1
-USER_ID       = 1
-OTHER_USER_ID = 2
-USER_NAME   = Settings[:user][:name]
-EMAIL       = Settings[:user][:email]
-PASSWORD    = Settings[:user][:password]
-RESET_TOKEN = Settings[:reset_passwords][:token]
-ADMIN_NAME     = Settings[:admin][:fixture][:name]
-ADMIN_EMAIL    = Settings[:admin][:fixture][:email]
-ADMIN_PASSWORD = Settings[:admin][:fixture][:password]
+SESSION_ID                  = 1
+USER_ID                     = 1
+OTHER_USER_ID               = 2
+NAME                        = Settings[:user][:name]
+EMAIL                       = Settings[:user][:email]
+PASSWORD                    = Settings[:user][:password]
+RESET_TOKEN                 = Settings[:reset_passwords][:token]
+
+ADMIN_NAME                  = Settings[:admin][:fixture][:name]
+ADMIN_EMAIL                 = Settings[:admin][:fixture][:email]
+ADMIN_PASSWORD              = Settings[:admin][:fixture][:password]
 ADMIN_PASSWORD_CONFIRMATION = ADMIN_PASSWORD
 
 CURRENT_PASSWORD                     = 'current_password'
@@ -27,11 +28,12 @@ NOW_A_DATE      = Date.today
 THREE_DATES_AGO = NOW_A_DATE - 3
 FOUR_DATES_AGO  = NOW_A_DATE - 4
 
+BLANK = ''
 BLANK_PARAMETERS = {}
 
-POST_LOGIN_PARAMS = {
+USER_POST_LOGIN_PARAMS = {
   user: {
-    name:     USER_NAME,
+    name:     NAME,
     password: PASSWORD
   }
 }
@@ -50,7 +52,7 @@ MODEL_POST_ADMIN_PARAMS = {
 
 USER_MOCK = {
   id:       USER_ID,
-  name:     USER_NAME,
+  name:     NAME,
   email:    EMAIL,
   password: PASSWORD
 }

@@ -1,3 +1,7 @@
+login:
+  allowed_params:
+    - name
+    - password
 reset_passwords:
   token: dummy_token
   resend_at: <%= 2.days.ago %>
