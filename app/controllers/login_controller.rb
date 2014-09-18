@@ -10,10 +10,10 @@ class LoginController < ApplicationController
     begin
       user = User.authenticate(user_params)
       session[:id] = user.id
-      redirect_to welcome_path
+      return redirect_to welcome_path
     rescue AuthorizationError, ValidationError => e
-      flash.now[:alert] = User.format_error_message(e.message)
-      render :new
+      flash.now[:alert] = Flash.format_error_message(e.message)
+      render 'new'
     end
   end
 
@@ -29,6 +29,6 @@ class LoginController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(Settings[:login][:allowed_params])
+    params.require(:user).permit(Settings.login.allowed_params)
   end
 end

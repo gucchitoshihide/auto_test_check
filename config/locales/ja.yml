@@ -53,6 +53,8 @@ ja:
         blank: パスワードを入力してください
         long: パスワードは 255 文字以下(半角英数記号)で入力してください
         invalid: パスワードは半角英数記号で入力してください
+      login_authorization:
+        invalid: 名前か、パスワードが不正です
       admin_authorization:
         invalid: メールアドレスか、パスワードが不正です
       admin_email:

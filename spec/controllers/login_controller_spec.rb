@@ -39,16 +39,17 @@ RSpec.describe LoginController, :type => :controller do
 
     context 'with presence name and password' do
       let(:params) { { user: { name: '', password: '' } } }
-      let(:errors) { 'las.errors.login_name.blank,las.errors.login_password.blank,las.errors.login_password.invalid' }
       it_behaves_like 'a successful rendered', 'new'
-      it { expect(subject.body).to include(errors.split(',').map { |error| t(error) }.join(Settings[:error][:seperate])) }
+      ['las.errors.login_name.blank', 'las.errors.login_password.blank', 'las.errors.login_password.invalid'].each do |error|
+        it { expect(subject.request.flash.alert).to include(t(error)) }
+      end
     end
 
     context 'with no existance name and password' do
       let(:params) { { user: { name: NAME, password: 'otherpassword' } } }
-      let(:error) { 'las.errors.login_authentication.invalid' }
+      let(:error) { 'las.errors.login_authorization.invalid' }
       it_behaves_like 'a successful rendered', 'new'
-      it { expect(subject.body).to include(t(error)) }
+      it { expect(subject.request.flash.alert).to include(t(error)) }
     end
   end
 end

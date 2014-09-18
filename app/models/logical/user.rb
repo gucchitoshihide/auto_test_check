@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
       raise ValidationError, join_errors(@errors) if @errors.present?
       user = find_by_name(params[:name])
       unless (user and user.authenticate(params[:password]))
-        raise AuthorizationError, 'username or password is invalid'
+        raise AuthorizationError, I18n.t('las.errors.login_authorization.invalid')
       end
       user
     end

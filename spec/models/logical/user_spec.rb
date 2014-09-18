@@ -33,8 +33,8 @@ RSpec.describe User, :type => :model do
         ]
       end
       with_them do
-        let(:errors) { format_errors(expected_errors) }
         let(:params) { @params.merge({ name: name, password: password }) }
+        let(:errors) { format_errors(expected_errors) }
         it { expect { subject }.to raise_error ValidationError, errors }
       end
     end
