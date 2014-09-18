@@ -8,7 +8,7 @@ class LoginController < ApplicationController
 
   def create
     begin
-      user = User.authenticate(user_params)
+      user = User.authenticate(login_params)
       session[:id] = user.id
       redirect_to welcome_path
     rescue AuthorizationError, ValidationError => e
@@ -28,7 +28,7 @@ class LoginController < ApplicationController
     redirect_to welcome_path if session[:id].present?
   end
 
-  def user_params
+  def login_params
     params.require(:user).permit(Settings.login.allowed_params)
   end
 end
