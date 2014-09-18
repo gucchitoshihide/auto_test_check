@@ -1,4 +1,9 @@
 login:
+  name:
+    max_length: 255
+  password:
+    max_length: 255
+    regexp: '[ -~]+'
   allowed_params:
     - name
     - password

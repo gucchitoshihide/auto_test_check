@@ -2,6 +2,10 @@ def t(key)
   I18n.t(key)
 end
 
+def format_errors(errors_message)
+  errors_message.split(',').map { |error| t(error) }.join(Settings.error.seperate)
+end
+
 # http://stackoverflow.com/a/5803121
 def login
   get(new_login_path)

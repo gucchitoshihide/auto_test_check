@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
     include ValidationAvatar
     include ValidationSettings
     include ValidationResetPassword
-    include ValidationLogins
+    include ValidationLogin
 
     attr_accessor :errors
 

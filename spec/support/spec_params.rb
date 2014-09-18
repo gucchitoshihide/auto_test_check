@@ -34,8 +34,13 @@ BLANK_PARAMETERS = {}
 USER_POST_LOGIN_PARAMS = {
   user: {
     name:     NAME,
-    password: PASSWORD
+    password: PASSWORD,
   }
+}
+
+MODEL_POST_LOGIN_PARAMS = {
+  name:     NAME,
+  password: PASSWORD,
 }
 
 USER_POST_ADMIN_PARAMS = {
