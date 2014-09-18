@@ -49,7 +49,7 @@ RSpec.describe 'Login', :type => :request do
 
     context 'with session' do
       before { login }
-      it_behaves_like 'a successful redirection to', '/login'
+      it_behaves_like 'a successful redirection to', '/login/new'
     end
 
     context 'without session' do
