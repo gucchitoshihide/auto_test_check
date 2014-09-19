@@ -7,4 +7,10 @@ module SessionAction
       redirect_to new_login_path
     end
   end
+
+  def forbidden_blank_session
+    if session[:id].blank?
+      render_403
+    end
+  end
 end

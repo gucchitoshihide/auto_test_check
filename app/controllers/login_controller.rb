@@ -1,7 +1,7 @@
 class LoginController < ApplicationController
   include SessionAction
-  before_action :redirect_to_welcome, only: [:new, :create]
-  before_action :session_required,    only: [:destroy]
+  before_action :redirect_to_welcome,     only: [:new, :create]
+  before_action :forbidden_blank_session, only: [:destroy]
 
   def new
   end
