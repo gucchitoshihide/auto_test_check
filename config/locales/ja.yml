@@ -1,20 +1,16 @@
 ja:
   las:
-    logins:
-      title: ログイン - Las -
-      message:
-        label:
-          name: 名前
-          password: パスワード
-        alert:
-          not_loggedin: ログインしてください
-          blank:
-            name: 名前を入力してください
-            password: パスワードを入力してください
-          invalid_authorization: 名前もしくはパスワードが不正です
+    login:
+      new:
+        title: ログイン
+      label:
+        name: 名前
+        password: パスワード
+      link:
+        reset_password: パスワードを忘れた方はこちら
       button:
-        submit: ログイン
-    home:
+        login: ログイン
+    welcome:
       title: ホーム
     skill_profiles:
       title: スキル紹介
@@ -50,6 +46,17 @@ ja:
       button:
         submit: ログイン
     errors:
+      login_session:
+        not_loggedin: はじめにログインしてください
+      login_name:
+        blank: 名前を入力してください
+        long: 名前は 255 文字以下(半角文字)で入力してください
+      login_password:
+        blank: パスワードを入力してください
+        long: パスワードは 255 文字以下(半角英数記号)で入力してください
+        invalid: パスワードは半角英数記号で入力してください
+      login_authorization:
+        invalid: 名前か、パスワードが不正です
       admin_authorization:
         invalid: メールアドレスか、パスワードが不正です
       admin_email:

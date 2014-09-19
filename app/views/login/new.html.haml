@@ -1,0 +1,20 @@
+= content_for(:title, t('las.login.new.title'))
+
+#alert
+  - if alert
+    %ul
+      - alert.each do |message|
+        %li
+          = message
+
+= form_for(:user, url: login_path) do |form|
+  %div.name_content
+    = form.label :name, t('las.login.label.name')
+    = form.text_field :name
+  %div.password_content
+    = form.label :password, t('las.login.label.password')
+    = form.password_field :password
+  %div.submit_content
+    = form.submit t('las.login.button.login')
+
+= link_to t('las.login.link.reset_password'), new_reset_password_path

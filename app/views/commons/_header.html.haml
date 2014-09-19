@@ -13,5 +13,5 @@
       - if session[:id].present?
         %ul.nav.navbar-nav
           %li
-            = link_to 'Logout', login_path(id: session[:id]), method: :delete
+            = link_to 'Logout', new_login_path(id: session[:id]), method: :delete
 

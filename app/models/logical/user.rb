@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
     include ValidationAvatar
     include ValidationSettings
     include ValidationResetPassword
-    include ValidationLogins
+    include ValidationLogin
 
     attr_accessor :errors
 
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
       raise ValidationError, join_errors(@errors) if @errors.present?
       user = find_by_name(params[:name])
       unless (user and user.authenticate(params[:password]))
-        raise AuthorizationError, 'username or password is invalid'
+        raise AuthorizationError, I18n.t('las.errors.login_authorization.invalid')
       end
       user
     end
@@ -72,7 +72,6 @@ class User < ActiveRecord::Base
     def join_errors(errored_message)
       errored_message.join(Settings[:error][:seperate])
     end
-
   end
 
   def send_reset_password_email

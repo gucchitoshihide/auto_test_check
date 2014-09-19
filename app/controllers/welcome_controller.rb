@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class WelcomeController < ApplicationController
   include SessionAction
   before_action :session_required
 
