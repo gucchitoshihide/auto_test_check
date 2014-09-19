@@ -1,27 +1,20 @@
-= javascript_include_tag 'login'
-
-= content_for(:title, I18n.t('las.login.new.title'))
+= content_for(:title, t('las.login.new.title'))
 
 #alert
   - if alert
     %ul
-      - if alert.instance_of?(Array)
-        - alert.each do |alert_message|
-          %li
-            = alert_message
-      - else
+      - alert.each do |message|
         %li
-          = alert
+          = message
 
-= form_for(:user, url: login_path) do |f|
-  %div#user_form
-    %div.name_field
-      = f.label :name, 'name'
-      = f.text_field :name
-    %div.password_field
-      = f.label :password, 'password'
-      = f.password_field :password
-    %div.submit_field
-      = f.submit 'login'
+= form_for(:user, url: login_path) do |form|
+  %div.name_content
+    = form.label :name, t('las.login.label.name')
+    = form.text_field :name
+  %div.password_content
+    = form.label :password, t('las.login.label.password')
+    = form.password_field :password
+  %div.submit_content
+    = form.submit t('las.login.button.login')
 
-= link_to 'reset_password', new_reset_password_path
+= link_to t('las.login.link.reset_password'), new_reset_password_path

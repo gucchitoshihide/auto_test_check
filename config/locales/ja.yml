@@ -6,8 +6,10 @@ ja:
       label:
         name: 名前
         password: パスワード
+      link:
+        reset_password: パスワードを忘れた方はこちら
       button:
-        submit: ログイン
+        login: ログイン
     welcome:
       title: ホーム
     skill_profiles:

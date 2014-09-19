@@ -72,7 +72,6 @@ class User < ActiveRecord::Base
     def join_errors(errored_message)
       errored_message.join(Settings[:error][:seperate])
     end
-
   end
 
   def send_reset_password_email

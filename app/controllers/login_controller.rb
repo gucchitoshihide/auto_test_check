@@ -8,12 +8,12 @@ class LoginController < ApplicationController
 
   def create
     begin
-      user = User.authenticate(login_params)
-      session[:id] = user.id
+      user_resource = User.authenticate(login_params)
+      session[:id]  = user_resource.id
       redirect_to welcome_path
     rescue AuthorizationError, ValidationError => e
       flash.now[:alert] = Flash.format_error_message(e.message)
-      render 'new'
+      render :new
     end
   end
 
