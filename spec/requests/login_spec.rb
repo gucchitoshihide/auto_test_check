@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Login', :type => :request do
-  before do
-    FactoryGirl.create(:user)
-  end
+  before { FactoryGirl.create(:user) }
 
   describe 'the response of GET /' do
     context 'when the user send request' do

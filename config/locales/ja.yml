@@ -11,7 +11,11 @@ ja:
       button:
         login: ログイン
     welcome:
-      title: ホーム
+      show:
+        title: ホーム
+      label:
+        skill_profile: スキルプロフィール
+        settings: 設定
     skill_profiles:
       title: スキル紹介
       content: 紹介内容

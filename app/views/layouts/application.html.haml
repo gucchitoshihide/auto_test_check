@@ -9,7 +9,7 @@
   %body
     %div#session_header
     - if session[:id]
-      = link_to 'logout', new_login_path(id: session[:id]), method: :delete
+      = link_to 'logout', login_path(id: session[:id]), method: :delete
     - else
       = 'Hello(Las)'
 
