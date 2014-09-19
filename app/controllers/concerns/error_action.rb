@@ -7,6 +7,10 @@ module ErrorAction
     raise ActionController::RoutingError.new(params[:path])
   end
 
+  def render_403(e = nil)
+    render 'errors/error_403', status: 403
+  end
+
   def render_404(e = nil)
     logger.info(e.message) if e
     if request.xhr?
@@ -24,9 +28,4 @@ module ErrorAction
       render template: 'errors/error_500', status: 500
     end
   end
-
-  def render_403(e = nil)
-    render 'errors/error_403', status: 403
-  end
-
 end

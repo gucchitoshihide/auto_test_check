@@ -1,0 +1,4 @@
+= content_for(:title, t('las.welcome.show.title'))
+
+= button_to t('las.welcome.label.skill_profile'), skill_profiles_path, method: :get
+= button_to t('las.welcome.label.settings'), edit_setting_path(id: session[:id]), method: :get
