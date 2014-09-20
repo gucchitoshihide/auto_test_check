@@ -1,9 +1,9 @@
 class SkillProfilesController < ApplicationController
   include SessionAction
-  before_action :session_required
-  before_action :set_article,    only: [:show, :edit, :update]
-  before_action :authorize_edit, only: [:edit, :update]
-  before_action :search_cert,    only: [:search]
+  before_action :session_required, only: [:index, :new, :edit]
+  before_action :set_article,      only: [:show, :edit, :update]
+  before_action :authorize_edit,   only: [:edit, :update]
+  before_action :search_cert,      only: [:search]
 
   def index
     @profiles = SkillProfile.latest
@@ -58,7 +58,6 @@ class SkillProfilesController < ApplicationController
     @profiles = SkillProfile.search(params)
     render :index
   end
-  
 
   private
 
