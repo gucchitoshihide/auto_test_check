@@ -25,7 +25,7 @@ ja:
         search: プロフィール検索
       message:
         article:
-          not_exist: 該当の記事は存在しませんでした
+          not_exist: 該当のプロフィールは存在しませんでした
       link:
         welcome: ホームへ
       button:
