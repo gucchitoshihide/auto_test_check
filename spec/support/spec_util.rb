@@ -7,6 +7,13 @@ def format_errors(errors_message)
 end
 
 # http://stackoverflow.com/a/5803121
+
+# use in controller spec
+def login_at(action)
+  get(action, nil, { id: USER_ID })
+end
+
+# use in request spec
 def login
   get(new_login_path)
   post(login_path, USER_POST_LOGIN_PARAMS)

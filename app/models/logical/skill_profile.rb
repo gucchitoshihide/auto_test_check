@@ -3,7 +3,7 @@ require 'las_errors'
 class SkillProfile < ActiveRecord::Base
   include RelationSkillProfile
 
-  scope :latest, ->(list_num = Settings[:skill_profile][:list_num]) {
+  scope :latest, ->(list_num = Settings.skill_profile.show_list.max_num) {
     order('created_at DESC').limit(list_num)
   }
 
@@ -31,14 +31,10 @@ class SkillProfile < ActiveRecord::Base
     end
 
     def search(params)
-      found_records = Search::Word.reg_exp(Article.where.not(skill_profile_id: nil), :content, params[:search])
+      params_search_key = Settings.skill_profile.form.object.search.to_sym
+      found_records = Search::Word.reg_exp(Article.where.not(skill_profile_id: nil), :content, params[params_search_key])
       return [] if found_records.blank?
       found_records.map { |record| record.skill_profile }
-    end
-
-    # Implemented for future spec
-    def throw_away(article_obj)
-      SkillProfile.find_by_article_id(article_id: article_obj.id).article.destroy
     end
 
     def format_error_message(error_message)

@@ -1,6 +1,6 @@
 class SkillProfilesController < ApplicationController
   include SessionAction
-  before_action :session_required, only: [:index, :new, :edit]
+  before_action :session_required
   before_action :set_article,      only: [:show, :edit, :update]
   before_action :authorize_edit,   only: [:edit, :update]
   before_action :search_cert,      only: [:search]
@@ -36,12 +36,6 @@ class SkillProfilesController < ApplicationController
       flash.now[:alert] = SkillProfile.format_error_message(e.message)
       render :edit
     end
-  end
-
-  # Implemented for future
-  def destroy
-    SkillProfile.throw_away(@article)
-    redirect_to skill_profiles_url, notice: 'skill_profile was successfully destroyed'
   end
 
   def comment

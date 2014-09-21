@@ -12,6 +12,7 @@ FactoryGirl.define do
   end
 
   factory :article, class: Article do
+    title   "Yusuke Matsukawa's skill"
     content '# I know\n* Ruby\n* Java\n* Python'
   end
 end

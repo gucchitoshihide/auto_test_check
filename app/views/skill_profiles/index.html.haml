@@ -1,31 +1,34 @@
+= content_for(:title, t('las.skill_profile.index.title'))
+
 = form_tag(search_skill_profiles_url, method: :put) do
-  %div
-    = label_tag :search, 'search'
-    = text_field_tag 'search'
-  %div
-    = submit_tag 'submit'
+  %div.search_content
+    = label_tag :search, t('las.skill_profile.label.search')
+    = text_field_tag Settings.skill_profile.form.object.search
+  %div.submit_content
+    = submit_tag t('las.skill_profile.button.search')
 
-
-%div
-  %table
+%table
+  - if @table.present?
     %thead
       %tr
         %th{colspan: '3'}
-        %th Title 
-        %th Content
+        %th= t('las.skill_profile.label.name')
+        %th= t('las.skill_profile.label.comment')
         %th{colspan: '3'}
     %tbody
       - @profiles.each do |profile|
         %tr
           %td{colspan: '3'}
-          %td= link_to profile.title + announce_comment(profile.article.id), skill_profile_path(id: profile.article.id)
           %td
-            = profile.user.name
+            = link_to profile.user.name, skill_profile_path(id: profile.article.id)
             - if profile.user.avatar?
               = image_tag profile.user.avatar.thumb.url
             - else
               %i.icon-user
+          %td= announce_comment(profile.article.id)
+          %td{colspan: '3'}
+  - else
+    %div.message.not_exist
+      = t('las.skill_profile.message.article.not_exist')
 
-%br/
-= link_to 'New Skill profile', new_skill_profile_path
-= link_to 'Home', welcome_path
+= link_to t('las.skill_profile.link.welcome'), welcome_path
