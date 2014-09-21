@@ -5,19 +5,39 @@ module Search
   module Word
     extend self
 
-    # method trusts records is ActiveRecord::Relation
-    def reg_exp(records, field, search_word)
-      # respond of records[0] should be changed
-      # * not to trust all record is in same group
-      # * ex. FooAR(respond x field), FooAR, BarAR(not respond x field), FooAR
-      return [] if (records.blank? and not records[0].respond_to?(field.to_s))
+    # -- given
+    #
+    # Article.all
+    #   #=> #<[Article: id: 1, title: 'good morning'], [Article: id: 2 title: 'good bye'],
+    #         [Article: id: 3, title: 'night']>
+    #
+    # Search::Word.reg_exp(Article.all, :title, 'good')
+    #   #=> #<[Article: id: 1, title: 'good morning'], [Article: id: 2 title: 'good bye']
+    #
+    # Search::Word.reg_exp(Article.all, :title, '.*')
+    #   #=>  #<[Article: id: 1, title: 'good morning'], [Article: id: 2 title: 'good bye'],
+    #          [Article: id: 3, title: 'night']>
+    #
+    # Search::Word.reg_exp(Article.all, :thanks_world, 'good')
+    #   #=> []
+    #
+    # -- changed given
+    #
+    # Article.all
+    #   #=> []
+    #
+    # Search::Word.reg_exp(Article.all, :title, 'good')
+    #   #=> []
+ 
+    def reg_exp(records, property, search_word)
+      return [] if (records.blank? or not records[0].respond_to?(property))
 
       if records.size > 1
-        return records.select { |record| record if record.send(field) =~ /#{search_word}/ }
+        binding.pry
+        return records.select { |record| record if record.send(property) =~ /#{search_word}/ }
       else
-        return (records[0].send(field) =~ /#{search_word}/) ? records : []
+        return (records[0].send(property) =~ /#{search_word}/) ? records : []
       end
     end
-
   end
 end

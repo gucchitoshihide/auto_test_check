@@ -1,4 +1,5 @@
 require 'yaml'
+# email.address and email.password is defined at /home/matsu/Develop/mail_settings.yml
 mail_settings = YAML.load_file('/home/matsu/Develop/mail_settings.yml')
 
 Rails.application.configure do

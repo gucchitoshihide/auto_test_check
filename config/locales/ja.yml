@@ -16,8 +16,20 @@ ja:
       label:
         skill_profile: スキルプロフィール
         settings: 設定
-    skill_profiles:
-      title: スキル紹介
+    skill_profile:
+      index:
+        title: スキルプロフィール 一覧
+      label:
+        name: 名前 
+        comment: コメント
+        search: プロフィール検索
+      message:
+        article:
+          not_exist: 該当のプロフィールは存在しませんでした
+      link:
+        welcome: ホームへ
+      button:
+        search: 検索
       content: 紹介内容
       submit: 投稿
       update: 変更

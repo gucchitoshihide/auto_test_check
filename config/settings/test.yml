@@ -7,6 +7,12 @@ login:
   allowed_params:
     - name
     - password
+skill_profile:
+  show_list:
+    max_num: 10
+  form:
+    object:
+      search: skill_profile_search
 reset_passwords:
   token: dummy_token
   resend_at: <%= 2.days.ago %>
@@ -46,8 +52,6 @@ admin:
     - page
     - email
     - password
-skill_profile:
-  list_num: 10
 article:
   title:
     max_length: 255
