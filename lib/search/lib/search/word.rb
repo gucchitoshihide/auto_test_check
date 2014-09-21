@@ -30,9 +30,10 @@ module Search
     #   #=> []
  
     def reg_exp(records, property, search_word)
-      return [] if (records.blank? and not records[0].respond_to?(property.to_s))
+      return [] if (records.blank? or not records[0].respond_to?(property))
 
       if records.size > 1
+        binding.pry
         return records.select { |record| record if record.send(property) =~ /#{search_word}/ }
       else
         return (records[0].send(property) =~ /#{search_word}/) ? records : []
