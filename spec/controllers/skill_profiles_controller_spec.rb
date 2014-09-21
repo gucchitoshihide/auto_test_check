@@ -15,7 +15,7 @@ RSpec.describe SkillProfilesController, :type => :controller do
         @size_skill_profile = SkillProfile.all.size
       end
       it { expect(assigns(:profiles)).not_to be_nil }
-      it { expect(assigns(:profiles)[0]).to instance_of(SkillProfile)}
+      it { expect(assigns(:profiles)[0]).to be_a(SkillProfile)}
     end
 
     context 'without session' do
