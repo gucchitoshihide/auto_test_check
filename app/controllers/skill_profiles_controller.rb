@@ -56,7 +56,7 @@ class SkillProfilesController < ApplicationController
   private
 
   def set_article
-    unless Cert::Params.numerical?(params[:id])
+    unless Cert::Params.numeric?(params[:id])
       return render_404
     end
     @article = SkillProfile.find_by(id: params[:id]).article
