@@ -42,21 +42,36 @@ RSpec.describe SkillProfilesController, :type => :controller do
     end
   end
 
-#  describe '#search' do
-#    context 'found record because article includes the search word' do
-#      before do
-#        params = {search: 'f'}
-#        put :search, {search: params[:search]}, {id: 1}
-#      end
-#      it { expect(assigns(:profiles).size).to eq(1) }
-#    end
-#
-#    context 'not found record because of unreasonable' do
-#      before do
-#        params = {search: 'qwytnbnb'}
-#        put :search, {search: params[:search]}, {id: 1}
-#      end
-#      it { expect(assigns(:profiles).size).to eq(0) }
-#    end
-#  end
+  describe '#comment' do
+    before do
+      @comment_params = USER_POST_COMMENT_PARAMS
+      login_at(:index)
+    end
+
+    context 'with valid params' do
+      before { post(:comment, USER_POST_COMMENT_PARAMS) }
+      it { expect(assigns(:article)).not_to be_nil }
+      it { expect(flash).to be_empty }
+    end
+
+    context 'with invalid params' do
+      context 'with blank comment' do
+        before do
+          params = { article_id: ARTICLE_ID, comment: { content: '' } }
+          post(:comment, params)
+        end
+        it { expect(assigns(:article)).to be_nil }
+        it { expect(flash).not_to be_empty }
+      end
+
+      context 'with invalid article_id' do
+        before do
+          params = { article_id: 'invalid', comment: { content: NEW_COMMENT } }
+          post(:comment, params)
+        end
+        it { expect(assigns(:article)).to be_nil }
+        it { expect(flash).to be_empty }
+      end
+    end
+  end
 end

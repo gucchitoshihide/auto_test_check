@@ -40,12 +40,13 @@ class SkillProfilesController < ApplicationController
 
   def comment
     begin
+      return render_403 unless Cert::Params.numeric?(params[:article_id])
       Comment.submit(comment_params, params[:article_id], session[:id])
-      redirect_to skill_profile_path(id: params[:article_id])
+      @article = Article.find_by(id: params[:article_id]) # @article is used to #show view
     rescue ValidationError => e
       flash.now[:alert] = e.message
-      redirect_to root_path
     end
+    render :show
   end
 
   def search
@@ -56,9 +57,7 @@ class SkillProfilesController < ApplicationController
   private
 
   def set_article
-    unless Cert::Params.numeric?(params[:id])
-      return render_404
-    end
+    return render_404 unless Cert::Params.numeric?(params[:id])
     @article = SkillProfile.find_by(id: params[:id]).article
   end
 

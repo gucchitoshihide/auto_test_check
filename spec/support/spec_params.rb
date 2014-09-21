@@ -1,10 +1,12 @@
-SESSION_ID                  = 1
 USER_ID                     = 1
+SESSION_ID                  = USER_ID
 OTHER_USER_ID               = 2
 NAME                        = Settings[:user][:name]
 EMAIL                       = Settings[:user][:email]
 PASSWORD                    = Settings[:user][:password]
 RESET_TOKEN                 = Settings[:reset_passwords][:token]
+NEW_COMMENT                 = Settings[:comment][:content]
+ARTICLE_ID                  = USER_ID
 
 ADMIN_NAME                  = Settings[:admin][:fixture][:name]
 ADMIN_EMAIL                 = Settings[:admin][:fixture][:email]
@@ -45,6 +47,13 @@ MODEL_POST_LOGIN_PARAMS = {
 
 USER_GET_SKILL_PROFILE_PARAMS = {
   id: USER_ID
+}
+
+USER_POST_COMMENT_PARAMS = {
+  article_id: ARTICLE_ID,
+  comment: {
+    content: NEW_COMMENT,
+  }
 }
 
 USER_POST_ADMIN_PARAMS = {

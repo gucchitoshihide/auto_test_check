@@ -27,9 +27,12 @@ ja:
         article:
           not_exist: 該当のプロフィールは存在しませんでした
       link:
-        welcome: ホームへ
+        welcome: ホームへ戻る
+        index: 一覧へ戻る
+        edit: 編集する
       button:
-        search: 検索
+        search: 検索する
+        submit: 投稿する
       content: 紹介内容
       submit: 投稿
       update: 変更

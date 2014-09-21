@@ -15,6 +15,8 @@ skill_profile:
       search: skill_profile_search
   title:
     description: dummy title
+comment:
+  content: dummy content
 reset_passwords:
   token: dummy_token
   resend_at: <%= 2.days.ago %>

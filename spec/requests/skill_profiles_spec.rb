@@ -46,4 +46,26 @@ RSpec.describe 'SkillProfiles', :type => :request do
       end
     end
   end
+
+  describe 'POST /skill_profiles/comment' do
+    before do
+      FactoryGirl.create(:user)
+      login
+    end
+
+    subject do
+      post(comment_skill_profiles_path)
+      response
+    end
+
+    context 'with valid params' do
+      it_behaves_like 'a successful rendered', 'show'
+      it { expect(flash[:alert]).to be_empty }
+    end
+
+    context 'with invalid params' do
+      it_behaves_like 'a successful rendered', 'show' 
+      it { expect(flash[:alert]).not_to be_empty }
+    end
+  end
 end
