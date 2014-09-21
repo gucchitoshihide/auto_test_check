@@ -56,6 +56,9 @@ class SkillProfilesController < ApplicationController
   private
 
   def set_article
+    unless Cert::Params.numerical?(params[:id])
+      return render_404
+    end
     @article = SkillProfile.find_by(id: params[:id]).article
   end
 
@@ -77,5 +80,4 @@ class SkillProfilesController < ApplicationController
     # maybe implement secure search word
     # using Cert gem
   end
-
 end

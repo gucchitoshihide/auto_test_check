@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SkillProfilesController, :type => :controller do
   before { FactoryGirl.create(:user) }
 
-  describe 'GET #index' do
+  describe '#index' do
     subject do
       get(:index)
       response
@@ -23,7 +23,26 @@ RSpec.describe SkillProfilesController, :type => :controller do
     end
   end
 
-#  describe 'PUT #search' do
+  describe '#show' do
+    before do
+      @params = USER_GET_SKILL_PROFILE_PARAMS
+      FactoryGirl.create(:user)
+      login_at(:index)
+      get(:show, params)
+    end
+    let(:params) { @params }
+
+    context 'with valid params' do
+      it { expect(assigns(:article)).not_to be_nil }
+    end
+
+    context 'with invalid params' do
+      let(:params) { USER_GET_SKILL_PROFILE_PARAMS.merge(id: 'invalid') }
+      it { expect(assigns(:article)).to be_nil }
+    end
+  end
+
+#  describe '#search' do
 #    context 'found record because article includes the search word' do
 #      before do
 #        params = {search: 'f'}

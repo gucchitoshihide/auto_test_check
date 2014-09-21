@@ -43,6 +43,10 @@ MODEL_POST_LOGIN_PARAMS = {
   password: PASSWORD,
 }
 
+USER_GET_SKILL_PROFILE_PARAMS = {
+  id: USER_ID
+}
+
 USER_POST_ADMIN_PARAMS = {
   admin: {
     email:    ADMIN_EMAIL,
