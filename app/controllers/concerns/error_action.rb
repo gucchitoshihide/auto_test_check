@@ -1,10 +1,19 @@
+require 'http_errors'
+
 module ErrorAction
   extend ActiveSupport::Concern
 
-  class Forbidden < ActionController::ActionControllerError; end
-  
   def routing_error
     raise ActionController::RoutingError.new(params[:path])
+  end
+
+  def render_401(e = nil)
+    logger.info(e.message) if e
+    if request.xhr?
+      render json: { error: '404 error' }, status: 401
+    else
+      render template: 'errors/error_404', status: 401
+    end
   end
 
   def render_403(e = nil)
