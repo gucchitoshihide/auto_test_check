@@ -62,7 +62,7 @@ class SkillProfilesController < ApplicationController
 
   def authorize_edit
     unless @article.skill_profile.user_id == session[:id]
-      redirect_to root_path
+      render_403
     end
   end
 
