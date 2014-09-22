@@ -13,6 +13,6 @@ module ValidationComment
   end
 
   def validate_comment_long(content)
-    @errors << I18n.t('las.errors.comment_content.long') if content.length > 3000
+    @errors << I18n.t('las.errors.comment_content.long') if content.length > Settings.comment.length_max
   end
 end
