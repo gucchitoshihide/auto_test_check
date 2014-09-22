@@ -28,12 +28,12 @@
       %li
         = comment.content
 
-= form_for(:comment, url: comment_skill_profiles_path(article_id: @article.id)) do |f|
+= form_for(:comment, url: comment_skill_profiles_path(article_id: @article.id)) do |form|
   %div#comment_description
     %div.content_description
-      = f.label :content, t('las.skill_profile.label.comment')
-      = f.text_field :content
+      = form.label :content, t('las.skill_profile.label.comment')
+      = form.text_area :content
     %div.submit_field
-      = f.submit t('las.skill_profile.button.submit')
+      = form.submit t('las.skill_profile.button.submit')
 
 = link_to t('las.skill_profile.link.index'), skill_profiles_path
