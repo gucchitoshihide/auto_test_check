@@ -1,37 +1,39 @@
 = javascript_include_tag 'skill_profiles'
 
+= content_for(:title, t('las.skill_profile.show.title') + @article.skill_profile.user.name)
+
+#alert
+  - if alert
+    %ul
+      - alert.each do |message|
+        %li
+          = message
+
+
 - if @article.skill_profile.user.id == session[:id]
-  = link_to 'Edit', edit_skill_profile_path(id: @article.id)
+  = link_to t('las.skill_profile.link.edit'), edit_skill_profile_path(id: @article.id)
 
-%div
-  #notice= notice
-
-%div
-  title:
-  = @article.title
-%div
-  content:
+%div.title_description
+  = @article.skill_profile.user.name
+%div.content_description
   - case @article.written_style
-  - when Settings[:user][:write_style][:plain]
+  - when Settings.user.write_style.plain
     = @article.content
-  - when Settings[:user][:write_style][:md]
+  - when Settings.user.write_style.md
     = markdown_to_html(@article.content)
 
-%div
-  - if Comment.followed?(@article.id)
-    - Comment.show_all(@article.id).each do |comment|
-      %hr
-        %li
-          = comment.content
-%hr
+%div.comment_description
+  - Comment.show_all(@article.id).each do |comment|
+    %ul
+      %li
+        = comment.content
 
-= form_for(:comment, url: comment_skill_profiles_path(article_id: @article.id)) do |f|
-  %div#comment_form
-    %div.content_field
-      = f.label :content, 'Comment'
-      = f.text_field :content
+= form_for(:comment, url: comment_skill_profiles_path(article_id: @article.id)) do |form|
+  %div#comment_description
+    %div.content_description
+      = form.label :content, t('las.skill_profile.label.comment')
+      = form.text_area :content
     %div.submit_field
-      = f.submit 'submit'
+      = form.submit t('las.skill_profile.button.submit')
 
-%div
-  = link_to 'Back', skill_profiles_path
+= link_to t('las.skill_profile.link.index'), skill_profiles_path

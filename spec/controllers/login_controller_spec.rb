@@ -13,10 +13,10 @@ RSpec.describe LoginController, :type => :controller do
     end
 
     context 'with session' do
-      before do
-        FactoryGirl.create(:user)
-        post(:create, USER_POST_LOGIN_PARAMS)
-      end
+      before { FactoryGirl.create(:user) }
+
+      subject { post(:create, USER_POST_LOGIN_PARAMS) }
+
       it_behaves_like 'a successful redirection to', '/welcome'
     end
   end

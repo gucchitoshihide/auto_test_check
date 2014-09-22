@@ -13,6 +13,11 @@ skill_profile:
   form:
     object:
       search: skill_profile_search
+  title:
+    description: dummy title
+comment:
+  content: dummy content
+  length_max: 3000
 reset_passwords:
   token: dummy_token
   resend_at: <%= 2.days.ago %>
@@ -54,7 +59,10 @@ admin:
     - password
 article:
   title:
+    description: dummy title
     max_length: 255
+  content:
+    description: dummy content
 user:
   name: dummy
   email: dummy@example.com

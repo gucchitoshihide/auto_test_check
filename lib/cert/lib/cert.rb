@@ -1,6 +1,5 @@
-require "cert/version"
-require "cert/redirection"
+require 'cert/version'
+require 'cert/params'
 
 module Cert
-  # autoload :Redirection, 'cert/redirection'
 end
