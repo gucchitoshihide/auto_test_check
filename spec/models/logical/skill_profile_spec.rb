@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'search'
 
 RSpec.describe SkillProfile, :type => :model do
   before { FactoryGirl.create(:skill_profile) }
@@ -17,6 +18,27 @@ RSpec.describe SkillProfile, :type => :model do
         @latest_check << @skill_profile[index] == record
       end
       expect(@latest_check).not_to include(false)
+    end
+  end
+
+  describe '.search' do
+    before do
+      @params = MODEL_PUT_SEARCH_PARAMS
+      found_records     = Search::Word.reg_exp(Article.where.not(skill_profile_id: nil), :content, @params[SEARCH_KEY])
+      @expected_profile = found_records.map { |record| record.skill_profile }
+      FactoryGirl.create(:article)
+    end
+    let(:params) { @params }
+
+    subject { SkillProfile.search(params) }
+
+    context 'with match word' do
+      it { expect(subject).to eq @expected_profile }
+    end
+
+    context 'with not match word' do
+      let(:params) { @params.merge(SEARCH_KEY => 'not match word') }
+      it { expect(subject).to be_empty }
     end
   end
 end

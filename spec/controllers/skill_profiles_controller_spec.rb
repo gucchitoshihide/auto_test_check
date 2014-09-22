@@ -74,4 +74,25 @@ RSpec.describe SkillProfilesController, :type => :controller do
       end
     end
   end
+
+  describe '#search' do
+    before do
+      @params = USER_PUT_SEARCH_PARAMS
+      login_at(:index)
+    end
+
+    context 'with match params' do
+      before { put(:search, USER_PUT_SEARCH_PARAMS) }
+
+      it { expect(assigns(:profiles)).not_to be_nil }
+    end
+
+    context 'with not match params' do
+      before do
+        params = @params.merge(SEARCH_KEY => 'not match word')
+        put(:search, params)
+      end
+      it { expect(assigns(:profile)).to be_nil }
+    end
+  end
 end

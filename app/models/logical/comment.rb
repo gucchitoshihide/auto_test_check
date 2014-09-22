@@ -26,7 +26,5 @@ class Comment < ActiveRecord::Base
         raise ValidationError, e.message
       end
     end
-
   end
-
 end

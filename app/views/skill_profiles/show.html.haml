@@ -1,5 +1,7 @@
 = javascript_include_tag 'skill_profiles'
 
+= content_for(:title, t('las.skill_profile.show.title') + @article.skill_profile.user.name)
+
 #alert
   - if alert
     %ul

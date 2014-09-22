@@ -31,13 +31,16 @@ RSpec.describe 'SkillProfiles', :type => :request do
     let(:params) { USER_GET_SKILL_PROFILE_PARAMS }
 
     subject do
-      get(skill_profile_path, params)
+      get(skill_profile_path(params))
       response
     end
 
     context 'when the user send request' do
       context 'with valid params' do
-        it_behaves_like 'a successful response', 'skill_profile.show'
+        its(:status) { should eq 200 }
+        it "rendered the show template" do
+          expect(subject).to render_template(:show)
+        end
       end
 
       context 'with invalid id' do
@@ -49,23 +52,42 @@ RSpec.describe 'SkillProfiles', :type => :request do
 
   describe 'POST /skill_profiles/comment' do
     before do
+      @params = USER_POST_COMMENT_PARAMS
       FactoryGirl.create(:user)
       login
     end
-
+    let(:params) { @params }
     subject do
-      post(comment_skill_profiles_path)
+      post(comment_skill_profiles_path, params)
       response
     end
 
     context 'with valid params' do
       it_behaves_like 'a successful rendered', 'show'
-      it { expect(flash[:alert]).to be_empty }
+      it { expect(flash[:alert]).to be_nil }
     end
 
     context 'with invalid params' do
+      let(:params) { @params.merge(article_id: @params[:article_id], comment: { content: 'not match' }) }
+
       it_behaves_like 'a successful rendered', 'show' 
-      it { expect(flash[:alert]).not_to be_empty }
+      it { expect(flash[:alert]).not_to be_nil }
+    end
+  end
+
+  describe 'PUT /skill_profiles/search' do
+    before do
+      FactoryGirl.create(:user)
+      login
+    end
+
+    subject do
+      post(comment_skill_profiles_path, USER_PUT_SEARCH_PARAMS)
+      response
+    end
+
+    context 'with params' do
+      it_behaves_like 'a successful rendered', 'index'
     end
   end
 end

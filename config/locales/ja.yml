@@ -19,6 +19,8 @@ ja:
     skill_profile:
       index:
         title: スキルプロフィール 一覧
+      show:
+        title: スキルプロフィール
       label:
         name: 名前 
         comment: コメント

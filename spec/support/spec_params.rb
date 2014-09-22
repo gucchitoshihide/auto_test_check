@@ -1,16 +1,18 @@
 USER_ID                     = 1
 SESSION_ID                  = USER_ID
 OTHER_USER_ID               = 2
-NAME                        = Settings[:user][:name]
-EMAIL                       = Settings[:user][:email]
-PASSWORD                    = Settings[:user][:password]
-RESET_TOKEN                 = Settings[:reset_passwords][:token]
-NEW_COMMENT                 = Settings[:comment][:content]
+NAME                        = Settings.user.name
+EMAIL                       = Settings.user.email
+PASSWORD                    = Settings.user.password
+RESET_TOKEN                 = Settings.reset_passwords.token
+NEW_COMMENT                 = Settings.comment.content
+SEARCH_WORD                 = Settings.article.content.description
+SEARCH_KEY                  = Settings.skill_profile.form.object.search.to_sym
 ARTICLE_ID                  = USER_ID
 
-ADMIN_NAME                  = Settings[:admin][:fixture][:name]
-ADMIN_EMAIL                 = Settings[:admin][:fixture][:email]
-ADMIN_PASSWORD              = Settings[:admin][:fixture][:password]
+ADMIN_NAME                  = Settings.admin.fixture.name
+ADMIN_EMAIL                 = Settings.admin.fixture.email
+ADMIN_PASSWORD              = Settings.admin.fixture.password
 ADMIN_PASSWORD_CONFIRMATION = ADMIN_PASSWORD
 
 CURRENT_PASSWORD                     = 'current_password'
@@ -55,6 +57,12 @@ USER_POST_COMMENT_PARAMS = {
     content: NEW_COMMENT,
   }
 }
+
+USER_PUT_SEARCH_PARAMS = {
+  SEARCH_KEY => SEARCH_WORD,
+}
+
+MODEL_PUT_SEARCH_PARAMS = USER_PUT_SEARCH_PARAMS
 
 USER_POST_ADMIN_PARAMS = {
   admin: {
