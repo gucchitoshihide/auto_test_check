@@ -39,9 +39,10 @@ group :development, :test do
   gem 'rspec-parameterized'
   gem 'faker'
   gem 'erb2haml'
+  gem 'database_cleaner'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'turnip'
   gem 'capybara'
-  gem 'capybara-webkit'
+#  gem 'capybara-webkit'
   gem 'phantomjs'
 end

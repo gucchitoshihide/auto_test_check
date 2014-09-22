@@ -21,11 +21,10 @@
     = markdown_to_html(@article.content)
 
 %div.comment_description
-  - if Comment.followed?(@article.id)
-    - Comment.show_all(@article.id).each do |comment|
-      %ul
-        %li
-          = comment.content
+  - Comment.show_all(@article.id).each do |comment|
+    %ul
+      %li
+        = comment.content
 
 = form_for(:comment, url: comment_skill_profiles_path(article_id: @article.id)) do |f|
   %div#comment_description

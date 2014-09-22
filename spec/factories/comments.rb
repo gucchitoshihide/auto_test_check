@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :comment, class: Comment do
-    content 'Nice'
+    content Settings.comment.content
   end
 end
