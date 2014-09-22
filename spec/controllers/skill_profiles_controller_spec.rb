@@ -51,7 +51,7 @@ RSpec.describe SkillProfilesController, :type => :controller do
     context 'with valid params' do
       before { post(:comment, USER_POST_COMMENT_PARAMS) }
       it { expect(assigns(:article)).not_to be_nil }
-      it { expect(flash).to be_empty }
+      it { expect(flash[:alert]).to be_nil }
     end
 
     context 'with invalid params' do
@@ -60,8 +60,8 @@ RSpec.describe SkillProfilesController, :type => :controller do
           params = { article_id: ARTICLE_ID, comment: { content: '' } }
           post(:comment, params)
         end
-        it { expect(assigns(:article)).to be_nil }
-        it { expect(flash).not_to be_empty }
+        it { expect(assigns(:article)).not_to be_nil }
+        it { expect(flash[:alert]).not_to be_nil }
       end
 
       context 'with invalid article_id' do
@@ -70,7 +70,7 @@ RSpec.describe SkillProfilesController, :type => :controller do
           post(:comment, params)
         end
         it { expect(assigns(:article)).to be_nil }
-        it { expect(flash).to be_empty }
+        it { expect(flash[:alert]).to be_nil }
       end
     end
   end

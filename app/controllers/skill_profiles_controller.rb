@@ -3,7 +3,6 @@ class SkillProfilesController < ApplicationController
   before_action :session_required
   before_action :set_article,      only: [:show, :edit, :update]
   before_action :authorize_edit,   only: [:edit, :update]
-  before_action :search_cert,      only: [:search]
 
   def index
     @profiles = SkillProfile.latest
@@ -41,10 +40,10 @@ class SkillProfilesController < ApplicationController
   def comment
     begin
       return render_403 unless Cert::Params.numeric?(params[:article_id])
-      Comment.submit(comment_params, params[:article_id], session[:id])
       @article = Article.find_by(id: params[:article_id]) # @article is used to #show view
+      Comment.submit(comment_params, params[:article_id], session[:id])
     rescue ValidationError => e
-      flash.now[:alert] = e.message
+      flash.now[:alert] = Flash.format_error_message(e.message)
     end
     render :show
   end
@@ -73,10 +72,5 @@ class SkillProfilesController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
-  end
-
-  def search_cert
-    # maybe implement secure search word
-    # using Cert gem
   end
 end

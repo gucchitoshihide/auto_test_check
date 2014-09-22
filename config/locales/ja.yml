@@ -78,6 +78,9 @@ ja:
         invalid: パスワードは半角英数記号で入力してください
       login_authorization:
         invalid: 名前か、パスワードが不正です
+      comment_content:
+        blank: コメントを入力してください
+        long: コメントは 3000 文字以下で入力してください
       admin_authorization:
         invalid: メールアドレスか、パスワードが不正です
       admin_email:

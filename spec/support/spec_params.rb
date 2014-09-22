@@ -52,10 +52,15 @@ USER_GET_SKILL_PROFILE_PARAMS = {
 }
 
 USER_POST_COMMENT_PARAMS = {
+  id:         USER_ID,
   article_id: ARTICLE_ID,
   comment: {
     content: NEW_COMMENT,
   }
+}
+
+MODEL_POST_COMMENT_PARAMS = {
+  content: NEW_COMMENT,
 }
 
 USER_PUT_SEARCH_PARAMS = {

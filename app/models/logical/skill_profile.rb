@@ -47,5 +47,4 @@ class SkillProfile < ActiveRecord::Base
       errored_model_obj.errors.messages.values.flatten.join(Settings[:error][:seperate])
     end
   end
-
 end

@@ -38,4 +38,34 @@ RSpec.describe Comment, :type => :model do
       it { expect(subject).to eq 0 }
     end
   end
+
+
+  # ids are validated at controller
+  describe '.submit' do
+    before do
+      FactoryGirl.create(:user)
+      @params = MODEL_POST_COMMENT_PARAMS
+    end
+    let(:params) { @params }
+
+    subject { Comment.submit(params, ARTICLE_ID, USER_ID) }
+
+    context 'with valid params' do
+      it { expect { subject }.not_to raise_error }
+    end
+
+    context 'with blank comment' do
+      let(:params) { { content: '' } }
+      let(:errors) { 'las.errors.comment_content.blank' }
+
+      it { expect { subject }.to raise_error ValidationError, format_errors(errors) }
+    end
+
+    context 'with long comment' do
+      let(:params) { { content: 'a' * (Settings.comment.length_max + 1) } }
+      let(:errors) { 'las.errors.comment_content.long' }
+
+      it { expect { subject }.to raise_error ValidationError, format_errors(errors) }
+    end
+  end
 end

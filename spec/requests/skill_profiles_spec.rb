@@ -57,6 +57,7 @@ RSpec.describe 'SkillProfiles', :type => :request do
       login
     end
     let(:params) { @params }
+
     subject do
       post(comment_skill_profiles_path, params)
       response
@@ -64,14 +65,7 @@ RSpec.describe 'SkillProfiles', :type => :request do
 
     context 'with valid params' do
       it_behaves_like 'a successful rendered', 'show'
-      it { expect(flash[:alert]).to be_nil }
-    end
-
-    context 'with invalid params' do
-      let(:params) { @params.merge(article_id: @params[:article_id], comment: { content: 'not match' }) }
-
-      it_behaves_like 'a successful rendered', 'show' 
-      it { expect(flash[:alert]).not_to be_nil }
+      it { expect(request.flash[:alert]).to be_nil }
     end
   end
 
@@ -82,7 +76,7 @@ RSpec.describe 'SkillProfiles', :type => :request do
     end
 
     subject do
-      post(comment_skill_profiles_path, USER_PUT_SEARCH_PARAMS)
+      put(search_skill_profiles_path, USER_PUT_SEARCH_PARAMS)
       response
     end
 
