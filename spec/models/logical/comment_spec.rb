@@ -39,7 +39,6 @@ RSpec.describe Comment, :type => :model do
     end
   end
 
-
   # ids are validated at controller
   describe '.submit' do
     before do
