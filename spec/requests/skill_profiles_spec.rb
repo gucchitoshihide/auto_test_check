@@ -43,10 +43,51 @@ RSpec.describe 'SkillProfiles', :type => :request do
         end
       end
 
-      context 'with invalid id' do
+      context 'with invalid params' do
         let(:params) { USER_GET_SKILL_PROFILE_PARAMS.merge(id: 'invalid') }
         it_behaves_like 'a failure response status with', 404
       end
+    end
+  end
+
+  describe 'GET /skill_profiles/:id/edit' do
+    before do
+      @params = USER_GET_SKILL_PROFILE_EDIT_PARAMS
+      FactoryGirl.create(:user)
+      login
+    end
+    let(:params) { @params }
+
+    subject do
+      get(edit_skill_profiles(params))
+      response
+    end
+
+    context 'with valid params' do
+      it_behaves_like 'a successful response', 'skill_profile.edit'
+    end
+
+    context 'with invalid params' do
+      let(:params) { @params.merge(id: 'invalid') }
+      it_behaves_like 'a failure response with', 403
+    end
+  end
+
+  describe 'PUT /skill_profiles/:id/edit' do
+    before do
+      @params = USER_PUT_SKILL_PROFILE_EDIT_PARAMS
+      FactoryGirl.create(:user)
+      login
+    end
+    let(:params) { @params }
+
+    subject do
+      put(skill_profiles(params))
+      response
+    end
+
+    context 'with valid params' do
+      it_behaves_like 'a successful response', 'skill_profile.show'
     end
   end
 

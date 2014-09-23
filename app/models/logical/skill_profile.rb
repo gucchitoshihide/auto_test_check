@@ -22,11 +22,13 @@ class SkillProfile < ActiveRecord::Base
       end
     end
 
-    def rewrite(article_obj, params, current_user)
+    def rewrite(params, current_user)
       begin
-        article_obj.update_attributes!(content: params[:content], written_style: current_user.write_style)
-      rescue ActiveRecord::RecordInvalid => e
-        raise ValidationError, active_model_errors_to_string(profile)
+        @errors = []
+        validate_skill_profile_edit(params)
+        raise ValidationError Error.join(@errors) if @errors.present?
+        # written_style saving is needed at this time
+        current_user.skill_profile.article.update_attributes!(content: params[:content], written_style: current_user.write_style)
       end
     end
 

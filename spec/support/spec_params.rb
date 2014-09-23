@@ -9,6 +9,7 @@ NEW_COMMENT                 = Settings.comment.content
 SEARCH_WORD                 = Settings.article.content.description
 SEARCH_KEY                  = Settings.skill_profile.form.object.search.to_sym
 ARTICLE_ID                  = USER_ID
+UPDATE_ARTICLE              = 'dummy update article'
 
 ADMIN_NAME                  = Settings.admin.fixture.name
 ADMIN_EMAIL                 = Settings.admin.fixture.email
@@ -49,6 +50,22 @@ MODEL_POST_LOGIN_PARAMS = {
 
 USER_GET_SKILL_PROFILE_PARAMS = {
   id: USER_ID
+}
+
+USER_GET_SKILL_PROFILE_EDIT_PARAMS = {
+  id: USER_ID
+}
+
+USER_PUT_SKILL_PROFILE_EDIT_PARAMS = {
+  article: {
+    content: UPDATE_ARTICLE,
+  }
+}
+
+MODEL_PUT_SKILL_PROFILE_EDIT_PARAMS = {
+  article: {
+    content: UPDATE_ARTICLE,
+  }
 }
 
 USER_POST_COMMENT_PARAMS = {

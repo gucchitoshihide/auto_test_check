@@ -2,7 +2,21 @@ require 'rails_helper'
 require 'search'
 
 RSpec.describe SkillProfile, :type => :model do
-  before { FactoryGirl.create(:skill_profile) }
+  before { FactoryGirl.create(:user) }
+
+  describe '.rewrite' do
+    before do
+      @params = MODEL_PUT_SKILL_PROFILE_EDIT_PARAMS
+      @current_user = User.find_by(id: USER_ID)
+    end
+    let(:params) { @params }
+
+    subject { SkillProfile.rewrite(params, @current_user) }
+
+    context 'with valid params' do
+      it { expect { subject }.not_to raise_error }
+    end
+  end
 
   describe '.latest' do
     # if over number limit of show list, create test flow

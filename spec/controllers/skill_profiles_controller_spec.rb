@@ -42,6 +42,28 @@ RSpec.describe SkillProfilesController, :type => :controller do
     end
   end
 
+  describe '#edit' do
+    before do
+      @params = USER_PUT_SKILL_PROFILE_EDIT_PARAMS
+      FactoryGirl.create(:user)
+      login_at(:index)
+    end
+    let(:params) { @params }
+
+    context 'with valid params' do
+      subject { put(:update, params) }
+
+      it { expect(flash[:error]).to be_nil }
+    end
+
+    context 'with valid params' do
+      let(:params) { @params.merge(article: { content: '' }) }
+      subject { put(:update, params) }
+
+      it { expect(flash[:error]).not_to be_nil }
+    end
+  end
+
   describe '#comment' do
     before do
       @comment_params = USER_POST_COMMENT_PARAMS

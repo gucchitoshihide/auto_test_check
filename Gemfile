@@ -43,6 +43,6 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'turnip'
   gem 'capybara'
-#  gem 'capybara-webkit'
+  gem 'capybara-webkit'
   gem 'phantomjs'
 end

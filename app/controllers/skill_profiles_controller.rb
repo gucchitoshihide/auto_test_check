@@ -29,7 +29,7 @@ class SkillProfilesController < ApplicationController
 
   def update
     begin
-      SkillProfile.rewrite(@article, article_params, current_user)
+      SkillProfile.rewrite(article_params, current_user)
       redirect_to skill_profiles_url
     rescue ValidationError => e
       flash.now[:alert] = SkillProfile.format_error_message(e.message)
