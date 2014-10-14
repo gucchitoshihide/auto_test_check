@@ -44,5 +44,6 @@ group :development, :test do
   gem 'turnip'
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'selenium-webdriver'
   gem 'phantomjs'
 end

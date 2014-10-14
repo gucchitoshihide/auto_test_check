@@ -66,7 +66,7 @@ article:
 user:
   name: dummy
   email: dummy@example.com
-  password: password_dummy
+  password: dummy_password
   password_reset_token: dummy_token
   write_style:
     plain: text_plain

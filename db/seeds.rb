@@ -8,9 +8,9 @@ User.create! do |user|
 end
 
 User.create! do |user|
-  user.name                  = 'kawa'
-  user.password              = 'foo'
-  user.password_confirmation = 'foo'
+  user.name                  = 'testmatsu'
+  user.password              = 'testpass'
+  user.password_confirmation = 'testpass'
   user.email                 = 'mat27y@gmail.com'
 end
 
