@@ -1,5 +1,5 @@
 require 'yaml'
-mail_settings = YAML.load_file('/home/matsu/Develop/mail_settings.yml')
+#mail_settings = YAML.load_file('/home/matsu/Develop/mail_settings.yml')
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -42,8 +42,8 @@ Rails.application.configure do
     port: '587',
     domain: 'smtp.gmail.com',
     authentication: 'plain',
-    user_name: mail_settings['email']['address'],
-    password: mail_settings['email']['password']
+    #user_name: mail_settings['email']['address'],
+    #password: mail_settings['email']['password']
   }
   config.action_mailer.default_url_options = {
     host: 'localhost:3000'

@@ -17,7 +17,7 @@ skill_profile:
     description: dummy title
 comment:
   content: dummy content
-  length_max: 3000 
+  length_max: 3000
 reset_passwords:
   token: dummy_token
   resend_at: <%= 2.days.ago %>
@@ -42,17 +42,17 @@ admin:
     name: dummy
     email: <%= 'a' * 243 + '@example.com' %>
     password: <%= 'a' * 255 %>
-  redirection:
-    regexp: '(http[s]?):\/\/([^\/\s]*)'
   basic_auth:
-    id: test
-    password: test
+    id: dev
+    password: dev
   constraint:
     email:
       length: 255
     password:
       length: 255
       regexp: '[ -~]+'
+  redirection:
+    regexp: '(http[s]?):\/\/([^\/\s]*)'
   allowed_keys:
     - page
     - email
