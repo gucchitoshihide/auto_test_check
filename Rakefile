@@ -3,6 +3,10 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+require 'rubygems'
+gem 'ci_reporter'
+require 'ci/reporter/rake/test_unit' # use this if you're using Test::Unit
+
 Rails.application.load_tasks
 
 namespace :test do
@@ -18,3 +22,5 @@ namespace :uploader do
     %x(rm -rf public/uploads/user/avatar/[0-9]*)
   end
 end
+
+
