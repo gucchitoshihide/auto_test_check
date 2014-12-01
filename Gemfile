@@ -37,7 +37,6 @@ group :development, :test do
   gem 'rspec'
   gem 'simplecov'
   gem 'rspec-rails', '~> 3.0.0'
-  gem 'rcov'
   gem 'rspec-its'
   gem 'rspec-parameterized'
   gem 'faker'
