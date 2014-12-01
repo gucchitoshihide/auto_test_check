@@ -12,7 +12,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 gem 'bcrypt'
 
-gem 'ci_reporter'
 
 gem 'carrierwave'
 gem 'rmagick'
@@ -37,6 +36,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec'
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'rcov'
   gem 'rspec-its'
   gem 'rspec-parameterized'
   gem 'faker'
@@ -48,4 +48,5 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'phantomjs'
+  gem 'ci_reporter'
 end
