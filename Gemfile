@@ -36,6 +36,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec'
+  gem 'simplecov'
   gem 'rspec-rails', '~> 3.0.0'
   gem 'rspec-its'
   gem 'rspec-parameterized'

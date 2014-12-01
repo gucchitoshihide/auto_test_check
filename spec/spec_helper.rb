@@ -6,6 +6,9 @@ require 'capybara/rspec'
 
 require File.expand_path('../../config/environment', __FILE__)
 
+require 'simplecov'
+SimpleCov.start
+
 # load support files
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
