@@ -49,5 +49,5 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'phantomjs'
-  gem 'ci_reporter'
+  gem 'ci_reporter_minitest', '~> 1.0.0'
 end
